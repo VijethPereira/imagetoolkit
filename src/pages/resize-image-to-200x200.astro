@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is 200×200 px commonly used for?',
+    a: 'This size is standard for forum avatars, comment profile pictures, email signature photos, and small application thumbnails. Many older web platforms and CMS systems cap profile photos at 200×200 px. It is also a common thumbnail size for product grids in smaller e-commerce sites.',
+  },
+  {
+    q: 'Will a 200×200 px image look blurry on a high-DPI screen?',
+    a: 'On retina or high-DPI displays, a 200×200 px image is displayed at half the logical size (100×100 CSS px), which actually makes it look sharp. If the platform displays it at a larger CSS size, it may appear slightly soft, but for most avatar and thumbnail uses the quality is acceptable.',
+  },
+  {
+    q: 'What format should I use for a 200×200 px avatar?',
+    a: 'JPEG is fine for photographic avatars and keeps the file size very small (typically 10–20 KB at 200×200 px). If your avatar has a transparent background or is a logo with flat colours, use PNG to preserve the sharp edges and transparency. WebP works well for web contexts but may not be supported by older platforms.',
+  },
+  {
+    q: 'My image looks stretched after resizing to 200×200 px.',
+    a: 'This happens when your original image is not square. To fix this, crop your image to a 1:1 square aspect ratio centred on the subject before resizing. The easiest approach is to use a square crop tool first, then use this tool to scale the square to exactly 200×200 px.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-200x200#app`,
+      name: `Resize Image to 200×200 px — ${siteConfig.siteName}`,
+      description: 'Resize image to 200×200 pixels online free. Common size for avatars, profile pictures, and thumbnails.',
+      url: `${siteConfig.domain}/resize-image-to-200x200`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 200×200 Pixels Online — Free"
+  description="Resize image to 200×200 pixels online free. Common size for avatars, profile pictures, and thumbnails."
+  canonical={`${siteConfig.domain}/resize-image-to-200x200`}
+  keywords="resize image to 200x200, 200x200 image resizer, avatar resize"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-200x200" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 200×200 px</h1>
+        <p class="tool-desc">Resize image to 200×200 pixels online free. Common size for avatars, profile pictures, and thumbnails.</p>
+      </header>
+
+      <ResizeTool width={200} height={200} lockAspect={false} outputFormat="jpeg" presetLabel="200×200 px" />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>200×200 pixels is a foundational size on the web — it is the default maximum for avatars on many forums (phpBB, XenForo, Discourse), comment systems, and older CMS platforms. At this size an image file is tiny: a JPEG avatar at 200×200 px typically weighs in at just 10–20 KB, making it negligible in terms of page load impact.</p>
+        <p>This size is also used for product thumbnails in smaller online stores, for email signature photos (where large images slow down email delivery), and as the source for app icons in some frameworks. Resizing a large photo from a smartphone camera (which may be 12 MP and 5+ MB) down to 200×200 px reduces the file size by over 99% while retaining all the visual detail you need for a small avatar.</p>
+        <p>For websites that serve images at 2× for retina screens, a 200×200 px image covers a 100×100 CSS pixel slot at full sharpness. This is ideal for small profile pictures displayed alongside usernames in comment threads or leaderboards.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
+          <li>The dimensions are pre-set to 200×200 px.</li>
+          <li>Choose JPEG for photos, PNG for graphics with transparency.</li>
+          <li>Click "Resize" and download your avatar-ready image.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

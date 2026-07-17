@@ -1,0 +1,300 @@
+---
+interface Props {
+  width?: number;          // preset width — if omitted, user enters value
+  height?: number;         // preset height
+  lockAspect?: boolean;    // default true for custom; false for fixed presets
+  outputFormat?: string;   // 'jpeg' | 'png' | 'webp'
+  presetLabel?: string;    // e.g. 'Passport Size (413×531 px)'
+}
+const {
+  width,
+  height,
+  lockAspect = width === undefined,
+  outputFormat = 'jpeg',
+  presetLabel,
+} = Astro.props;
+const isPreset = width !== undefined && height !== undefined;
+---
+
+<section
+  class="tool-widget"
+  id="resize-tool"
+  data-preset-w={width?.toString() ?? ''}
+  data-preset-h={height?.toString() ?? ''}
+  data-lock-aspect={lockAspect ? '1' : '0'}
+  data-output-format={outputFormat}
+>
+  <!-- Upload zone -->
+  <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Upload image">
+    <div class="drop-inner">
+      <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
+      </svg>
+      <p class="drop-label">Drop image here or <span class="drop-link">browse</span></p>
+      <p class="drop-hint">JPG · PNG · WebP · GIF — max 20 MB</p>
+    </div>
+    <input type="file" id="file-input" accept="image/*" class="file-input" />
+  </div>
+
+  <!-- Controls -->
+  <div class="controls" id="controls" hidden>
+    <div class="file-meta">
+      <span class="file-name" id="file-name"></span>
+      <span class="file-size" id="orig-dims"></span>
+    </div>
+
+    {isPreset ? (
+      <p class="preset-info">
+        Resizing to: <strong>{presetLabel ?? `${width}×${height} px`}</strong>
+      </p>
+    ) : (
+      <div class="dims-row">
+        <label class="dim-field">
+          <span>Width (px)</span>
+          <input type="number" id="width-input" min="1" max="8000" placeholder="e.g. 800" class="dim-input" />
+        </label>
+        <span class="dim-sep">×</span>
+        <label class="dim-field">
+          <span>Height (px)</span>
+          <input type="number" id="height-input" min="1" max="8000" placeholder="e.g. 600" class="dim-input" />
+        </label>
+        <label class="aspect-toggle">
+          <input type="checkbox" id="aspect-lock" checked={lockAspect} />
+          <span>Keep aspect ratio</span>
+        </label>
+      </div>
+    )}
+
+    <div class="format-row">
+      <label for="fmt-select">Output format</label>
+      <select id="fmt-select" class="fmt-select">
+        <option value="jpeg" selected={outputFormat === 'jpeg'}>JPEG</option>
+        <option value="png"  selected={outputFormat === 'png'}>PNG</option>
+        <option value="webp" selected={outputFormat === 'webp'}>WebP</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" id="resize-btn">Resize Image</button>
+  </div>
+
+  <p class="status" id="status" hidden></p>
+
+  <div class="result" id="result" hidden>
+    <div class="result-stats">
+      <div class="stat"><span class="stat-label">Original</span><span class="stat-val" id="r-orig-dims"></span></div>
+      <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+      <div class="stat"><span class="stat-label">Resized</span><span class="stat-val green" id="r-new-dims"></span></div>
+    </div>
+    <div class="result-actions">
+      <a class="btn-primary" id="download-btn" download>Download</a>
+      <button class="btn-ghost" id="reset-btn">Try another image</button>
+    </div>
+  </div>
+
+  <p class="privacy-note">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd"/></svg>
+    Your image never leaves your device.
+  </p>
+</section>
+
+<script>
+  const tool = document.getElementById('resize-tool') as HTMLElement;
+  const dropZone = document.getElementById('drop-zone') as HTMLElement;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const controls = document.getElementById('controls') as HTMLElement;
+  const fileNameEl = document.getElementById('file-name') as HTMLElement;
+  const origDims = document.getElementById('orig-dims') as HTMLElement;
+  const widthInput = document.getElementById('width-input') as HTMLInputElement;
+  const heightInput = document.getElementById('height-input') as HTMLInputElement;
+  const aspectLock = document.getElementById('aspect-lock') as HTMLInputElement;
+  const fmtSelect = document.getElementById('fmt-select') as HTMLSelectElement;
+  const resizeBtn = document.getElementById('resize-btn') as HTMLButtonElement;
+  const statusEl = document.getElementById('status') as HTMLElement;
+  const resultEl = document.getElementById('result') as HTMLElement;
+  const rOrigDims = document.getElementById('r-orig-dims') as HTMLElement;
+  const rNewDims = document.getElementById('r-new-dims') as HTMLElement;
+  const downloadBtn = document.getElementById('download-btn') as HTMLAnchorElement;
+  const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+
+  const presetW = tool.dataset.presetW ? parseInt(tool.dataset.presetW) : null;
+  const presetH = tool.dataset.presetH ? parseInt(tool.dataset.presetH) : null;
+  const isPreset = presetW !== null && presetH !== null;
+  let lockAspect = tool.dataset.lockAspect === '1';
+  let currentFile: File | null = null;
+  let naturalW = 0, naturalH = 0;
+
+  function setStatus(msg: string) { statusEl.textContent = msg; statusEl.hidden = !msg; }
+
+  function showControls(file: File, img: HTMLImageElement) {
+    currentFile = file;
+    naturalW = img.naturalWidth;
+    naturalH = img.naturalHeight;
+    fileNameEl.textContent = file.name;
+    origDims.textContent = `${naturalW}×${naturalH} px`;
+    if (widthInput) widthInput.value = String(naturalW);
+    if (heightInput) heightInput.value = String(naturalH);
+    controls.hidden = false;
+    resultEl.hidden = true;
+    setStatus('');
+  }
+
+  function loadImage(file: File): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', async (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const f = e.dataTransfer?.files[0];
+    if (f && f.type.startsWith('image/')) showControls(f, await loadImage(f));
+  });
+  fileInput.addEventListener('change', async () => {
+    if (fileInput.files?.[0]) showControls(fileInput.files[0], await loadImage(fileInput.files[0]));
+  });
+
+  // Aspect-ratio locking
+  widthInput?.addEventListener('input', () => {
+    if (lockAspect && naturalW && widthInput.value) {
+      heightInput.value = String(Math.round(parseInt(widthInput.value) * naturalH / naturalW));
+    }
+  });
+  heightInput?.addEventListener('input', () => {
+    if (lockAspect && naturalH && heightInput.value) {
+      widthInput.value = String(Math.round(parseInt(heightInput.value) * naturalW / naturalH));
+    }
+  });
+  aspectLock?.addEventListener('change', () => { lockAspect = aspectLock.checked; });
+
+  resizeBtn.addEventListener('click', async () => {
+    if (!currentFile) return;
+    resizeBtn.disabled = true;
+    setStatus('Resizing…');
+    resultEl.hidden = true;
+
+    try {
+      const img = await loadImage(currentFile);
+      const targetW = isPreset ? presetW! : (parseInt(widthInput?.value) || naturalW);
+      const targetH = isPreset ? presetH! : (parseInt(heightInput?.value) || naturalH);
+      const fmt = fmtSelect?.value || 'jpeg';
+      const mime = `image/${fmt}`;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = targetW;
+      canvas.height = targetH;
+      const ctx = canvas.getContext('2d')!;
+      if (fmt === 'jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, targetW, targetH); }
+      ctx.drawImage(img, 0, 0, targetW, targetH);
+
+      const blob = await new Promise<Blob>((res, rej) => {
+        canvas.toBlob((b) => b ? res(b) : rej(new Error('failed')), mime, 0.92);
+      });
+
+      rOrigDims.textContent = `${naturalW}×${naturalH} px`;
+      rNewDims.textContent = `${targetW}×${targetH} px`;
+
+      const ext = fmt === 'jpeg' ? 'jpg' : fmt;
+      const base = currentFile.name.replace(/\.[^.]+$/, '');
+      downloadBtn.href = URL.createObjectURL(blob);
+      downloadBtn.download = `${base}-${targetW}x${targetH}.${ext}`;
+
+      controls.hidden = true;
+      resultEl.hidden = false;
+      setStatus('');
+    } catch {
+      setStatus('Something went wrong. Please try a different image.');
+    }
+    resizeBtn.disabled = false;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    currentFile = null;
+    fileInput.value = '';
+    controls.hidden = true;
+    resultEl.hidden = true;
+    setStatus('');
+  });
+</script>
+
+<style>
+  /* Shares visual style with CompressTool */
+  .tool-widget {
+    background: var(--site-bg-card);
+    border: 1px solid var(--site-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .drop-zone {
+    border: 2px dashed var(--site-border);
+    border-radius: 10px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--site-accent);
+    background: color-mix(in srgb, var(--site-accent) 5%, transparent);
+  }
+  .drop-inner { pointer-events: none; }
+  .drop-icon { width: 2.5rem; height: 2.5rem; color: var(--site-text-muted); margin: 0 auto 0.75rem; }
+  .drop-label { font-size: 1rem; font-weight: 500; color: var(--site-text); margin: 0 0 0.25rem; }
+  .drop-link { color: var(--site-accent); }
+  .drop-hint { font-size: 0.8125rem; color: var(--site-text-muted); margin: 0; }
+  .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+
+  .controls { margin-top: 1.25rem; }
+  .file-meta { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1rem; padding: 0.75rem 1rem; background: var(--site-hover); border-radius: 8px; flex-wrap: wrap; }
+  .file-name { font-weight: 600; color: var(--site-text); font-size: 0.9375rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 18ch; }
+  .file-size { font-size: 0.875rem; color: var(--site-text-muted); flex-shrink: 0; }
+
+  .preset-info { margin: 0 0 1rem; color: var(--site-text-muted); font-size: 0.9375rem; }
+
+  .dims-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .dim-field { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.875rem; color: var(--site-text-muted); }
+  .dim-input { width: 7rem; padding: 0.4rem 0.75rem; border: 1px solid var(--site-border); border-radius: 6px; background: var(--site-bg); color: var(--site-text); font-size: 0.9375rem; }
+  .dim-sep { font-size: 1.25rem; color: var(--site-text-muted); padding-bottom: 0.3rem; }
+  .aspect-toggle { display: flex; align-items: center; gap: 0.4rem; font-size: 0.875rem; color: var(--site-text-muted); cursor: pointer; }
+  .aspect-toggle input { accent-color: var(--site-accent); }
+
+  .format-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.9375rem; color: var(--site-text); }
+  .fmt-select { padding: 0.375rem 0.75rem; border: 1px solid var(--site-border); border-radius: 6px; background: var(--site-bg); color: var(--site-text); font-size: 0.9375rem; }
+
+  .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; background: var(--site-accent); color: #fff; border: none; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.15s; width: 100%; }
+  .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--site-border); border-radius: 8px; background: transparent; color: var(--site-text-muted); font-size: 0.9375rem; cursor: pointer; width: 100%; transition: background 0.15s, color 0.15s; }
+  .btn-ghost:hover { background: var(--site-hover); color: var(--site-text); }
+
+  .status { text-align: center; color: var(--site-text-muted); font-size: 0.9375rem; margin: 0.75rem 0 0; padding: 0.75rem; background: var(--site-hover); border-radius: 8px; }
+
+  .result { margin-top: 1.25rem; }
+  .result-stats { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: color-mix(in srgb, #22c55e 8%, transparent); border: 1px solid color-mix(in srgb, #22c55e 30%, transparent); border-radius: 10px; margin-bottom: 1rem; flex-wrap: wrap; justify-content: center; }
+  .stat { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+  .stat-label { font-size: 0.75rem; color: var(--site-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-val { font-size: 1.125rem; font-weight: 700; color: var(--site-text); }
+  .stat-val.green { color: #16a34a; }
+  [data-theme="dark"] .stat-val.green { color: #4ade80; }
+  .arrow-icon { width: 1.25rem; color: var(--site-text-muted); }
+  .result-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  .privacy-note { display: flex; align-items: center; gap: 0.5rem; margin: 1.25rem 0 0; padding: 0.75rem 1rem; background: var(--site-hover); border-radius: 8px; font-size: 0.8125rem; color: var(--site-text-muted); }
+  .privacy-note svg { width: 1rem; height: 1rem; flex-shrink: 0; color: var(--site-accent); }
+</style>

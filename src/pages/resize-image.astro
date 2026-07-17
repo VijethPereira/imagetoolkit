@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the difference between resizing and compressing an image?',
+    a: 'Resizing changes the pixel dimensions of an image (width × height), while compression reduces file size by removing data within the existing dimensions. Resizing to smaller dimensions will also reduce file size significantly, but they are different operations. For government exam uploads you often need to do both: resize to the required pixel dimensions and then compress to the required file size.',
+  },
+  {
+    q: 'Will resizing reduce file size?',
+    a: 'Yes, reducing pixel dimensions always reduces file size because there is less image data to store. For example, resizing a 4000×3000 px photo to 400×300 px can reduce the file size by up to 90% even before any compression. If you need to hit a specific file size target, use the Compress tool after resizing.',
+  },
+  {
+    q: 'Should I maintain aspect ratio when resizing?',
+    a: 'For general use (web images, wallpapers, profile photos for platforms that do not specify dimensions), keeping the aspect ratio locked prevents your image from looking stretched or squashed. For applications that require exact pixel dimensions (government forms, e-commerce platforms, passport photos), you should unlock the aspect ratio and enter the exact required values, understanding that cropping may be needed for a natural result.',
+  },
+  {
+    q: 'What output format should I choose?',
+    a: 'Choose JPEG for photographs — it gives the smallest file size for photos. Choose PNG if your image has a transparent background or is a logo/graphic with flat colours. Choose WebP if you are optimising for a website and all target browsers are modern (all major browsers have supported WebP since 2020).',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image#app`,
+      name: `Resize Image Online — ${siteConfig.siteName}`,
+      description: 'Resize any image to custom pixel dimensions online for free. Supports JPG, PNG, WebP. No software, no upload.',
+      url: `${siteConfig.domain}/resize-image`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image Online — Free Custom Size"
+  description="Resize any image to custom pixel dimensions online for free. Supports JPG, PNG, WebP. No software, no upload."
+  canonical={`${siteConfig.domain}/resize-image`}
+  keywords="resize image, resize image online, change image size, image resizer"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image Online</h1>
+        <p class="tool-desc">Resize any image to custom pixel dimensions online for free. Supports JPG, PNG, WebP. No software, no upload.</p>
+      </header>
+
+      <ResizeTool />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>Image resizing changes the width and height of an image in pixels. This is different from compression — resizing physically reduces or enlarges the image canvas itself. When you reduce dimensions, the image contains fewer pixels and the file size naturally decreases. When you enlarge an image beyond its original size, the browser or tool must interpolate new pixels, which can introduce softness or blurriness.</p>
+        <p>Common reasons to resize images include preparing photos for web pages (where large images slow page load times), meeting exact pixel requirements on government and job application portals, creating thumbnails for e-commerce catalogues, and resizing photos before sharing via email or messaging apps where large files are slow to send.</p>
+        <p>Pixels and centimetres are related by DPI (dots per inch). A standard photo print at 300 DPI means 1 cm ≈ 118 pixels. So a 3.5×4.5 cm passport photo at 300 DPI is 413×531 px. When a portal specifies dimensions in pixels, enter those values directly. When a form specifies in centimetres, you need to know the required DPI (usually 300 for print, 96 for screen) to calculate pixels.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
+          <li>Enter your target width and/or height in pixels.</li>
+          <li>Toggle "Lock aspect ratio" to maintain proportions, or unlock to set both dimensions independently.</li>
+          <li>Select your preferred output format (JPEG, PNG, or WebP).</li>
+          <li>Click "Resize" and download the result.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

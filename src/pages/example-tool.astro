@@ -1,0 +1,402 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import siteConfig from '../site.config.ts';
+
+const toolName = 'Example Tool';
+const toolDesc = 'A placeholder tool demonstrating the standard tool-page pattern for this site.';
+
+const faqs = [
+  {
+    q: 'What does this tool do?',
+    a: 'This is a placeholder tool. Replace this text with an accurate description of what your tool does and how it helps users.',
+  },
+  {
+    q: 'Is this tool free to use?',
+    a: `Yes, all tools on ${siteConfig.siteName} are free to use with no account required.`,
+  },
+  {
+    q: 'Does this tool store my data?',
+    a: 'No data is sent to our servers. All processing happens entirely in your browser.',
+  },
+  {
+    q: 'Which browsers are supported?',
+    a: 'This tool works in any modern browser including Chrome, Firefox, Safari, and Edge.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/example-tool#app`,
+      name: `${toolName} — ${siteConfig.siteName}`,
+      description: toolDesc,
+      url: `${siteConfig.domain}/example-tool`,
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Any',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title={toolName}
+  description={toolDesc}
+  canonical={`${siteConfig.domain}/example-tool`}
+  keywords="example tool, free tool, online tool"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/example-tool" />
+
+  <main class="page-main">
+    <div class="container">
+
+      <!-- Tool header -->
+      <header class="tool-header">
+        <a href="/" class="back-link" aria-label="Back to home">&larr; All tools</a>
+        <h1>{toolName}</h1>
+        <p class="tool-desc">{toolDesc}</p>
+      </header>
+
+      <!-- Interactive tool area — replace with your actual tool UI -->
+      <section class="tool-area" aria-label="Tool">
+        <div class="tool-placeholder">
+          <p class="placeholder-label">Tool UI goes here</p>
+          <p class="placeholder-hint">
+            Replace this section with your interactive widget, form, or calculator.
+            Keep all tool state local to this section.
+          </p>
+          <div class="demo-row">
+            <input
+              type="text"
+              class="demo-input"
+              placeholder="Enter a value…"
+              aria-label="Demo input"
+            />
+            <button class="demo-btn">Calculate</button>
+          </div>
+          <p class="demo-result" id="demo-result"></p>
+        </div>
+      </section>
+
+      <AdSlot slot="1234567890" />
+
+      <!-- Content / explanation section -->
+      <section class="content-section">
+        <h2>About {toolName}</h2>
+        <p>
+          Replace this section with useful content about what your tool does, why it's useful,
+          and how to interpret its results. Good content here helps with SEO and user trust.
+        </p>
+
+        <h3>How to use {toolName}</h3>
+        <ol class="steps">
+          <li>Enter your value in the input field above.</li>
+          <li>Click <strong>Calculate</strong> (or adjust sliders / dropdowns).</li>
+          <li>Read the result displayed below the input.</li>
+        </ol>
+
+        <h3>Why use this tool?</h3>
+        <p>
+          Explain the specific benefit of your tool here. What problem does it solve?
+          Who is it for? What makes it better than alternatives?
+        </p>
+      </section>
+
+      <AdSlot slot="0987654321" />
+
+      <!-- FAQ section -->
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  class="faq-toggle"
+                >
+                  {q}
+                  <span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden>
+                <p>{a}</p>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  // Simple demo — remove this when building a real tool
+  (function () {
+    var btn = document.querySelector('.demo-btn');
+    var input = document.querySelector('.demo-input');
+    var result = document.getElementById('demo-result');
+    if (btn && input && result) {
+      btn.addEventListener('click', function () {
+        var val = input.value.trim();
+        result.textContent = val ? 'You entered: ' + val : '';
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        var dd = btn.closest('.faq-item').querySelector('.faq-a');
+        var icon = btn.querySelector('.faq-icon');
+        dd.hidden = expanded;
+        if (icon) icon.textContent = expanded ? '+' : '−';
+      });
+    });
+  })();
+</script>
+
+<style>
+  .page-main {
+    padding: 2rem 0 4rem;
+  }
+
+  .container {
+    max-width: 860px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .tool-header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--site-text-muted);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.15s;
+  }
+
+  .back-link:hover {
+    color: var(--site-text);
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--site-text);
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+  }
+
+  .tool-desc {
+    font-size: 1.0625rem;
+    color: var(--site-text-muted);
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  /* Tool area */
+  .tool-area {
+    border: 1px solid var(--site-border);
+    border-radius: 12px;
+    background: var(--site-bg-card);
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .tool-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-label {
+    font-weight: 600;
+    color: var(--site-text);
+    margin: 0 0 0.5rem;
+  }
+
+  .placeholder-hint {
+    font-size: 0.875rem;
+    color: var(--site-text-muted);
+    margin: 0 0 1.5rem;
+    max-width: 52ch;
+    margin-inline: auto;
+  }
+
+  .demo-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .demo-input {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--site-border);
+    border-radius: 6px;
+    background: var(--site-bg);
+    color: var(--site-text);
+    font-size: 0.9375rem;
+    min-width: 220px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .demo-input:focus {
+    border-color: var(--site-accent);
+  }
+
+  .demo-btn {
+    padding: 0.5rem 1.25rem;
+    background: var(--site-accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .demo-btn:hover {
+    opacity: 0.85;
+  }
+
+  .demo-result {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--site-text);
+    min-height: 1.5em;
+  }
+
+  /* Content section */
+  .content-section {
+    margin: 2.5rem 0;
+  }
+
+  .content-section h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 0 0 0.75rem;
+  }
+
+  .content-section h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--site-text);
+    margin: 1.75rem 0 0.5rem;
+  }
+
+  .content-section p {
+    color: var(--site-text-muted);
+    margin: 0 0 1rem;
+    max-width: 72ch;
+  }
+
+  .steps {
+    color: var(--site-text-muted);
+    padding-left: 1.5rem;
+    max-width: 64ch;
+  }
+
+  .steps li {
+    margin-bottom: 0.375rem;
+  }
+
+  /* FAQ */
+  .faq-section {
+    margin: 2.5rem 0;
+  }
+
+  .faq-section h2 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 0 0 1.25rem;
+  }
+
+  .faq-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .faq-item {
+    border: 1px solid var(--site-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .faq-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: var(--site-bg-card);
+    border: none;
+    color: var(--site-text);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .faq-toggle:hover {
+    background: var(--site-hover);
+  }
+
+  .faq-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--site-text-muted);
+  }
+
+  .faq-a {
+    margin: 0;
+    padding: 0 1.25rem 1rem;
+    background: var(--site-bg-card);
+  }
+
+  .faq-a p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--site-text-muted);
+    line-height: 1.6;
+  }
+</style>

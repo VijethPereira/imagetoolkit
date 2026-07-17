@@ -1,0 +1,2 @@
+# ads.txt — add your AdSense publisher line when you apply for AdSense.
+# Example: google.com, pub-XXXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,72 @@
+---
+import siteConfig from '../site.config.ts';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="brand">{siteConfig.siteName}</p>
+    <nav aria-label="Footer navigation">
+      <ul class="footer-links">
+        {siteConfig.navLinks.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <p class="copy">&copy; {year} {siteConfig.siteName}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--site-border);
+    margin-top: 4rem;
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .brand {
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 0;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .footer-links a {
+    font-size: 0.875rem;
+    color: var(--site-text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover {
+    color: var(--site-text);
+    text-decoration: none;
+  }
+
+  .copy {
+    font-size: 0.8rem;
+    color: var(--site-text-muted);
+    margin: 0;
+  }
+</style>

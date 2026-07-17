@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the official passport photo size in India?',
+    a: 'The Ministry of External Affairs requires a 35×45 mm photograph. At 300 DPI (the standard print resolution), this converts to 413×531 pixels. The photo must be recent (taken within the last 6 months), show the full face clearly, and have a plain white or off-white background.',
+  },
+  {
+    q: 'What should the background colour be for a passport photo?',
+    a: 'The background must be plain white or off-white with no patterns, shadows, or other people in the frame. Most passport portals and photo studios use white backgrounds. If your photo has a coloured background, you will need to reshoot or use a background removal tool before resizing.',
+  },
+  {
+    q: 'Can I crop my photo to passport size with this tool?',
+    a: 'This tool resizes your image to 413×531 px by scaling. If your image has a very different aspect ratio (e.g., a wide landscape photo), the result may look stretched. For best results, start with a portrait-orientation photo where your face occupies the centre of the frame, then resize. This tool does not crop — it scales to fit the exact dimensions.',
+  },
+  {
+    q: 'Is 413×531 px accepted by the Passport Seva portal?',
+    a: 'Yes. passportindia.gov.in accepts JPEG photographs of 413×531 px (35×45 mm at 300 DPI), file size under 500 KB. This tool outputs exactly 413×531 px in JPEG format. After resizing, verify the file size is under 500 KB — for passport photos it almost always will be.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-passport-size#app`,
+      name: `Resize Photo to Passport Size — ${siteConfig.siteName}`,
+      description: 'Resize any photo to standard passport size (413×531 px / 35×45 mm) online for free. Accepted by Indian passport applications, visa forms, and most govt portals.',
+      url: `${siteConfig.domain}/resize-image-to-passport-size`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Photo to Passport Size Online — 35×45 mm Free"
+  description="Resize any photo to standard passport size (413×531 px / 35×45 mm) online for free. Accepted by Indian passport applications, visa forms, and most govt portals."
+  canonical={`${siteConfig.domain}/resize-image-to-passport-size`}
+  keywords="passport size photo online, resize photo to passport size, 35x45mm photo, passport photo resize"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-passport-size" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Photo to Passport Size</h1>
+        <p class="tool-desc">Resize any photo to standard passport size (413×531 px / 35×45 mm) online for free. Accepted by Indian passport applications, visa forms, and most govt portals.</p>
+      </header>
+
+      <ResizeTool width={413} height={531} lockAspect={false} outputFormat="jpeg" presetLabel="Passport Size (413×531 px / 35×45 mm)" />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>India's passport photo standard is 35×45 mm — equivalent to 413×531 pixels at 300 DPI (dots per inch), which is the standard resolution for photo printing. This size is required for the Passport Seva Kendra application (passportindia.gov.in), visa applications at embassies, Aadhaar enrolment, bank KYC submissions, and most Indian government ID applications.</p>
+        <p>This tool is pre-configured to output exactly 413×531 px in JPEG format, the combination accepted by the Passport Seva portal. Simply upload your photo, and the tool will scale it to the correct dimensions without you needing to enter anything. The output JPEG file will typically be under 100 KB, well within the 500 KB limit imposed by passportindia.gov.in.</p>
+        <p>Important: The aspect ratio is unlocked by default because passport photos have a fixed 35:45 aspect ratio which may not match your original photo. If your photo is not already roughly portrait-oriented with your face centred, you may notice slight stretching. In that case, crop your photo to a 7:9 aspect ratio before uploading for the best result.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Take or choose a clear portrait photograph with a white background and your full face visible.</li>
+          <li>Upload the photo using "Choose File" or drag and drop.</li>
+          <li>The dimensions are pre-set to 413×531 px and the format to JPEG.</li>
+          <li>Click "Resize" — the tool outputs the passport-size image instantly.</li>
+          <li>Download the JPEG and upload it to your application portal.</li>
+          <li>If the file size still needs to be reduced, use the <a href="/compress-image-to-50kb">50 KB compressor</a> after resizing.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

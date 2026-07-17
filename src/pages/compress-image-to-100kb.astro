@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the 100 KB image limit used for?',
+    a: 'Many job application portals, HR management systems, and e-commerce seller platforms require profile or product images to be under 100 KB. Indian Railways (IRCTC) passenger photo uploads, some state police recruitment portals, and several private company recruitment portals also use this limit.',
+  },
+  {
+    q: 'What quality can I expect at 100 KB?',
+    a: 'At 100 KB, a typical portrait photograph at 400×500 px can be compressed to JPEG with quality around 75–85%, which produces a very acceptable result — sharp facial features and good colour reproduction. For product images or landscapes at higher resolution, quality will still be noticeably better than 50 KB output.',
+  },
+  {
+    q: 'Can I compress a PNG to 100 KB?',
+    a: 'Yes, but for photographs it is much more efficient to convert to JPEG first, as PNG uses lossless compression and typical photographic PNGs are far larger. Select JPEG as the output format in this tool to get the best quality at 100 KB.',
+  },
+  {
+    q: 'My image is 102 KB — will it be rejected?',
+    a: 'Most portals check the file size strictly and will reject an upload that exceeds the stated limit by even 1–2 KB. Always compress to a safe margin below the limit — aim for 95 KB or less when the limit is 100 KB — to avoid edge cases caused by different file size calculation methods.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-100kb#app`,
+      name: `Compress Image to 100 KB — ${siteConfig.siteName}`,
+      description: 'Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality.',
+      url: `${siteConfig.domain}/compress-image-to-100kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 100 KB Online — Free"
+  description="Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality."
+  canonical={`${siteConfig.domain}/compress-image-to-100kb`}
+  keywords="compress image to 100kb, reduce image size to 100kb, compress photo 100kb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-100kb" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 100 KB</h1>
+        <p class="tool-desc">Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality.</p>
+      </header>
+
+      <CompressTool targetKB={100} />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>The 100 KB limit appears on job application portals, company HR systems, e-commerce seller dashboards, CMS platforms for website uploads, and a wide range of Indian government and railway portals. Profile photos on LinkedIn and other professional networks are often recommended to be under 100 KB for fast page load times.</p>
+        <p>Compressing a photo to 100 KB is generally straightforward — at this target you can usually maintain visually excellent quality for portraits and product images. The tool automatically finds the highest JPEG quality setting that keeps the output under 100 KB, so you do not need to manually tune settings.</p>
+        <p>E-commerce sellers in particular benefit from compressed product images — faster-loading product pages improve conversion rates and are favoured by Amazon and Flipkart ranking algorithms. Compressed images also reduce storage costs in bulk catalogue scenarios.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
+          <li>The target is pre-set to 100 KB.</li>
+          <li>Choose JPEG for photographs, or WebP for web images where transparency is not needed.</li>
+          <li>Click "Compress" — the tool will automatically select the optimal quality.</li>
+          <li>Preview the result and download the compressed file.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

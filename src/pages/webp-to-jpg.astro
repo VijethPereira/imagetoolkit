@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ConvertTool from '../components/tools/ConvertTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why would I convert WebP to JPEG?',
+    a: 'WebP is great for websites but not universally supported by all software. Government portals and exam sites in India require JPEG explicitly. Older image editors like older versions of Photoshop, Paint, and many mobile gallery apps cannot open WebP files. Email clients may not display WebP inline. If you downloaded an image from a website and it is in WebP format, converting to JPEG makes it compatible with any software or upload form.',
+  },
+  {
+    q: 'Will the JPEG file be larger than the WebP?',
+    a: 'Generally yes. Since WebP uses more efficient compression, converting to JPEG at the same quality setting typically increases file size by 25–35%. You can compensate by using a lower JPEG quality setting, or by running the result through the image compressor if a specific file size limit applies.',
+  },
+  {
+    q: 'What happens to transparency when converting WebP to JPEG?',
+    a: 'JPEG does not support transparency. Any transparent areas in your WebP image will be filled with a white background when converted to JPEG. If you need to preserve transparency, convert to PNG instead using the WebP to PNG tool.',
+  },
+  {
+    q: 'Can I choose the JPEG quality when converting?',
+    a: 'Yes. The quality slider lets you balance between file size and image quality. A setting of 80–85% produces excellent visual results for most photographs. If you need a specific file size (e.g., under 50 KB for a government portal), lower the quality until the target is met, or use the compress tool after conversion.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/webp-to-jpg#app`,
+      name: `WebP to JPG Converter — ${siteConfig.siteName}`,
+      description: 'Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources.',
+      url: `${siteConfig.domain}/webp-to-jpg`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="WebP to JPG Converter Online — Free"
+  description="Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources."
+  canonical={`${siteConfig.domain}/webp-to-jpg`}
+  keywords="webp to jpg, convert webp to jpeg, webp to jpg converter"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/webp-to-jpg" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>WebP to JPG Converter</h1>
+        <p class="tool-desc">Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources.</p>
+      </header>
+
+      <ConvertTool from="WebP" to="jpeg" />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>WebP has become the default image format for many websites — browsers automatically download WebP versions of images when available, and modern web stacks serve WebP by default. This means when you right-click and save an image from a website, you often end up with a .webp file instead of a .jpg. While WebP works fine in modern browsers, it can cause problems when you need to use the image elsewhere.</p>
+        <p>Government exam portals (SSC, UPSC, IBPS, NTA) explicitly require JPEG photographs. Older versions of Photoshop, Lightroom, and many mobile photo editing apps cannot open WebP files. When sending images by email, some older email clients fail to display WebP inline. For printing, photo labs generally require JPEG or TIFF — not WebP. Converting from WebP to JPEG solves all of these compatibility issues.</p>
+        <p>Important note: JPEG does not support transparency. If your WebP image has transparent areas (e.g., a logo or icon with a see-through background), those areas will become white in the JPEG output. If preserving transparency is important, convert to PNG instead using the WebP to PNG converter.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your WebP image onto the tool.</li>
+          <li>Adjust the quality slider if needed — 80% is a good default for photographs.</li>
+          <li>Click "Convert" — the tool renders the WebP on a Canvas and encodes it as JPEG.</li>
+          <li>Download the JPEG file — it is ready to upload anywhere JPEG is required.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

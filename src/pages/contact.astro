@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import siteConfig from '../site.config.ts';
+---
+
+<Layout
+  title="Contact — Image Tools"
+  description="Get in touch with Image Tools. Report a bug, suggest a tool, or ask a question."
+  canonical={`${siteConfig.domain}/contact`}
+>
+  <SiteNav currentPath="/contact" />
+
+  <main class="page-main">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>
+        Have a bug report, feature suggestion, or question? We would love to hear from you.
+      </p>
+
+      <h2>Report a bug or request a feature</h2>
+      <p>
+        The fastest way to report an issue or suggest a new tool is via email at
+        <a href="mailto:feedback@example.com">feedback@example.com</a>. Please include
+        the tool name, the browser you are using, and a description of what happened
+        (or what you would like to see).
+      </p>
+
+      <h2>Suggest a new tool</h2>
+      <p>
+        If you frequently need an image-related task that is not covered by the current
+        tools — for example, a specific exam's photo or signature requirements — let us
+        know and we will consider adding it. The tools on this site were built based on
+        real user needs, and suggestions are welcome.
+      </p>
+
+      <h2>Response time</h2>
+      <p>
+        This is a small project maintained by a single developer. Responses may take a
+        few days. Thank you for your patience.
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .page-main {
+    padding: 3rem 0 6rem;
+  }
+
+  .container {
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--site-text);
+    margin: 0 0 1.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 2rem 0 0.5rem;
+  }
+
+  p {
+    color: var(--site-text-muted);
+    margin: 0 0 1rem;
+    max-width: 65ch;
+    line-height: 1.7;
+  }
+
+  a {
+    color: var(--site-accent);
+  }
+</style>

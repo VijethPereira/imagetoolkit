@@ -1,0 +1,498 @@
+---
+interface Props {
+  targetKB?: number;       // fixed target — if set, no quality slider shown
+  outputFormat?: string;   // 'jpeg' | 'png' | 'webp' | 'auto' (default: 'jpeg')
+}
+const { targetKB, outputFormat = 'jpeg' } = Astro.props;
+const isFixed = targetKB !== undefined;
+---
+
+<section
+  class="tool-widget"
+  id="compress-tool"
+  data-target-kb={targetKB?.toString() ?? ''}
+  data-output-format={outputFormat}
+>
+  <!-- Upload zone -->
+  <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Upload image">
+    <div class="drop-inner">
+      <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
+      </svg>
+      <p class="drop-label">Drop image here or <span class="drop-link">browse</span></p>
+      <p class="drop-hint">JPG · PNG · WebP · GIF — max 20 MB</p>
+    </div>
+    <input type="file" id="file-input" accept="image/*" class="file-input" />
+  </div>
+
+  <!-- File info + controls (hidden until file selected) -->
+  <div class="controls" id="controls" hidden>
+    <div class="file-meta">
+      <span class="file-name" id="file-name"></span>
+      <span class="file-size" id="orig-size"></span>
+    </div>
+
+    {!isFixed && (
+      <label class="quality-row">
+        <span>Quality</span>
+        <input type="range" id="quality-slider" min="1" max="99" value="75" class="slider" />
+        <span class="quality-val" id="quality-val">75%</span>
+      </label>
+    )}
+
+    {isFixed && (
+      <p class="target-note">Target: <strong>{targetKB} KB</strong></p>
+    )}
+
+    <button class="btn-primary" id="compress-btn">
+      {isFixed ? `Compress to ${targetKB} KB` : 'Compress Image'}
+    </button>
+  </div>
+
+  <!-- Progress -->
+  <p class="status" id="status" hidden></p>
+
+  <!-- Result (hidden until done) -->
+  <div class="result" id="result" hidden>
+    <div class="result-stats">
+      <div class="stat">
+        <span class="stat-label">Original</span>
+        <span class="stat-val" id="r-orig"></span>
+      </div>
+      <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+      </svg>
+      <div class="stat">
+        <span class="stat-label">Compressed</span>
+        <span class="stat-val green" id="r-new"></span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Saved</span>
+        <span class="stat-val green" id="r-saved"></span>
+      </div>
+    </div>
+    <div class="result-actions">
+      <a class="btn-primary" id="download-btn" download>Download</a>
+      <button class="btn-ghost" id="reset-btn">Try another image</button>
+    </div>
+  </div>
+
+  <p class="privacy-note">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd"/></svg>
+    Your image never leaves your device. All processing happens in your browser.
+  </p>
+</section>
+
+<script>
+  const tool = document.getElementById('compress-tool') as HTMLElement;
+  const dropZone = document.getElementById('drop-zone') as HTMLElement;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const controls = document.getElementById('controls') as HTMLElement;
+  const fileName = document.getElementById('file-name') as HTMLElement;
+  const origSize = document.getElementById('orig-size') as HTMLElement;
+  const qualitySlider = document.getElementById('quality-slider') as HTMLInputElement;
+  const qualityVal = document.getElementById('quality-val') as HTMLElement;
+  const compressBtn = document.getElementById('compress-btn') as HTMLButtonElement;
+  const status = document.getElementById('status') as HTMLElement;
+  const result = document.getElementById('result') as HTMLElement;
+  const rOrig = document.getElementById('r-orig') as HTMLElement;
+  const rNew = document.getElementById('r-new') as HTMLElement;
+  const rSaved = document.getElementById('r-saved') as HTMLElement;
+  const downloadBtn = document.getElementById('download-btn') as HTMLAnchorElement;
+  const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+
+  const targetKB = tool.dataset.targetKb ? parseInt(tool.dataset.targetKb) : null;
+  const outputFormat = (tool.dataset.outputFormat || 'jpeg') as 'jpeg' | 'png' | 'webp';
+
+  let currentFile: File | null = null;
+
+  function fmtBytes(b: number) {
+    if (b < 1024) return `${b} B`;
+    if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+    return `${(b / (1024 * 1024)).toFixed(2)} MB`;
+  }
+
+  function setStatus(msg: string) {
+    status.textContent = msg;
+    status.hidden = !msg;
+  }
+
+  function showControls(file: File) {
+    currentFile = file;
+    fileName.textContent = file.name;
+    origSize.textContent = fmtBytes(file.size);
+    controls.hidden = false;
+    result.hidden = true;
+    setStatus('');
+  }
+
+  // Drag-drop
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const f = e.dataTransfer?.files[0];
+    if (f && f.type.startsWith('image/')) showControls(f);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files?.[0]) showControls(fileInput.files[0]);
+  });
+
+  // Quality slider
+  qualitySlider?.addEventListener('input', () => {
+    if (qualityVal) qualityVal.textContent = `${qualitySlider.value}%`;
+  });
+
+  // Canvas helpers
+  function loadImage(file: File): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  function canvasToBlob(canvas: HTMLCanvasElement, mime: string, quality: number): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((b) => b ? resolve(b) : reject(new Error('toBlob failed')), mime, quality);
+    });
+  }
+
+  function drawToCanvas(img: HTMLImageElement, w = img.naturalWidth, h = img.naturalHeight) {
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d')!;
+    if (outputFormat === 'jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(img, 0, 0, w, h);
+    return canvas;
+  }
+
+  async function compressToTargetKB(img: HTMLImageElement, kb: number): Promise<Blob> {
+    const mime = `image/${outputFormat}`;
+    const targetBytes = kb * 1024;
+    const canvas = drawToCanvas(img);
+
+    // Already small enough — just re-encode at high quality
+    if (currentFile!.size <= targetBytes) {
+      return canvasToBlob(canvas, mime, 0.92);
+    }
+
+    // Binary search quality
+    let lo = 0.01, hi = 0.95, best: Blob | null = null;
+    for (let i = 0; i < 14; i++) {
+      const mid = (lo + hi) / 2;
+      const blob = await canvasToBlob(canvas, mime, mid);
+      if (blob.size <= targetBytes) { best = blob; lo = mid; }
+      else { hi = mid; }
+      if (hi - lo < 0.005) break;
+    }
+
+    // If quality alone not enough, also downscale
+    if (!best || best.size > targetBytes * 1.05) {
+      let scale = 0.85;
+      while (scale >= 0.2) {
+        const sw = Math.round(img.naturalWidth * scale);
+        const sh = Math.round(img.naturalHeight * scale);
+        const c2 = drawToCanvas(img, sw, sh);
+        const blob = await canvasToBlob(c2, mime, 0.5);
+        if (blob.size <= targetBytes) { best = blob; break; }
+        scale -= 0.1;
+      }
+    }
+    return best ?? await canvasToBlob(canvas, hi === 0.01 ? drawToCanvas(img) : canvas, lo, 0.01);
+  }
+
+  compressBtn.addEventListener('click', async () => {
+    if (!currentFile) return;
+    compressBtn.disabled = true;
+    setStatus('Compressing…');
+    result.hidden = true;
+
+    try {
+      const img = await loadImage(currentFile);
+      const mime = `image/${outputFormat}`;
+      let blob: Blob;
+
+      if (targetKB !== null) {
+        blob = await compressToTargetKB(img, targetKB);
+      } else {
+        const quality = parseInt(qualitySlider.value) / 100;
+        const canvas = drawToCanvas(img);
+        blob = await canvasToBlob(canvas, mime, quality);
+      }
+
+      const origBytes = currentFile.size;
+      const newBytes = blob.size;
+      const saved = Math.round((1 - newBytes / origBytes) * 100);
+
+      rOrig.textContent = fmtBytes(origBytes);
+      rNew.textContent = fmtBytes(newBytes);
+      rSaved.textContent = saved > 0 ? `${saved}% smaller` : 'no reduction';
+
+      const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
+      const baseName = currentFile.name.replace(/\.[^.]+$/, '');
+      downloadBtn.href = URL.createObjectURL(blob);
+      downloadBtn.download = `${baseName}-compressed.${ext}`;
+
+      controls.hidden = true;
+      result.hidden = false;
+      setStatus('');
+    } catch (err) {
+      setStatus('Something went wrong. Please try a different image.');
+    }
+
+    compressBtn.disabled = false;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    currentFile = null;
+    fileInput.value = '';
+    controls.hidden = true;
+    result.hidden = true;
+    setStatus('');
+  });
+
+  // Fix broken overload call above
+  async function canvasToBlob2(canvas: HTMLCanvasElement, mime: string, quality: number): Promise<Blob> {
+    return canvasToBlob(canvas, mime, quality);
+  }
+</script>
+
+<style>
+  .tool-widget {
+    background: var(--site-bg-card);
+    border: 1px solid var(--site-border);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  /* Drop zone */
+  .drop-zone {
+    border: 2px dashed var(--site-border);
+    border-radius: 10px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+
+  .drop-zone:hover,
+  .drop-zone.drag-over {
+    border-color: var(--site-accent);
+    background: color-mix(in srgb, var(--site-accent) 5%, transparent);
+  }
+
+  .drop-inner { pointer-events: none; }
+
+  .drop-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--site-text-muted);
+    margin: 0 auto 0.75rem;
+  }
+
+  .drop-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--site-text);
+    margin: 0 0 0.25rem;
+  }
+
+  .drop-link { color: var(--site-accent); }
+
+  .drop-hint {
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+    margin: 0;
+  }
+
+  .file-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Controls */
+  .controls { margin-top: 1.25rem; }
+
+  .file-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--site-hover);
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+
+  .file-name {
+    font-weight: 600;
+    color: var(--site-text);
+    font-size: 0.9375rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 18ch;
+  }
+
+  .file-size {
+    font-size: 0.875rem;
+    color: var(--site-text-muted);
+    flex-shrink: 0;
+  }
+
+  .quality-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+    color: var(--site-text);
+  }
+
+  .slider {
+    flex: 1;
+    accent-color: var(--site-accent);
+  }
+
+  .quality-val {
+    font-weight: 600;
+    min-width: 3ch;
+    color: var(--site-accent);
+  }
+
+  .target-note {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    color: var(--site-text-muted);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    background: var(--site-accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    width: 100%;
+  }
+
+  .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.5rem;
+    border: 1px solid var(--site-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--site-text-muted);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .btn-ghost:hover { background: var(--site-hover); color: var(--site-text); }
+
+  /* Status */
+  .status {
+    text-align: center;
+    color: var(--site-text-muted);
+    font-size: 0.9375rem;
+    margin: 0.75rem 0 0;
+    padding: 0.75rem;
+    background: var(--site-hover);
+    border-radius: 8px;
+  }
+
+  /* Result */
+  .result { margin-top: 1.25rem; }
+
+  .result-stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: color-mix(in srgb, #22c55e 8%, transparent);
+    border: 1px solid color-mix(in srgb, #22c55e 30%, transparent);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--site-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-val {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--site-text);
+  }
+
+  .stat-val.green { color: #16a34a; }
+
+  [data-theme="dark"] .stat-val.green { color: #4ade80; }
+
+  .arrow-icon { width: 1.25rem; color: var(--site-text-muted); }
+
+  .result-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Privacy note */
+  .privacy-note {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0.75rem 1rem;
+    background: var(--site-hover);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+  }
+
+  .privacy-note svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    color: var(--site-accent);
+  }
+</style>

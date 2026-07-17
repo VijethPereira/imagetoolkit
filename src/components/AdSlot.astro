@@ -1,0 +1,36 @@
+---
+import siteConfig from '../site.config.ts';
+
+interface Props {
+  slot: string;
+  format?: string;
+  layout?: string;
+}
+
+const { slot: adSlot, format = 'auto', layout } = Astro.props;
+
+// Render nothing when AdSense publisher ID is not configured
+const show = Boolean(siteConfig.adsenseId);
+---
+
+{show && (
+  <div class="ad-wrapper" aria-label="Advertisement">
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={siteConfig.adsenseId}
+      data-ad-slot={adSlot}
+      data-ad-format={format}
+      data-ad-layout={layout}
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}
+
+<style>
+  .ad-wrapper {
+    margin: 2rem 0;
+    text-align: center;
+  }
+</style>

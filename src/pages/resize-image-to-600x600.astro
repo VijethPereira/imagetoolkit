@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why do Amazon and Flipkart require square product images?',
+    a: 'E-commerce platforms use square images so product thumbnails display consistently in grid layouts without cropping or distortion. Amazon requires the main product image to be at least 500×500 px, and recommends 1000×1000 px or larger for zoom functionality. 600×600 px is a commonly used size for secondary images and catalogue uploads where file size is also a concern.',
+  },
+  {
+    q: 'Will resizing stretch my image if it is not square?',
+    a: 'Yes, if your original image is not square (1:1 ratio) and the aspect ratio is unlocked, resizing to 600×600 px will stretch it. To avoid this, crop your image to a 1:1 ratio first, then resize. Alternatively, upload a square crop of your subject directly.',
+  },
+  {
+    q: 'What is the ideal WhatsApp DP size?',
+    a: 'WhatsApp displays profile photos (DPs) as circles and accepts images up to 5 MB. It automatically resizes large images, but uploading a 600×600 px image gives you full control — the image loads quickly and looks sharp when viewed full-size by contacts.',
+  },
+  {
+    q: 'Can I use this tool for Facebook profile photos?',
+    a: 'Yes. Facebook displays profile photos at 170×170 px on desktops but stores them at higher resolution. A 600×600 px image gives Facebook enough resolution for a crisp display on all screens and across all zoom levels while keeping the file lightweight.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-600x600#app`,
+      name: `Resize Image to 600×600 px — ${siteConfig.siteName}`,
+      description: 'Resize any image to 600×600 pixels online for free. Perfect for social media profiles, WhatsApp DP, Amazon product images, and govt form uploads.',
+      url: `${siteConfig.domain}/resize-image-to-600x600`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 600×600 Pixels Online — Free"
+  description="Resize any image to 600×600 pixels online for free. Perfect for social media profiles, WhatsApp DP, Amazon product images, and govt form uploads."
+  canonical={`${siteConfig.domain}/resize-image-to-600x600`}
+  keywords="resize image to 600x600, 600x600 photo resize, square image resize"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-600x600" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 600×600 px</h1>
+        <p class="tool-desc">Resize any image to 600×600 pixels online for free. Perfect for social media profiles, WhatsApp DP, Amazon product images, and govt form uploads.</p>
+      </header>
+
+      <ResizeTool width={600} height={600} lockAspect={false} outputFormat="jpeg" presetLabel="600×600 px (Square)" />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>600×600 pixels is one of the most widely used square image sizes on the internet. Amazon Seller Central accepts product images at this resolution for secondary and variation images. Flipkart, Meesho, and other Indian e-commerce platforms use this as a standard catalogue image size. Social media platforms including Facebook, Instagram, and WhatsApp all work well with 600×600 px profile pictures and post images.</p>
+        <p>Some Indian government portals that require a square photograph — such as certain state recruitment boards and university registration systems — also accept 600×600 px as a valid dimension. The square format ensures the image looks identical regardless of whether it is displayed in a circle, a grid thumbnail, or a full preview.</p>
+        <p>Note: If your original image is not square, the tool will resize both dimensions to 600 px independently, which may stretch the image. For best results, start with a square crop or use an image that is already close to a 1:1 aspect ratio.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
+          <li>Dimensions are pre-set to 600×600 px with aspect ratio unlocked.</li>
+          <li>The output format is set to JPEG — change to PNG if you need transparency.</li>
+          <li>Click "Resize" and preview the result.</li>
+          <li>Download the resized image and use it wherever a square image is needed.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>

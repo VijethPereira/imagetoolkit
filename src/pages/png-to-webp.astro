@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ConvertTool from '../components/tools/ConvertTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Does WebP support transparency like PNG?',
+    a: 'Yes. WebP supports full alpha-channel transparency, just like PNG. When you convert a PNG with a transparent background to WebP, the transparency is preserved in the output file. This makes WebP an excellent replacement for PNG in web contexts where transparency is needed.',
+  },
+  {
+    q: 'How much smaller is WebP compared to PNG?',
+    a: 'WebP lossless compression is approximately 26% smaller than PNG for the same image. WebP lossy compression is even smaller — often 60–80% smaller than a PNG of the same image, though with some quality reduction. For photographs saved as PNG, converting to WebP (lossy) can reduce file size dramatically.',
+  },
+  {
+    q: 'When should I keep PNG instead of converting to WebP?',
+    a: 'Keep PNG if: the file will be used as a source for editing (PNG is lossless so every re-save is identical, whereas re-encoding WebP lossy degrades quality each time), you need to upload to a platform that does not support WebP (e.g., some older CMS or government portals), or you need compatibility with software that cannot open WebP files.',
+  },
+  {
+    q: 'Will my PNG logo look the same after converting to WebP lossless?',
+    a: 'Yes, if you use WebP lossless mode (quality 100), the output is pixel-perfect and identical to the source PNG. In lossy mode, flat-colour graphics like logos may show slight colour banding at lower quality settings — for logos, either use lossless WebP or stick with PNG.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/png-to-webp#app`,
+      name: `PNG to WebP Converter — ${siteConfig.siteName}`,
+      description: 'Convert PNG images to WebP online free. WebP is 26% smaller than PNG and supports transparency.',
+      url: `${siteConfig.domain}/png-to-webp`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="PNG to WebP Converter Online — Free"
+  description="Convert PNG images to WebP online free. WebP is 26% smaller than PNG and supports transparency."
+  canonical={`${siteConfig.domain}/png-to-webp`}
+  keywords="png to webp, convert png to webp, png webp converter online"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/png-to-webp" />
+  <main class="page-main">
+    <div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>PNG to WebP Converter</h1>
+        <p class="tool-desc">Convert PNG images to WebP online free. WebP is 26% smaller than PNG and supports transparency.</p>
+      </header>
+
+      <ConvertTool from="PNG" to="webp" />
+
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>About This Tool</h2>
+        <p>PNG (Portable Network Graphics) has been the standard for lossless web images with transparency since the late 1990s. While it produces perfect-quality images, PNG files can be very large — especially for photographs. WebP was designed by Google as a modern successor that is smaller, faster to load, and supports the same alpha-channel transparency that makes PNG so useful for logos, icons, and overlays.</p>
+        <p>WebP lossless is approximately 26% smaller than PNG for the same image content. For photographs stored as PNG (a common practice for screenshots and design exports), WebP lossy can achieve reductions of 60–80% while maintaining excellent visual quality. Every kilobyte saved translates to faster page loads and a better user experience, particularly for mobile users on slower connections.</p>
+        <p>Modern browsers — Chrome, Firefox, Safari 14+, Edge, and all current mobile browsers — support WebP natively. If your web project targets only modern browsers, replacing PNG with WebP is a straightforward and impactful optimisation. The conversion is safe to do on an image-by-image basis; simply swap the PNG references in your HTML or CSS to point to the WebP files.</p>
+        <h3>How to Use</h3>
+        <ol>
+          <li>Click "Choose File" or drag and drop your PNG image onto the tool.</li>
+          <li>Adjust the quality slider — use 100 for lossless (same quality as PNG) or lower for smaller files.</li>
+          <li>Click "Convert" — transparency in the PNG is automatically preserved in the WebP output.</li>
+          <li>Compare the file sizes and download the WebP when satisfied.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
+  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
+  .content-section li { margin-bottom: 0.375rem; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+</style>
