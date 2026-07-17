@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import siteConfig from '../site.config.ts';
+---
+
+<Layout
+  title={`500 — Server Error | ${siteConfig.siteName}`}
+  description="Something went wrong on our end. Please try again in a moment."
+>
+  <SiteNav />
+
+  <main class="error-main">
+    <div class="error-card">
+      <div class="error-visual">
+        <svg class="icon-wrench" viewBox="0 0 80 80" fill="none" aria-hidden="true">
+          <circle cx="40" cy="40" r="30" fill="var(--site-bg-soft2)" stroke="var(--site-border-strong)" stroke-width="2"/>
+          <path d="M50 22 C55 27 55 35 50 40 L35 55 C32 58 27 58 24 55 C21 52 21 47 24 44 L39 29 C44 24 45 17 50 22 Z" fill="none" stroke="var(--site-text-muted)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M46 26 L54 34" stroke="var(--site-text-muted)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="28" cy="51" r="3" fill="var(--site-text-muted)"/>
+          <path d="M20 32 L22 28 L26 30 L28 26 L32 28 L30 32 Z" fill="none" stroke="var(--site-accent)" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M54 48 L56 44 L60 46 L58 50 Z" fill="none" stroke="var(--site-accent)" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <p class="error-code">500</p>
+      </div>
+
+      <h1>Something Went Wrong</h1>
+      <p class="error-desc">We hit an unexpected error on our end. This is not your fault — our team has been notified. Please try again in a moment.</p>
+
+      <div class="btn-row">
+        <button class="btn-reload" onclick="window.location.reload()">&#8635; Try Again</button>
+        <a href="/" class="btn-home">&#8592; Back to Home</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="help-text">
+        If this keeps happening, <a href="/contact">contact us</a> and we'll look into it right away.
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .error-main {
+    min-height: calc(100dvh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .error-card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    background: var(--site-bg-card);
+    border: 1px solid var(--site-border);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-3);
+  }
+
+  .error-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .icon-wrench {
+    width: 80px;
+    height: 80px;
+  }
+
+  .error-code {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -2px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--site-text);
+    margin: 0 0 0.625rem;
+  }
+
+  .error-desc {
+    color: var(--site-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .btn-reload {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.625rem 1.5rem;
+    background: var(--site-bg-soft2);
+    color: var(--site-text);
+    border: 1px solid var(--site-border-strong);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+
+  .btn-reload:hover {
+    background: var(--site-hover);
+  }
+
+  .btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.625rem 1.5rem;
+    background: var(--site-accent);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .btn-home:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--site-border);
+    margin-bottom: 1.5rem;
+  }
+
+  .help-text {
+    font-size: 0.875rem;
+    color: var(--site-text-muted);
+    margin: 0;
+  }
+
+  .help-text a {
+    color: var(--site-accent);
+  }
+
+  @media (max-width: 480px) {
+    .error-card {
+      padding: 2rem 1.25rem;
+    }
+
+    .error-code {
+      font-size: 4rem;
+    }
+
+    .btn-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
