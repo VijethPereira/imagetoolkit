@@ -44,7 +44,9 @@ const siteConfig = {
   navLinks: [
     { label: 'All Tools', href: '/' },
     { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
     { label: 'Privacy', href: '/privacy-policy' },
+    { label: 'Terms', href: '/terms' },
   ],
   toolCategories,
   tools: allTools,
