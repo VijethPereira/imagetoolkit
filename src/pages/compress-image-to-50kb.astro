@@ -9,19 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Which portals require images under 50 KB?',
-    a: 'The 50 KB limit is used by UPSC (IAS/IPS/IFS applications on upsc.gov.in), NTA for JEE Main, NEET-UG, and CUET on ntaonline.in, most state government job portals, many university admission portals, and online forms for banks and insurance companies. It is the single most common photo size limit on Indian government websites.',
+    a: 'The 50 KB limit is used by UPSC (upsc.gov.in), NTA for JEE Main, NEET-UG, and CUET (ntaonline.in), most state government job portals, university admission forms, and online forms for banks and insurance companies. It is the single most common photo size limit on Indian government websites.',
   },
   {
-    q: 'What if my photo is already under 50 KB?',
-    a: 'If your photo is already smaller than 50 KB, you do not need to compress it. You can still run it through this tool if you want to reduce it further, but uploading an image that is already within the limit is perfectly fine.',
+    q: 'How do I compress an image to 50 KB without losing quality?',
+    a: 'This tool handles it automatically — it binary-searches for the highest JPEG quality that keeps the output under 50 KB. For the best visible quality, first resize your photo to a smaller pixel size (200×230 px for a portrait is ideal) using the Resize Image tool. Smaller dimensions compress more gracefully to 50 KB.',
   },
   {
     q: 'Should I use JPEG or PNG for a 50 KB upload?',
-    a: 'Use JPEG for photographs — a typical passport-size JPEG can be compressed to under 50 KB while still looking good. PNG is lossless and will be much larger for the same visual quality; avoid PNG for exam photo uploads unless the portal specifically requires it.',
+    a: 'JPEG for photographs — a typical passport-size JPEG compresses cleanly to under 50 KB while looking sharp. PNG is lossless and will be much larger for the same visual quality; avoid PNG for exam photo uploads. Most government portals explicitly require JPEG (JPG) format anyway.',
   },
   {
     q: 'My photo keeps coming out with too low quality after compression.',
-    a: 'This usually happens when the original image is very large (e.g., 3–5 MB) and heavy compression is needed to reach 50 KB. The fix is to first resize your photo to a smaller pixel dimension — 200×230 px for portraits is a good starting point — and then compress to 50 KB. Smaller images need less compression to meet the size limit, so quality is much better preserved.',
+    a: 'This usually happens when the source image is very large (3–5 MB from a smartphone) and extreme compression is needed to reach 50 KB. Fix: first resize your photo to 200×230 px using the Resize tool, then compress here. A 200×230 px image needs much less compression to reach 50 KB, so quality is much better preserved.',
+  },
+  {
+    q: 'What if my photo is already under 50 KB?',
+    a: 'You do not need to compress it. Simply upload the existing file to the application portal. If the portal still rejects it, check that the format is JPEG (not PNG or WebP) and that the pixel dimensions meet the portal\'s requirements.',
+  },
+  {
+    q: 'Is this image compressor free and private?',
+    a: 'Yes and yes. The tool is completely free with no account required. It runs entirely in your browser — your photo is never uploaded to any server, so there is no privacy risk. Ideal for sensitive documents like passport photos and government ID images.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/compress-image-to-50kb#app`,
-      name: `Compress Image to 50 KB — ${siteConfig.siteName}`,
-      description: 'Compress any image to under 50 KB online. Required for UPSC, banking exams, college admissions, and most Indian govt portals.',
+      name: 'Compress Image to 50 KB Online Free',
+      description: 'Compress any image to under 50 KB online. Free, no upload, 100% private. Required for UPSC, NTA JEE/NEET, banking exams, and most Indian govt portals.',
       url: `${siteConfig.domain}/compress-image-to-50kb`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,39 +59,46 @@ const jsonLd = {
 ---
 
 <Layout
-  title="Compress Image to 50 KB Online — Free"
-  description="Compress any image to under 50 KB online. Required for UPSC, banking exams, college admissions, and most Indian govt portals."
+  title="Compress Image to 50 KB Free — No Upload"
+  description="Free tool to compress any photo to under 50 KB. 100% private, no upload. Required for UPSC, JEE Main, NEET & most Indian govt portals."
   canonical={`${siteConfig.domain}/compress-image-to-50kb`}
-  keywords="compress image to 50kb, reduce image to 50kb, compress photo to 50kb"
+  keywords="compress image to 50kb, reduce image to 50kb, compress photo to 50kb, image compressor to 50kb, compress jpg to 50kb, compress image for upsc"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/compress-image-to-50kb" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>Compress Image to 50 KB</h1>
-        <p class="tool-desc">Compress any image to under 50 KB online. Required for UPSC, banking exams, college admissions, and most Indian govt portals.</p>
+        <h1>Compress Image to 50 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 50 KB. 100% private, no upload. Required for UPSC, NTA JEE/NEET, banking exams, and most Indian government portals.</p>
       </header>
 
       <CompressTool targetKB={50} />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>50 KB is the most common photograph size limit on Indian government and education portals. UPSC requires applicants to upload a photo under 50 KB on upsc.gov.in. NTA's portals for JEE Main, NEET-UG, and CUET enforce the same 50 KB limit. State government recruitment boards, central university admission portals, and most public sector bank job applications use this threshold as well.</p>
-        <p>This tool automatically compresses your image until it falls under 50 KB, then stops — preserving as much quality as possible at that target. The process happens entirely in your browser; nothing is uploaded to a server. You can compress the same photo multiple times with different settings without any privacy concern.</p>
-        <p>For UPSC and NTA applications in particular, the photograph must typically be recent, show a clear face against a white or light background, and be in JPEG format. Use the quality result preview to confirm the image still clearly shows your face before submitting.</p>
-        <h3>How to Use</h3>
+        <h2>Compress Image to 50 KB — For UPSC, NTA &amp; Govt Portals</h2>
+        <p>50 KB is the most widely enforced photograph size limit on Indian government and educational portals. UPSC's online application system (upsc.gov.in) requires candidates to upload a photograph under 50 KB. NTA's portals for JEE Main, NEET-UG, and CUET enforce the same 50 KB limit. State government recruitment boards, central university admissions, and most public sector bank online forms use this threshold as well.</p>
+        <p>This free online image compressor automatically targets 50 KB — it binary-searches for the highest JPEG quality setting that produces an output file under 50 KB, preserving as much visual quality as possible. The entire process happens in your browser with no server upload, making it fast, private, and suitable for sensitive documents like passport photos.</p>
+        <p>For UPSC applications in particular, the photograph must be recent (taken within 3–6 months), show a clear face against a light background, and be in JPEG format. The file size limit at upsc.gov.in is 40 KB for the photograph — use a safe margin and aim for 45 KB or less.</p>
+
+        <h3>How to Compress a Photo to 50 KB</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your photo onto the tool.</li>
-          <li>The target is pre-set to 50 KB — no adjustment needed.</li>
-          <li>Ensure the output format is JPEG for photographs.</li>
-          <li>Click "Compress" — the tool finds the optimal quality setting automatically.</li>
-          <li>Review the compressed image and download if acceptable.</li>
-          <li>If quality is too low, try <a href="/resize-image-to-passport-size">resizing to passport dimensions</a> first, then compress.</li>
+          <li>Click "Choose File" or drag and drop your photo. Accepts JPG, PNG, and WebP.</li>
+          <li>The 50 KB target is pre-set — no adjustment needed.</li>
+          <li>Select JPEG as the output format for smallest file size and widest portal compatibility.</li>
+          <li>Click "Compress" — the tool finds the optimal quality level automatically.</li>
+          <li>Review the result and download if the quality is acceptable.</li>
+          <li><strong>Tip:</strong> If the photo looks too soft, <a href="/resize-image-to-passport-size">resize it to passport dimensions (413×531 px)</a> first, then compress to 50 KB.</li>
         </ol>
+
+        <h3>Why Resize Before Compressing?</h3>
+        <p>A smartphone photo might be 4000×3000 pixels and 4 MB. To compress that to 50 KB, the tool must discard over 98% of the data — resulting in visible blurriness. If you first resize to 200×230 px (a standard portrait size for exam portals), the same 50 KB target needs only 60–70% compression — and the result looks sharp. The resize-then-compress workflow almost always produces better-looking output than compression alone.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -103,7 +118,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC &amp; IBPS exam uploads</span>
+          </a>
+          <a href="/compress-image-to-100kb" class="related-card">
+            <span class="related-name">Compress to 100 KB</span>
+            <span class="related-desc">Job portals &amp; e-commerce</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Quality slider compression</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -122,22 +159,25 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .content-section a { color: var(--site-accent); }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -145,4 +185,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

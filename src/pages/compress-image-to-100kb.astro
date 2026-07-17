@@ -8,20 +8,28 @@ import siteConfig from '../site.config.ts';
 
 const faqs = [
   {
+    q: 'How do I compress an image to 100 KB without losing quality?',
+    a: 'This tool does it automatically — it binary-searches for the highest JPEG quality that keeps the output under 100 KB. At 100 KB, most portrait photos at 400×500 px can be encoded at JPEG quality 80–90%, producing sharp, attractive results with no visible compression artefacts.',
+  },
+  {
     q: 'What is the 100 KB image limit used for?',
-    a: 'Many job application portals, HR management systems, and e-commerce seller platforms require profile or product images to be under 100 KB. Indian Railways (IRCTC) passenger photo uploads, some state police recruitment portals, and several private company recruitment portals also use this limit.',
+    a: 'The 100 KB limit appears on job application portals (Naukri, LinkedIn company portals, IRCTC), company HR systems, e-commerce seller dashboards, several Indian railway and police recruitment portals, and university registration systems. Profile photos on many platforms are also recommended to be under 100 KB for fast page loading.',
   },
   {
     q: 'What quality can I expect at 100 KB?',
-    a: 'At 100 KB, a typical portrait photograph at 400×500 px can be compressed to JPEG with quality around 75–85%, which produces a very acceptable result — sharp facial features and good colour reproduction. For product images or landscapes at higher resolution, quality will still be noticeably better than 50 KB output.',
+    a: 'At 100 KB, even a 600×800 px portrait photograph compresses to JPEG quality 80–90%, which looks excellent — sharp details, accurate colours, and no visible artefacts. This is a comfortable target that preserves good visual quality for both identification and display purposes.',
   },
   {
     q: 'Can I compress a PNG to 100 KB?',
-    a: 'Yes, but for photographs it is much more efficient to convert to JPEG first, as PNG uses lossless compression and typical photographic PNGs are far larger. Select JPEG as the output format in this tool to get the best quality at 100 KB.',
+    a: 'Yes. For photographs, switch the output format to JPEG for best results — PNG uses lossless compression and may be much larger than 100 KB even after compression. For logos or graphics with transparency, WebP supports alpha channels and compresses far better than PNG at this size target.',
   },
   {
-    q: 'My image is 102 KB — will it be rejected?',
-    a: 'Most portals check the file size strictly and will reject an upload that exceeds the stated limit by even 1–2 KB. Always compress to a safe margin below the limit — aim for 95 KB or less when the limit is 100 KB — to avoid edge cases caused by different file size calculation methods.',
+    q: 'My image is 102 KB — will it be rejected by the portal?',
+    a: 'Most portals enforce the file size limit strictly and will reject anything over the stated maximum, even by 1–2 KB. Always aim for a safe margin: if the limit is 100 KB, target 95 KB or less. This tool targets exactly 100 KB but file size calculation methods can vary, so download and check the actual file size before uploading.',
+  },
+  {
+    q: 'Is this tool free and does it work without uploading my image?',
+    a: 'Yes. It is completely free with no account required. All processing happens in your browser using the Canvas API — your image is never uploaded to any server. This makes it safe for sensitive images like ID photos and professional headshots.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/compress-image-to-100kb#app`,
-      name: `Compress Image to 100 KB — ${siteConfig.siteName}`,
-      description: 'Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality.',
+      name: 'Image Compressor to 100 KB Online Free',
+      description: 'Compress any image to under 100 KB free online. No upload, 100% private. Perfect for job portals, e-commerce, and general web use.',
       url: `${siteConfig.domain}/compress-image-to-100kb`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,38 +59,47 @@ const jsonLd = {
 ---
 
 <Layout
-  title="Compress Image to 100 KB Online — Free"
-  description="Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality."
+  title="Image Compressor to 100 KB — Free Online"
+  description="Compress any image to under 100 KB free. No upload, 100% private. Great for job portals, e-commerce product images & general web use."
   canonical={`${siteConfig.domain}/compress-image-to-100kb`}
-  keywords="compress image to 100kb, reduce image size to 100kb, compress photo 100kb"
+  keywords="compress image to 100kb, image compressor to 100kb, reduce image size to 100kb, compress jpg to 100kb, compress photo 100kb, compress jpeg to 100kb"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/compress-image-to-100kb" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>Compress Image to 100 KB</h1>
-        <p class="tool-desc">Compress any image file to under 100 KB online for free. Reduce JPG, PNG, and WebP size without losing quality.</p>
+        <h1>Compress Image to 100 KB Online</h1>
+        <p class="tool-desc">Free image compressor to 100 KB. No upload, 100% private. Perfect for job portals, e-commerce product images, and general web use. Supports JPG, PNG, WebP.</p>
       </header>
 
       <CompressTool targetKB={100} />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>The 100 KB limit appears on job application portals, company HR systems, e-commerce seller dashboards, CMS platforms for website uploads, and a wide range of Indian government and railway portals. Profile photos on LinkedIn and other professional networks are often recommended to be under 100 KB for fast page load times.</p>
-        <p>Compressing a photo to 100 KB is generally straightforward — at this target you can usually maintain visually excellent quality for portraits and product images. The tool automatically finds the highest JPEG quality setting that keeps the output under 100 KB, so you do not need to manually tune settings.</p>
-        <p>E-commerce sellers in particular benefit from compressed product images — faster-loading product pages improve conversion rates and are favoured by Amazon and Flipkart ranking algorithms. Compressed images also reduce storage costs in bulk catalogue scenarios.</p>
-        <h3>How to Use</h3>
+        <h2>Compress Image to 100 KB — For Job Portals &amp; E-commerce</h2>
+        <p>The 100 KB limit is one of the most common file size restrictions on job portals, HR management systems, and e-commerce platforms. Naukri, Monster, and most company career portals require profile or application photos under 100 KB. Indian Railways (IRCTC) passenger photo uploads, state police and paramilitary recruitment portals, and several private company job application forms use this same limit.</p>
+        <p>At 100 KB, JPEG compression can maintain very high visual quality for portrait photographs — typically 80–90% quality for a 400×500 px image. The result looks sharp, has accurate colours, and shows no visible compression artefacts. This is a comfortable target compared to the more challenging 20 KB or 50 KB limits used by stricter government exam portals.</p>
+        <p>This free online image compressor handles the entire process automatically. Drop your image in, and the tool binary-searches for the highest quality setting that produces an output under 100 KB. Your image is never uploaded to a server — processing happens entirely on your device in milliseconds.</p>
+
+        <h3>How to Compress a Photo to 100 KB</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
-          <li>The target is pre-set to 100 KB.</li>
-          <li>Choose JPEG for photographs, or WebP for web images where transparency is not needed.</li>
-          <li>Click "Compress" — the tool will automatically select the optimal quality.</li>
-          <li>Preview the result and download the compressed file.</li>
+          <li>Click "Choose File" or drag and drop your image. Accepts JPG, PNG, and WebP.</li>
+          <li>The 100 KB target is pre-set — no manual adjustment needed.</li>
+          <li>Select JPEG output for photographs; WebP for web graphics or images with transparency.</li>
+          <li>Click "Compress". The tool finds the optimal quality automatically, usually in under a second.</li>
+          <li>Review the before/after comparison and download the compressed image.</li>
         </ol>
+
+        <h3>Common Use Cases for a 100 KB Image Limit</h3>
+        <p><strong>Job applications:</strong> Naukri, LinkedIn company portals, and most corporate HR systems require profile or application photos under 100 KB. A professional headshot compressed to 100 KB looks sharp and loads quickly on employer dashboards.</p>
+        <p><strong>E-commerce product images:</strong> Faster-loading product pages improve conversion rates and are favoured by Amazon's and Flipkart's search ranking algorithms. Compressing catalogue images to 100 KB or less (or better, converting to WebP) directly impacts your store's performance metrics.</p>
+        <p><strong>Website uploads:</strong> Oversized images are the most common cause of slow Core Web Vitals scores. A 100 KB cap on any single image ensures your pages load quickly on mobile connections and passes Google's PageSpeed recommendations.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -102,7 +119,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC, NTA portals</span>
+          </a>
+          <a href="/compress-image-to-200kb" class="related-card">
+            <span class="related-name">Compress to 200 KB</span>
+            <span class="related-desc">Social media &amp; job portals</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Quality slider compression</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Change pixel dimensions</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -121,21 +160,24 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -143,4 +185,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

@@ -124,7 +124,6 @@ const { from, to, quality = 0.92 } = Astro.props;
     setStatus('');
   }
 
-  dropZone.addEventListener('click', () => fileInput.click());
   dropZone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
   dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
   dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
@@ -192,8 +191,8 @@ const { from, to, quality = 0.92 } = Astro.props;
 </script>
 
 <style>
-  .tool-widget { background: var(--site-bg-card); border: 1px solid var(--site-border); border-radius: 12px; padding: 2rem; margin: 1.5rem 0 2rem; }
-  .drop-zone { border: 2px dashed var(--site-border); border-radius: 10px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+  .tool-widget { background: var(--site-bg-card); border-radius: 12px; box-shadow: var(--shadow-4); padding: 2rem; margin: 1.5rem 0 2rem; }
+  .drop-zone { border: 2px dashed var(--site-border); border-radius: 8px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
   .drop-zone:hover, .drop-zone.drag-over { border-color: var(--site-accent); background: color-mix(in srgb, var(--site-accent) 5%, transparent); }
   .drop-inner { pointer-events: none; }
   .drop-icon { width: 2.5rem; height: 2.5rem; color: var(--site-text-muted); margin: 0 auto 0.75rem; }
@@ -211,11 +210,11 @@ const { from, to, quality = 0.92 } = Astro.props;
   .quality-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; font-size: 0.9375rem; color: var(--site-text); }
   .slider { flex: 1; accent-color: var(--site-accent); }
   .quality-val { font-weight: 600; min-width: 3ch; color: var(--site-accent); }
-  .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; background: var(--site-accent); color: #fff; border: none; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.15s; width: 100%; }
+  .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; background: var(--site-accent); color: #fff; border: none; border-radius: 9999px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.15s; width: 100%; }
   .btn-primary:hover { opacity: 0.85; text-decoration: none; }
   .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--site-border); border-radius: 8px; background: transparent; color: var(--site-text-muted); font-size: 0.9375rem; cursor: pointer; width: 100%; transition: background 0.15s, color 0.15s; }
-  .btn-ghost:hover { background: var(--site-hover); color: var(--site-text); }
+  .btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--site-border); border-radius: 9999px; background: transparent; color: var(--site-body); font-size: 0.9375rem; cursor: pointer; width: 100%; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+  .btn-ghost:hover { background: var(--site-hover); color: var(--site-text); border-color: var(--site-border-strong); }
   .status { text-align: center; color: var(--site-text-muted); font-size: 0.9375rem; margin: 0.75rem 0 0; padding: 0.75rem; background: var(--site-hover); border-radius: 8px; }
   .result { margin-top: 1.25rem; }
   .result-stats { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: color-mix(in srgb, #22c55e 8%, transparent); border: 1px solid color-mix(in srgb, #22c55e 30%, transparent); border-radius: 10px; margin-bottom: 1rem; flex-wrap: wrap; justify-content: center; }
@@ -228,4 +227,11 @@ const { from, to, quality = 0.92 } = Astro.props;
   .result-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
   .privacy-note { display: flex; align-items: center; gap: 0.5rem; margin: 1.25rem 0 0; padding: 0.75rem 1rem; background: var(--site-hover); border-radius: 8px; font-size: 0.8125rem; color: var(--site-text-muted); }
   .privacy-note svg { width: 1rem; height: 1rem; flex-shrink: 0; color: var(--site-accent); }
+
+  /* ── Mobile ── */
+  @media (max-width: 480px) {
+    .tool-widget { padding: 1.125rem; }
+    .drop-zone { padding: 2rem 1rem; }
+    .result-actions { grid-template-columns: 1fr; }
+  }
 </style>

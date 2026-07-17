@@ -8,20 +8,28 @@ import siteConfig from '../site.config.ts';
 
 const faqs = [
   {
-    q: 'Does compression reduce image quality?',
-    a: 'Yes, lossy compression (used for JPEG and WebP) does reduce quality slightly, but at settings of 75–85% the difference is rarely visible to the naked eye. The goal is to find the highest quality setting that still meets your file size requirement.',
+    q: 'How do I compress an image to 100 KB without losing quality?',
+    a: 'Use the "Compress to 100 KB" tool which automatically finds the highest JPEG quality that keeps the output under 100 KB. For the best visual result, first resize your photo to the target pixel dimensions, then compress. Smaller dimensions need far less compression to reach the KB target, so the image looks sharper.',
   },
   {
-    q: 'What is the best quality setting to use?',
-    a: 'For photographs shared online, 80% quality is a good starting point — it typically reduces file size by 60–70% with minimal visible loss. For images that need to look pixel-perfect (logos, screenshots), use 90% or higher. For very aggressive compression (government exam uploads), 60–70% is often acceptable.',
+    q: 'Is it safe to compress images online?',
+    a: 'Yes — because this tool runs entirely in your browser using the HTML5 Canvas API. Your images are never uploaded to any server, never transmitted over the internet, and never stored anywhere other than your own device. It is the most private way to compress images online.',
   },
   {
-    q: 'What image formats are supported?',
-    a: 'This tool supports JPEG (JPG), PNG, and WebP images. You can also choose the output format — for example, converting a PNG to JPEG during compression often produces much smaller files since JPEG handles photographs more efficiently.',
+    q: 'How do I reduce image size in KB for free?',
+    a: 'Drop your image onto the tool and use the quality slider to reduce file size. A setting of 75–80% quality typically reduces file size by 60–70% with minimal visible quality loss. For a specific KB target, use the dedicated tools: Compress to 20 KB, Compress to 50 KB, or Compress to 100 KB.',
   },
   {
-    q: 'Is my image uploaded to a server?',
-    a: 'No. Everything happens entirely in your browser using the HTML5 Canvas API. Your image never leaves your device and is never sent to any server. This means your photos remain 100% private.',
+    q: 'What is the difference between JPEG and WebP compression?',
+    a: 'JPEG uses lossy compression optimised for photographs and is universally supported everywhere — email, government portals, social media, printers. WebP is Google\'s modern format that achieves 25–34% smaller file sizes than JPEG at the same quality. Choose JPEG for maximum compatibility (especially for government exam uploads); choose WebP for web images where modern browser support is guaranteed.',
+  },
+  {
+    q: 'Can I compress a PNG image online?',
+    a: 'Yes. This tool accepts PNG files. However, PNG uses lossless compression so compressing a PNG without converting the format yields limited size reduction. For the biggest savings, switch the output format to JPEG or WebP — a photograph that is 2 MB as PNG might be only 150 KB as JPEG at good quality. If the image has a transparent background that must be preserved, output to WebP which supports transparency at smaller sizes than PNG.',
+  },
+  {
+    q: 'Does compressing an image reduce its pixel dimensions?',
+    a: 'No. Compression reduces file size (bytes) by encoding the same pixels more efficiently, but the width and height of the image do not change. If you also need to change dimensions, use the Resize Image tool first, then compress.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/compress-image#app`,
-      name: `Compress Image Online — ${siteConfig.siteName}`,
-      description: 'Compress JPG, PNG, and WebP images online for free. Reduce file size with quality control — no upload, 100% private.',
+      name: 'Image Compressor Online',
+      description: 'Free online image compressor. Compress JPG, PNG and WebP — reduce file size without losing quality. 100% private, no upload.',
       url: `${siteConfig.domain}/compress-image`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,38 +59,54 @@ const jsonLd = {
 ---
 
 <Layout
-  title="Compress Image Online — Reduce File Size Free"
-  description="Compress JPG, PNG, and WebP images online for free. Reduce file size with quality control — no upload, 100% private."
+  title="Image Compressor Online — Free No Upload"
+  description="Free online image compressor. Compress JPG, PNG & WebP — reduce file size without losing quality. 100% private, no upload required."
   canonical={`${siteConfig.domain}/compress-image`}
-  keywords="compress image, reduce image size, compress jpg, compress png online"
+  keywords="image compressor, compress image online, free image compressor, compress jpeg, compress png, photo compressor, compress image for web, image size reducer, reduce image size"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/compress-image" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>Compress Image Online</h1>
-        <p class="tool-desc">Compress JPG, PNG, and WebP images online for free. Reduce file size with quality control — no upload, 100% private.</p>
+        <h1>Image Compressor Online</h1>
+        <p class="tool-desc">Free online image compressor — compress JPG, PNG &amp; WebP in your browser. Reduce file size without losing quality. 100% private, no upload.</p>
       </header>
 
       <CompressTool />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>Image compression reduces file size by discarding redundant pixel data that the human eye cannot easily perceive. JPEG and WebP use lossy compression algorithms that can cut file sizes by 60–80% at typical quality settings while keeping images looking sharp. PNG uses lossless compression, which preserves every pixel but produces larger files.</p>
-        <p>The quality slider lets you balance file size against visual fidelity. For most web and social media uses, a setting of 75–85% produces excellent results. For government exam and form uploads where the examiner is checking identity rather than image aesthetics, settings as low as 60% are often acceptable.</p>
-        <p>Common use cases include preparing photos for email attachments (many email clients impose a 5–10 MB total limit), meeting upload size requirements on job portals and e-commerce platforms, and compressing photos before sending on WhatsApp (which recompresses images automatically, often degrading quality further if files are already large).</p>
-        <h3>How to Use</h3>
+        <h2>Free Image Compressor — Compress JPEG, PNG &amp; WebP Online</h2>
+        <p>Image compression reduces the number of bytes required to store a photo by discarding pixel data that the human eye is least sensitive to. Our free online image compressor runs entirely in your browser using the HTML5 Canvas API — your photos never leave your device, making it the fastest and most private image compressor online.</p>
+
+        <h3>Supported Image Formats</h3>
+        <ul>
+          <li><strong>JPEG (JPG)</strong> — The most efficient format for photographs. Lossy compression discards imperceptible colour variations, achieving 60–80% file size reduction at quality settings of 75–85%. Best for government exam uploads, job applications, e-commerce, and any context where file size matters more than absolute pixel perfection.</li>
+          <li><strong>PNG</strong> — Lossless format for logos, screenshots, and images with transparency. Converting a PNG photograph to JPEG during compression typically produces 5–10× smaller files. If the image has a transparent background that must be preserved, convert to WebP instead.</li>
+          <li><strong>WebP</strong> — Google's modern web format. 25–34% smaller than JPEG at equivalent visual quality, with full transparency support. All major browsers have supported WebP since 2020. Ideal for compressing images for websites and improving Core Web Vitals scores.</li>
+        </ul>
+
+        <h3>How to Use This Image Compressor</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your image onto the tool.</li>
-          <li>Adjust the quality slider — lower values create smaller files with more compression.</li>
-          <li>Optionally select an output format (JPEG, PNG, or WebP).</li>
-          <li>Click "Compress" and review the before/after file size comparison.</li>
-          <li>Download the compressed image when you are satisfied with the result.</li>
+          <li><strong>Upload your image.</strong> Click the drop zone or drag and drop your JPG, PNG, or WebP file. Files up to 20 MB are supported.</li>
+          <li><strong>Adjust compression.</strong> Use the quality slider to set the compression level. Settings of 75–85% work well for photographs shared online. For government exam portals where a strict file size limit applies, lower the slider until the output is within range — or use a dedicated compress-to-KB tool below.</li>
+          <li><strong>Download the result.</strong> Click "Compress" and review the before/after file size. Download your compressed image when you are happy with the result.</li>
         </ol>
+
+        <h3>Why Client-Side Compression Is Private and Fast</h3>
+        <p>Most online photo compressors upload your images to a remote server to process them. This means your photos travel across the internet and may be temporarily stored on infrastructure you do not control — a real privacy concern for passport photos, ID photos, and documents. This free image compressor works differently: the Canvas API draws your image to an off-screen canvas and re-encodes it at your chosen quality level in milliseconds, entirely on your device. No upload. No waiting for network transfers. No privacy risk.</p>
+
+        <h3>Common Use Cases</h3>
+        <p><strong>Government and exam form uploads:</strong> Indian government exam portals for SSC, UPSC, IBPS, RRB NTPC, and NTA enforce strict file size limits — typically 20 KB, 50 KB, or 100 KB for photographs and signatures. Use our dedicated compress-to-KB tools to hit these targets precisely without manual trial and error.</p>
+        <p><strong>Email attachments:</strong> Most email providers cap attachments at 10–25 MB. A batch of smartphone photos can easily fill this limit. Compressing images before attaching reduces upload time and makes emails faster to open on mobile.</p>
+        <p><strong>Web pages and e-commerce:</strong> Oversized images are the most common cause of slow page load speeds. Google's Core Web Vitals directly reward pages with fast-loading images. Compress product images to under 100 KB (or convert to WebP) before uploading to your website or CMS to improve search rankings and conversion rates.</p>
+        <p><strong>Reduce image size for WhatsApp:</strong> WhatsApp applies its own aggressive compression to images it sends, which can degrade quality further if the original is already large. Compressing before sending gives you control over the final quality.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -102,7 +126,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC &amp; IBPS exam uploads</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC, NTA, banking portals</span>
+          </a>
+          <a href="/compress-image-to-100kb" class="related-card">
+            <span class="related-name">Compress to 100 KB</span>
+            <span class="related-desc">Job portals &amp; e-commerce</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Change pixel dimensions</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -121,21 +167,24 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol, .content-section ul { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -143,4 +192,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

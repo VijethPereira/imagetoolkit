@@ -4,6 +4,29 @@ import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
 import siteConfig, { toolCategories } from '../site.config.ts';
 
+const faqs = [
+  {
+    q: 'How do I compress an image to 100 KB without losing quality?',
+    a: 'Use the "Compress to 100 KB" tool — it automatically binary-searches for the highest JPEG quality that keeps your file under 100 KB. For the best result, first resize your photo to the required pixel dimensions, then compress. Smaller dimensions need less compression to hit the target, so quality is much better preserved.',
+  },
+  {
+    q: 'Is it safe to compress images online?',
+    a: 'Yes — because all tools on this site run entirely in your browser using the HTML5 Canvas API. Your images are never uploaded to any server; they never leave your device. There is no risk of your photos being stored, scanned, or accessed by anyone else.',
+  },
+  {
+    q: 'How do I reduce image size in KB for free?',
+    a: 'Drop your image onto any compress tool and click "Compress". The quality slider lets you control the output size. For a specific target (20 KB, 50 KB, 100 KB), use the dedicated compress-to-KB tools which hit the target automatically. Everything is free with no account required.',
+  },
+  {
+    q: 'What is the difference between compressing and resizing an image?',
+    a: 'Resizing changes the pixel dimensions of an image (width × height), while compression reduces the file size without changing the dimensions. Both reduce file size, but for very strict KB limits (like government exam uploads), you should do both: resize to the required pixel dimensions first, then compress to the required file size.',
+  },
+  {
+    q: 'Do these image tools work on mobile?',
+    a: 'Yes. All tools are fully mobile-responsive and work on Android and iOS browsers. The upload zones support tap-to-browse on mobile, and the results can be downloaded directly to your device. No app installation is required.',
+  },
+];
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -22,7 +45,7 @@ const jsonLd = {
     },
     {
       '@type': 'ItemList',
-      name: 'Image Tools',
+      name: 'Free Image Tools',
       itemListElement: siteConfig.tools.map((t, i) => ({
         '@type': 'ListItem',
         position: i + 1,
@@ -30,24 +53,33 @@ const jsonLd = {
         url: `${siteConfig.domain}${t.href}`,
       })),
     },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
   ],
 };
 ---
 
 <Layout
-  title={siteConfig.siteName}
-  description={siteConfig.tagline}
+  title="Image Compressor — Free Online Tools"
+  description="Free image compressor — compress, resize & convert photos in your browser. 100% private, no upload required. JPG, PNG, WebP."
   canonical={siteConfig.domain}
+  keywords="image compressor, compress image online, free image compressor, photo compressor, image size reducer, reduce image size, compress jpeg, compress png"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/" />
   <main>
     <section class="hero">
       <div class="container">
-        <h1>{siteConfig.siteName}</h1>
-        <p class="tagline">{siteConfig.tagline}</p>
+        <h1>Free Image Compressor &amp; Browser Tools</h1>
+        <p class="tagline">Compress, resize, and convert images entirely in your browser — no upload, 100% private, completely free.</p>
         <div class="privacy-badge">
-          🔒 100% private — images never leave your device
+          🔒 Your images never leave your device
         </div>
       </div>
     </section>
@@ -71,98 +103,136 @@ const jsonLd = {
       </section>
     ))}
 
-    <section class="seo-section">
+    <section class="content-section">
       <div class="container">
-        <h2>Free Image Tools — No Upload Required</h2>
-        <p>All tools on Image Tools run entirely in your browser using the Canvas API. Your images are never sent to any server — they stay on your device throughout the entire process. This makes our tools fast, private, and free to use without any account or registration.</p>
-        <h3>Why use browser-based image tools?</h3>
+        <h2>Free Image Compressor — Compress JPG, PNG &amp; WebP Online</h2>
+        <p>Our free image compressor reduces file size without a server upload — everything runs inside your browser using the HTML5 Canvas API. Whether you need to compress a JPEG for a government exam portal, reduce a PNG for a website, or shrink a WebP for a mobile app, these tools handle it instantly and privately.</p>
+
+        <h3>How to Compress an Image in 3 Steps</h3>
+        <ol>
+          <li><strong>Drop or browse.</strong> Click the upload zone on any tool page and select your image, or drag and drop it directly. Supports JPG, PNG, and WebP up to 20 MB.</li>
+          <li><strong>Set your target.</strong> Use the quality slider for manual control, or choose a dedicated tool like "Compress to 20 KB" or "Compress to 100 KB" which hit the target automatically using binary search.</li>
+          <li><strong>Download instantly.</strong> The compressed file is ready in seconds. The before/after file size is shown so you can see exactly how much space was saved.</li>
+        </ol>
+
+        <h3>Why Client-Side Compression Is Safer and Faster</h3>
+        <p>Most online image compressors upload your photos to a remote server, process them, and send them back. This means your images travel over the internet and may be stored on someone else's infrastructure. Our image compressor runs 100% in your browser — no data is transmitted anywhere. This makes it the most private online photo compressor available, and also one of the fastest, since there is no upload wait time even for large files.</p>
+
+        <h3>Supported Formats</h3>
         <ul>
-          <li><strong>Privacy</strong> — your photos and documents never leave your device.</li>
-          <li><strong>Speed</strong> — no upload/download waiting time for large files.</li>
-          <li><strong>Free forever</strong> — no subscriptions, no credits, no limits.</li>
-          <li><strong>Works offline</strong> — once the page loads, no internet needed.</li>
+          <li><strong>JPEG (JPG)</strong> — Best for photographs. Produces the smallest files for images with many colours. The default choice for government exam portals, job applications, and e-commerce product images. Our compress JPEG tool can hit exact KB targets like 20 KB, 50 KB, and 100 KB.</li>
+          <li><strong>PNG</strong> — Best for logos, screenshots, and images with transparent backgrounds. Lossless, so no quality loss on save, but larger files than JPEG. Use our PNG compressor when you need to reduce a PNG for web delivery.</li>
+          <li><strong>WebP</strong> — Google's modern web format. 25–34% smaller than JPEG at the same quality. All modern browsers support it. Use our JPG to WebP or PNG to WebP converter to upgrade images for faster web pages.</li>
         </ul>
-        <h3>Popular use cases in India</h3>
-        <p>Our most-used tools help with government exam applications (SSC, UPSC, NTA, IBPS), college admissions, visa applications, and online job portals — all of which require photos and signatures in specific sizes and file sizes.</p>
+
+        <h3>Common Use Cases</h3>
+        <p><strong>Government exam photo uploads (India):</strong> SSC CGL, SSC CHSL, IBPS PO, IBPS Clerk, UPSC, RRB NTPC, NTA JEE/NEET, and state PSC portals all require photos and signatures in specific sizes and file sizes. The most common limits are 20 KB (SSC signature), 50 KB (UPSC, NTA portals), and 100 KB (banking and railways). Our dedicated compress-to-KB tools hit these targets with a single click.</p>
+        <p><strong>Email attachments:</strong> Most email providers cap total attachment size at 10–25 MB. A batch of smartphone photos can easily exceed this. Compressing images before attaching saves time for both sender and recipient, especially on mobile data connections.</p>
+        <p><strong>Web pages and e-commerce:</strong> Google's Core Web Vitals measure page load speed and directly affect search rankings. Oversized images are the most common cause of slow LCP (Largest Contentful Paint) scores. Converting product images to WebP and compressing them to under 100 KB per image is one of the highest-impact SEO optimisations you can make.</p>
+        <p><strong>Social media and profile photos:</strong> WhatsApp, Instagram, Facebook, and LinkedIn all impose upload size limits and apply their own re-compression. Uploading a pre-compressed image gives you more control over the final visual quality than letting the platform apply its own aggressive compression algorithm.</p>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   </main>
   <Footer />
 </Layout>
 
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
 <style>
+  [hidden] { display: none !important; }
+
   .hero {
-    padding: 4rem 0 3rem;
+    padding: 6rem 0 4rem;
     border-bottom: 1px solid var(--site-border);
   }
-
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -2.4px;
     color: var(--site-text);
-    line-height: 1.15;
-    margin: 0 0 0.75rem;
+    line-height: 1.0;
+    margin: 0 0 1rem;
   }
-
   .tagline {
     font-size: 1.125rem;
-    color: var(--site-text-muted);
-    margin: 0 0 1.25rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--site-body);
+    margin: 0 0 1.5rem;
     max-width: 52ch;
   }
-
   .privacy-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.8125rem;
+    font-weight: 500;
     color: var(--site-accent);
-    background: color-mix(in srgb, var(--site-accent) 10%, transparent);
-    border: 1px solid color-mix(in srgb, var(--site-accent) 25%, transparent);
-    padding: 0.375rem 0.875rem;
+    background: var(--site-accent-soft);
+    border: 1px solid color-mix(in srgb, var(--site-accent) 20%, transparent);
+    padding: 0.3rem 0.875rem;
     border-radius: 9999px;
   }
 
-  .category-section {
-    padding: 2.5rem 0 0.5rem;
-  }
-
-  .category-section:last-of-type {
-    padding-bottom: 2rem;
-  }
+  .category-section { padding: 2.5rem 0 0; }
+  .category-section:last-of-type { padding-bottom: 2rem; }
 
   .cat-label {
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--site-accent);
+    color: var(--site-text-muted);
     margin: 0 0 1rem;
   }
 
   .tool-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 0.875rem;
+    gap: 0.75rem;
   }
 
   .tool-card {
     display: block;
-    padding: 1.125rem 1.25rem;
-    border: 1px solid var(--site-border);
-    border-radius: 10px;
+    padding: 1.25rem;
+    border-radius: 8px;
     background: var(--site-bg-card);
     color: inherit;
     text-decoration: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    box-shadow: var(--shadow-2);
+    transition: box-shadow 0.15s;
   }
-
-  .tool-card:hover {
-    border-color: var(--site-accent);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--site-accent) 12%, transparent);
-    text-decoration: none;
-  }
+  .tool-card:hover { box-shadow: var(--shadow-4); text-decoration: none; }
 
   .card-header {
     display: flex;
@@ -171,71 +241,51 @@ const jsonLd = {
     gap: 0.5rem;
     margin-bottom: 0.375rem;
   }
-
-  .card-name {
-    font-weight: 600;
-    font-size: 0.9375rem;
-    color: var(--site-text);
-  }
-
+  .card-name { font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.2px; color: var(--site-text); }
   .card-badge {
     font-size: 0.6875rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
-    background: color-mix(in srgb, var(--site-accent) 12%, transparent);
+    background: var(--site-accent-soft);
     color: var(--site-accent);
     white-space: nowrap;
     flex-shrink: 0;
   }
+  .card-desc { font-size: 0.8125rem; font-weight: 400; letter-spacing: -0.1px; color: var(--site-body); margin: 0; line-height: 1.5; }
 
-  .card-desc {
-    font-size: 0.8125rem;
-    color: var(--site-text-muted);
-    margin: 0;
-    line-height: 1.5;
-  }
+  /* SEO content section */
+  .content-section { padding: 3rem 0; border-top: 1px solid var(--site-border); margin-top: 1rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { font-size: 1rem; color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol, .content-section ul { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
 
-  .seo-section {
-    padding: 3rem 0 4rem;
-    border-top: 1px solid var(--site-border);
-    margin-top: 1rem;
-  }
-
-  .seo-section h2 {
-    font-size: 1.375rem;
-    font-weight: 700;
-    color: var(--site-text);
-    margin: 0 0 0.75rem;
-  }
-
-  .seo-section h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--site-text);
-    margin: 1.75rem 0 0.5rem;
-  }
-
-  .seo-section p {
-    color: var(--site-text-muted);
-    margin: 0 0 1rem;
-    max-width: 72ch;
-  }
-
-  .seo-section ul {
-    color: var(--site-text-muted);
-    padding-left: 1.5rem;
-    max-width: 64ch;
-    margin: 0;
-  }
-
-  .seo-section li {
-    margin-bottom: 0.375rem;
-  }
+  /* FAQ section */
+  .faq-section { padding: 0 0 4rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
 
   .container {
-    max-width: 1100px;
+    max-width: 1400px;
     margin-inline: auto;
     padding-inline: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 3rem 0 2.5rem; }
+    .hero h1 { letter-spacing: -0.75px; }
+    .tagline { font-size: 1rem; }
+    .category-section { padding: 1.75rem 0 0; }
+    .tool-grid { gap: 0.5rem; }
+    .tool-card { padding: 1rem; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
   }
 </style>

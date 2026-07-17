@@ -9,19 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Why would I convert WebP to JPEG?',
-    a: 'WebP is great for websites but not universally supported by all software. Government portals and exam sites in India require JPEG explicitly. Older image editors like older versions of Photoshop, Paint, and many mobile gallery apps cannot open WebP files. Email clients may not display WebP inline. If you downloaded an image from a website and it is in WebP format, converting to JPEG makes it compatible with any software or upload form.',
+    a: 'WebP is great for websites but not universally supported in all software. Indian government exam portals (SSC, UPSC, IBPS, NTA) require JPEG explicitly. Older image editors, many mobile gallery apps, and email clients may not display WebP inline. If you downloaded an image from a website and it saved as .webp, converting to JPEG makes it compatible with any software or upload form.',
   },
   {
     q: 'Will the JPEG file be larger than the WebP?',
-    a: 'Generally yes. Since WebP uses more efficient compression, converting to JPEG at the same quality setting typically increases file size by 25–35%. You can compensate by using a lower JPEG quality setting, or by running the result through the image compressor if a specific file size limit applies.',
+    a: 'Generally yes. WebP uses more efficient compression, so converting to JPEG at the same quality typically increases file size by 25–35%. You can compensate by using a lower JPEG quality setting, or by running the result through the image compressor to meet a specific KB limit.',
   },
   {
     q: 'What happens to transparency when converting WebP to JPEG?',
-    a: 'JPEG does not support transparency. Any transparent areas in your WebP image will be filled with a white background when converted to JPEG. If you need to preserve transparency, convert to PNG instead using the WebP to PNG tool.',
+    a: 'JPEG does not support transparency. Any transparent areas in your WebP image will be filled with a solid white background when converted to JPEG. If you need to preserve transparency, convert to PNG instead using the WebP to PNG tool.',
   },
   {
     q: 'Can I choose the JPEG quality when converting?',
-    a: 'Yes. The quality slider lets you balance between file size and image quality. A setting of 80–85% produces excellent visual results for most photographs. If you need a specific file size (e.g., under 50 KB for a government portal), lower the quality until the target is met, or use the compress tool after conversion.',
+    a: 'Yes. The quality slider lets you balance file size against image quality. A setting of 80–85% gives excellent visual results for most photographs. If you need to meet a specific file size limit (e.g., under 50 KB for a government portal), lower the quality until the output is within range, or use the compress tool after conversion.',
+  },
+  {
+    q: 'Can I upload the resulting JPEG to SSC, UPSC, or IBPS portals?',
+    a: 'Yes — after converting from WebP to JPEG here, you will have a standard .jpg file that is accepted by all Indian government exam portals. Check the portal\'s size requirement (usually 20–50 KB for photos) and compress if needed using the compress tools on this site.',
+  },
+  {
+    q: 'Is this free and safe to use?',
+    a: 'Completely free, no account required, and 100% private. All conversion happens in your browser — your image is never uploaded to any server. The WebP is decoded and re-encoded as JPEG entirely on your device.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/webp-to-jpg#app`,
-      name: `WebP to JPG Converter — ${siteConfig.siteName}`,
-      description: 'Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources.',
+      name: 'WebP to JPG Converter Online Free',
+      description: 'Convert WebP images to JPEG online free. No upload, 100% private. Get a universally compatible JPG from any WebP file — for portals, email, and software.',
       url: `${siteConfig.domain}/webp-to-jpg`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,37 +59,45 @@ const jsonLd = {
 ---
 
 <Layout
-  title="WebP to JPG Converter Online — Free"
-  description="Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources."
+  title="WebP to JPG Converter — Free Online"
+  description="Free WebP to JPG converter online. Get a universally compatible JPEG from any WebP file. No upload, 100% private. For govt portals, email &amp; older software."
   canonical={`${siteConfig.domain}/webp-to-jpg`}
-  keywords="webp to jpg, convert webp to jpeg, webp to jpg converter"
+  keywords="webp to jpg, convert webp to jpeg, webp to jpg converter, webp to jpeg online free"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/webp-to-jpg" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>WebP to JPG Converter</h1>
-        <p class="tool-desc">Convert WebP images to JPEG online for free. Download universally supported JPG files from WebP sources.</p>
+        <h1>WebP to JPG Converter — Free</h1>
+        <p class="tool-desc">Convert WebP images to JPEG free online. Get a universally compatible JPG from any WebP file. No upload, 100% private. For government portals, email attachments, and older software.</p>
       </header>
 
       <ConvertTool from="WebP" to="jpeg" />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>WebP has become the default image format for many websites — browsers automatically download WebP versions of images when available, and modern web stacks serve WebP by default. This means when you right-click and save an image from a website, you often end up with a .webp file instead of a .jpg. While WebP works fine in modern browsers, it can cause problems when you need to use the image elsewhere.</p>
-        <p>Government exam portals (SSC, UPSC, IBPS, NTA) explicitly require JPEG photographs. Older versions of Photoshop, Lightroom, and many mobile photo editing apps cannot open WebP files. When sending images by email, some older email clients fail to display WebP inline. For printing, photo labs generally require JPEG or TIFF — not WebP. Converting from WebP to JPEG solves all of these compatibility issues.</p>
-        <p>Important note: JPEG does not support transparency. If your WebP image has transparent areas (e.g., a logo or icon with a see-through background), those areas will become white in the JPEG output. If preserving transparency is important, convert to PNG instead using the WebP to PNG converter.</p>
-        <h3>How to Use</h3>
+        <h2>Convert WebP to JPG — For Portals, Email &amp; Older Software</h2>
+        <p>WebP has become the default image format for many modern websites — when you right-click and save an image from a website, you often get a .webp file instead of a .jpg. While WebP works perfectly in modern browsers, it creates compatibility problems in many other contexts.</p>
+        <p>Indian government exam portals — SSC, UPSC, IBPS, NTA, RRB — explicitly require JPEG format for photograph and signature uploads. A .webp file will be rejected regardless of its visual content. If you have a WebP photo that you need to submit to an exam portal, convert it to JPEG here first, then compress it to the required KB limit using the compress tools.</p>
+        <p>Older versions of Photoshop (pre-2022), Lightroom Classic (earlier versions), many mobile photo editing apps, and Windows Photo Viewer cannot open WebP files. Email clients — particularly Outlook and older Gmail mobile apps — may not display WebP images inline; recipients see a broken image icon instead. For any of these use cases, converting WebP to JPEG solves the compatibility issue immediately.</p>
+        <p>For printing at photo labs and pharmacies, JPEG (or TIFF) is the required format. Photo lab kiosks and online printing services universally accept JPEG; most do not accept WebP. Convert before ordering prints.</p>
+
+        <h3>How to Convert WebP to JPG</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your WebP image onto the tool.</li>
-          <li>Adjust the quality slider if needed — 80% is a good default for photographs.</li>
-          <li>Click "Convert" — the tool renders the WebP on a Canvas and encodes it as JPEG.</li>
-          <li>Download the JPEG file — it is ready to upload anywhere JPEG is required.</li>
+          <li><strong>Upload your WebP.</strong> Click "Choose File" or drag and drop your .webp image.</li>
+          <li><strong>Set quality.</strong> 80% is a good default for most photos — excellent visual quality at a compact file size. Increase to 90%+ for images where colour accuracy is critical.</li>
+          <li><strong>Convert and download.</strong> Click "Convert" — the WebP is decoded on a Canvas and re-encoded as JPEG. Download the .jpg file.</li>
+          <li><strong>Compress if needed.</strong> If the portal has a strict KB limit (e.g., SSC requires under 20 KB, UPSC under 50 KB), use the <a href="/compress-image">compress tool</a> after conversion.</li>
         </ol>
+
+        <h3>Important: Transparency Becomes White</h3>
+        <p>JPEG does not support transparency. If your WebP has transparent areas (like a logo with a see-through background), those areas will become white in the JPEG. If you need to keep transparency, use the <a href="/webp-to-png">WebP to PNG converter</a> instead — PNG fully supports alpha-channel transparency.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -101,7 +117,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/webp-to-png" class="related-card">
+            <span class="related-name">WebP to PNG</span>
+            <span class="related-desc">Keep transparency</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC &amp; govt portals</span>
+          </a>
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC &amp; IBPS portals</span>
+          </a>
+          <a href="/jpg-to-webp" class="related-card">
+            <span class="related-name">JPG to WebP</span>
+            <span class="related-desc">Smaller web images</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -120,21 +158,25 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -142,4 +184,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

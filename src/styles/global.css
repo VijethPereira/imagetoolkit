@@ -1,59 +1,90 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
+  --font-sans: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
 }
 
-/* Light mode tokens */
+/* ─── Design tokens (Vercel-inspired) ─── */
 :root {
-  --site-bg: #fafafa;
-  --site-bg-card: #ffffff;
-  --site-text: #171717;
-  --site-text-muted: #737373;
-  --site-border: #e5e5e5;
-  --site-hover: #f5f5f5;
-  --site-nav-bg: rgba(255, 255, 255, 0.92);
-  --site-accent: #0070f3;
+  /* Surfaces */
+  --site-bg:        #fafafa;   /* canvas-soft — page background */
+  --site-bg-card:   #ffffff;   /* canvas — card surface */
+  --site-bg-soft2:  #f5f5f5;   /* canvas-soft-2 — inset / hover */
+
+  /* Text */
+  --site-text:       #171717;  /* ink */
+  --site-body:       #4d4d4d;  /* body — secondary text */
+  --site-text-muted: #737373;  /* mute — lowest-priority text */
+
+  /* Borders */
+  --site-border:        #ebebeb;  /* hairline */
+  --site-border-strong: #a1a1a1;  /* hairline-strong */
+
+  /* Interaction */
+  --site-hover:   #f5f5f5;
+  --site-nav-bg:  rgba(255, 255, 255, 0.92);
+
+  /* Accent (link / success) */
+  --site-accent:      #0070f3;
+  --site-accent-deep: #0761d1;
+  --site-accent-soft: #d3e5ff;
+
+  /* Stacked shadows — Level 1→4 matching Vercel elevation system */
+  --shadow-1: 0 0 0 1px #00000014;
+  --shadow-2: 0 0 0 1px #00000014, 0px 1px 1px #00000005, 0px 2px 2px #0000000a;
+  --shadow-3: 0 0 0 1px #00000014, 0px 2px 2px #0000000a, 0px 8px 8px -8px #0000000a;
+  --shadow-4: 0 0 0 1px #00000014, 0px 2px 2px #0000000a, 0px 8px 16px -4px #0000000a;
 }
 
-/* Dark mode tokens */
 [data-theme="dark"] {
-  --site-bg: #0a0a0a;
-  --site-bg-card: #141414;
-  --site-text: #ededed;
+  --site-bg:        #0a0a0a;
+  --site-bg-card:   #111111;
+  --site-bg-soft2:  #1a1a1a;
+
+  --site-text:       #ededed;
+  --site-body:       #a1a1a1;
   --site-text-muted: #737373;
-  --site-border: #262626;
-  --site-hover: #1c1c1c;
-  --site-nav-bg: rgba(10, 10, 10, 0.92);
-  --site-accent: #3291ff;
+
+  --site-border:        #262626;
+  --site-border-strong: #404040;
+
+  --site-hover:   #1a1a1a;
+  --site-nav-bg:  rgba(10, 10, 10, 0.92);
+
+  --site-accent:      #3291ff;
+  --site-accent-deep: #0761d1;
+  --site-accent-soft: #0d2a5e;
+
+  --shadow-1: 0 0 0 1px #ffffff0d;
+  --shadow-2: 0 0 0 1px #ffffff0d, 0px 1px 1px #0000001a, 0px 2px 2px #00000026;
+  --shadow-3: 0 0 0 1px #ffffff0d, 0px 2px 2px #00000026, 0px 8px 8px -8px #00000026;
+  --shadow-4: 0 0 0 1px #ffffff0d, 0px 2px 2px #00000026, 0px 8px 16px -4px #00000026;
 }
 
-* {
-  box-sizing: border-box;
-}
+/* ─── Base reset ─── */
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  height: 100%;
-}
+html { height: 100%; }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
   background: var(--site-bg);
   color: var(--site-text);
-  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "ss02";
 }
 
 a {
   color: var(--site-accent);
   text-decoration: none;
 }
-
-a:hover {
-  text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 ::selection {
   background: #171717;

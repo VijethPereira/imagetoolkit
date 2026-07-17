@@ -9,19 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Why convert WebP to PNG instead of JPEG?',
-    a: 'Choose PNG when you need to preserve transparency — PNG fully supports alpha channels, just like WebP. Also choose PNG when you need a lossless copy for editing: PNG is lossless so it can be re-saved many times without quality degradation, while JPEG loses quality with each re-encode. PNG also has better compatibility with older image editors and design tools that may not support WebP.',
+    a: 'Choose PNG when you need to preserve transparency — PNG fully supports alpha channels, just like WebP. Also choose PNG when you need a lossless file for further editing: PNG can be re-saved many times without quality degradation, while JPEG loses quality with each re-encode. PNG also has better compatibility with older image editors and design tools.',
   },
   {
     q: 'Will the PNG file be larger than the original WebP?',
-    a: 'Yes, in almost all cases. WebP uses more efficient compression than PNG. Converting WebP to PNG will produce a larger file — often significantly larger for photographs. If file size is a concern, consider keeping the WebP for web use or converting to JPEG instead. PNG is best when quality and transparency preservation matter more than file size.',
+    a: 'Yes, in almost all cases — often significantly larger. WebP uses more efficient compression than PNG. Converting WebP to PNG will increase file size. If file size is a concern, consider keeping the WebP for web use or converting to JPEG instead. PNG is best when quality and transparency preservation matter more than file size.',
   },
   {
     q: 'Can I open the converted PNG in Photoshop or Illustrator?',
-    a: 'Yes. PNG is one of the most universally supported image formats and can be opened in Photoshop, Illustrator, GIMP, Paint.NET, Affinity Photo, and virtually every image editor. This is one of the main reasons to convert WebP to PNG — for use in design and editing workflows where WebP may not be natively supported.',
+    a: 'Yes. PNG is one of the most universally supported image formats — it can be opened in Photoshop, Illustrator, GIMP, Paint.NET, Affinity Photo, Figma, and virtually every image editor. Converting WebP to PNG is the standard approach for using web-downloaded images in design workflows.',
   },
   {
     q: 'Does converting WebP to PNG affect image quality?',
-    a: 'Converting WebP lossless to PNG is completely lossless — the pixel values are identical. Converting WebP lossy to PNG produces a lossless PNG of the already-decompressed WebP, so no further quality loss occurs during conversion, but the original lossy compression artefacts from the WebP encoding are preserved. You cannot recover quality lost during the original WebP encoding.',
+    a: 'Converting WebP lossless to PNG is completely lossless — pixel values are identical. Converting WebP lossy to PNG produces a lossless PNG of the already-decompressed data, so no further quality loss occurs during the conversion. However, the lossy compression artefacts from the original WebP encoding are already present and cannot be reversed.',
+  },
+  {
+    q: 'Will transparency be preserved when I convert WebP to PNG?',
+    a: 'Yes — PNG fully supports alpha-channel transparency, the same as WebP. If your WebP has a transparent background (a logo or icon with see-through areas), that transparency is perfectly preserved in the PNG output. This is the main reason to choose PNG over JPEG when converting a WebP with transparency.',
+  },
+  {
+    q: 'Is this free and private — is my file uploaded to a server?',
+    a: 'Completely free, no sign-up required, and 100% private. Your WebP file is converted entirely in your browser using the Canvas API and is never uploaded to any server. Instant and safe for sensitive or private images.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/webp-to-png#app`,
-      name: `WebP to PNG Converter — ${siteConfig.siteName}`,
-      description: 'Convert WebP to PNG online free. Preserve transparency and get a lossless, universally supported image.',
+      name: 'WebP to PNG Converter Online Free',
+      description: 'Convert WebP to PNG online free. Preserve transparency and get a lossless, universally compatible PNG. No upload, 100% private.',
       url: `${siteConfig.domain}/webp-to-png`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,37 +59,46 @@ const jsonLd = {
 ---
 
 <Layout
-  title="WebP to PNG Converter Online — Free"
-  description="Convert WebP to PNG online free. Preserve transparency and get a lossless, universally supported image."
+  title="WebP to PNG Converter — Free Online"
+  description="Free WebP to PNG converter online. Preserve transparency and get a lossless, universally compatible PNG. No upload, 100% private. For editing &amp; design tools."
   canonical={`${siteConfig.domain}/webp-to-png`}
-  keywords="webp to png, convert webp to png, webp png converter"
+  keywords="webp to png, convert webp to png, webp png converter online, webp to png free, download webp as png"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/webp-to-png" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>WebP to PNG Converter</h1>
-        <p class="tool-desc">Convert WebP to PNG online free. Preserve transparency and get a lossless, universally supported image.</p>
+        <h1>WebP to PNG Converter — Free</h1>
+        <p class="tool-desc">Convert WebP to PNG free online. Preserve transparency and get a lossless, universally compatible PNG. No upload, 100% private. For Photoshop, design tools, and editing workflows.</p>
       </header>
 
       <ConvertTool from="WebP" to="png" />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>WebP is widely used on modern websites but is not as universally compatible as PNG in design workflows and offline software. If you downloaded a WebP image (such as a logo, icon, or graphic with a transparent background) and need to use it in a design project, converting to PNG gives you the broadest compatibility. PNG is supported natively in every major image editor, presentation tool, and document processor.</p>
-        <p>The key advantage of converting to PNG rather than JPEG is transparency preservation. WebP supports alpha-channel transparency, and so does PNG. When you convert a WebP logo with a transparent background to PNG, the transparency is maintained perfectly. If you converted that same WebP to JPEG, the transparent areas would become white — which is usually not what you want for logos or overlays.</p>
-        <p>PNG is also a lossless format, which makes it ideal for images that will be edited further. Once you have a PNG, you can open it, make changes, and save it again without any quality degradation — unlike JPEG which re-compresses (and loses quality) every time you save. For web delivery, PNG files are larger than WebP, but for editing and archival purposes, PNG is the right choice.</p>
-        <h3>How to Use</h3>
+        <h2>Convert WebP to PNG — For Design Tools, Editing &amp; Transparency</h2>
+        <p>WebP is widely used on modern websites but is not universally compatible with design and editing software. If you downloaded a WebP image — a logo, icon, or graphic with a transparent background — and need to use it in Photoshop, Illustrator, Figma, or another design tool, converting to PNG gives you the broadest compatibility. PNG is supported natively in every major image editor, presentation tool, and document processor.</p>
+        <p>The key advantage of PNG over JPEG when converting from WebP is transparency preservation. WebP supports alpha-channel transparency, and so does PNG. When you convert a WebP logo with a transparent background to PNG, the transparency is maintained perfectly and the graphic retains its see-through areas. Converting to JPEG instead would fill the transparent areas with white — unsuitable for logos and overlays.</p>
+        <p>PNG is also a lossless format, ideal for images that will be edited further. Once you have a PNG, you can open it, make adjustments, and re-save it without quality degradation — unlike JPEG which loses quality every time you save. For web delivery after editing, convert back to WebP or JPEG; for editing and archival, PNG is the right format.</p>
+        <p>This converter processes your WebP entirely in the browser. Nothing is uploaded to any server — the WebP is decoded by the browser and re-encoded as a lossless PNG. Instant, free, and completely private.</p>
+
+        <h3>How to Convert WebP to PNG</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your WebP image onto the tool.</li>
-          <li>PNG output is pre-selected — no format adjustment needed.</li>
-          <li>Click "Convert" — transparency in the WebP is automatically preserved.</li>
-          <li>Download the PNG file and open it in your preferred image editor or application.</li>
+          <li><strong>Upload your WebP.</strong> Click "Choose File" or drag and drop your .webp image. Transparency is automatically handled.</li>
+          <li><strong>PNG output is pre-selected.</strong> No format adjustment needed.</li>
+          <li><strong>Click "Convert".</strong> The WebP is decoded and re-encoded as a lossless PNG.</li>
+          <li><strong>Download the PNG.</strong> Open it in Photoshop, Figma, GIMP, or any other design tool. Use it wherever a universally compatible lossless image is needed.</li>
         </ol>
+
+        <h3>WebP to PNG vs WebP to JPEG — Which to Choose?</h3>
+        <p><strong>Convert to PNG when:</strong> Your WebP has a transparent background (logo, icon, UI element). You need to edit the image in design software. You need a lossless copy for archival or source file storage. The platform you are uploading to requires PNG.</p>
+        <p><strong>Convert to JPEG when:</strong> Your WebP is a photograph with no transparency. You need the smallest possible file size. You are uploading to a government portal or service that requires JPEG format.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -101,7 +118,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/webp-to-jpg" class="related-card">
+            <span class="related-name">WebP to JPG</span>
+            <span class="related-desc">For portals &amp; email</span>
+          </a>
+          <a href="/png-to-webp" class="related-card">
+            <span class="related-name">PNG to WebP</span>
+            <span class="related-desc">Smaller web images</span>
+          </a>
+          <a href="/png-to-jpg" class="related-card">
+            <span class="related-name">PNG to JPG</span>
+            <span class="related-desc">Smallest file for photos</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Reduce file size in KB</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -120,21 +159,24 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -142,4 +184,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

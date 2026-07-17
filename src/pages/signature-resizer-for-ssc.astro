@@ -17,11 +17,19 @@ const faqs = [
   },
   {
     q: 'My signature image is bigger than 12 KB after resizing — what should I do?',
-    a: 'After resizing to 276×118 px, use the Compress tool to bring the file under 12 KB. A 276×118 px JPEG compressed to around 60–70% quality typically falls between 4–10 KB, which is well within the SSC limit. Visit the compress-image-to-20kb page and compress your resized signature.',
+    a: 'After resizing to 276×118 px here, use the Compress to 20 KB tool to bring the file under 12 KB. A 276×118 px JPEG compressed to around 60–70% quality typically falls between 4–10 KB, which is well within the SSC limit.',
   },
   {
     q: 'Does SSC accept PNG signatures?',
-    a: 'No. SSC explicitly requires JPEG (JPG) format for the signature upload. PNG files will be rejected by the portal. This tool is pre-set to output JPEG, so you do not need to change anything.',
+    a: 'No. SSC explicitly requires JPEG (JPG) format for the signature upload. PNG files will be rejected by the portal regardless of their file size or dimensions. This tool is pre-set to output JPEG, so you do not need to change the format setting.',
+  },
+  {
+    q: 'Do all SSC exams use the same signature dimensions?',
+    a: 'Yes — 276×118 px is the standard SSC signature specification across all SSC examinations: SSC CGL, CHSL, CPO, MTS, GD Constable, and JE. Some state-level exams and other recruitment portals may have different dimensions, so always verify the exact specification in the official notification for your exam.',
+  },
+  {
+    q: 'Can I use a smartphone to photograph my signature instead of scanning?',
+    a: 'Yes. A clear smartphone photo of your signature works fine if: you use good lighting (natural light or even overhead light is fine), the paper is flat with no shadows, and the camera is directly overhead (not at an angle). After photographing, crop out the blank margins, then resize to 276×118 px with this tool.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/signature-resizer-for-ssc#app`,
-      name: `SSC Signature Resizer — ${siteConfig.siteName}`,
-      description: 'Resize signature image to SSC exam specifications: 276×118 pixels, JPEG, under 12 KB. Works for SSC CGL, CHSL, CPO, MTS, and all SSC exams.',
+      name: 'SSC Signature Resizer Online Free',
+      description: 'Resize signature to SSC specs: 276×118 px, JPEG, under 12 KB. Free, no upload, 100% private. Works for SSC CGL, CHSL, CPO, MTS, GD.',
       url: `${siteConfig.domain}/signature-resizer-for-ssc`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,38 +59,48 @@ const jsonLd = {
 ---
 
 <Layout
-  title="SSC Signature Resizer Online — 276×118 px, Max 12 KB"
-  description="Resize signature image to SSC exam specifications: 276×118 pixels, JPEG, under 12 KB. Works for SSC CGL, CHSL, CPO, MTS, and all SSC exams."
+  title="SSC Signature Resizer — 276×118 px Free"
+  description="Free SSC signature resizer — resize to 276×118 px, JPEG, under 12 KB. No upload, 100% private. Works for all SSC exams: CGL, CHSL, CPO, MTS."
   canonical={`${siteConfig.domain}/signature-resizer-for-ssc`}
-  keywords="ssc signature resize, signature resizer for ssc, ssc signature size, signature 276x118"
+  keywords="ssc signature resize, signature resizer for ssc, ssc signature size 276x118, ssc signature dimensions, signature resize online free, ssc cgl signature size"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/signature-resizer-for-ssc" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>SSC Signature Resizer</h1>
-        <p class="tool-desc">Resize signature image to SSC exam specifications: 276×118 pixels, JPEG, under 12 KB. Works for SSC CGL, CHSL, CPO, MTS, and all SSC exams.</p>
+        <h1>SSC Signature Resizer — 276×118 px</h1>
+        <p class="tool-desc">Free online tool to resize your signature to SSC exam specifications: 276×118 pixels, JPEG, under 12 KB. Works for SSC CGL, CHSL, CPO, MTS, GD, and all SSC exams. No upload, 100% private.</p>
       </header>
 
       <ResizeTool width={276} height={118} lockAspect={false} outputFormat="jpeg" presetLabel="SSC Signature (276×118 px)" />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>The Staff Selection Commission requires candidates to upload their scanned signature at exactly 276×118 pixels in JPEG format with a maximum file size of 12 KB. This specification applies to all SSC examinations: SSC CGL (Combined Graduate Level), SSC CHSL (Combined Higher Secondary Level), SSC CPO (Central Police Organisations), SSC MTS (Multi-Tasking Staff), and SSC GD Constable. Getting the signature dimensions wrong is one of the most common reasons for application rejection.</p>
-        <p>Common mistakes candidates make with the SSC signature upload: scanning at too low a resolution (which makes the signature illegible), signing on lined or coloured paper (which is rejected), uploading in PNG format (only JPEG is accepted), and having a file that is either too small (under 1 KB) or too large (over 12 KB). This tool addresses the size and format requirements automatically.</p>
-        <p>After resizing to 276×118 px with this tool, check the file size. If it is over 12 KB, <a href="/compress-image-to-20kb">use the image compressor</a> to reduce it further. The compressed and resized JPEG should be between 4–10 KB for a typical clean signature scan.</p>
-        <h3>How to Use</h3>
+        <h2>Resize Signature for SSC — 276×118 px, JPEG, Under 12 KB</h2>
+        <p>The Staff Selection Commission requires candidates to upload their scanned or photographed signature at exactly 276×118 pixels in JPEG format with a file size between 1 KB and 12 KB. This specification applies uniformly across all SSC examinations — SSC CGL (Combined Graduate Level), SSC CHSL (Combined Higher Secondary Level), SSC CPO (Central Police Organisations), SSC MTS (Multi-Tasking Staff), and SSC GD Constable. Getting the signature dimensions wrong is one of the most common reasons for application rejection or technical errors during form submission.</p>
+        <p>This free online signature resizer is pre-set to 276×118 px and JPEG output. Your signature image is processed entirely in your browser — nothing is uploaded to any server. The tool works on both desktop and mobile, making it easy to use directly after photographing your signature with your phone.</p>
+
+        <h3>Common Mistakes to Avoid on SSC Signature Upload</h3>
+        <p><strong>Wrong dimensions:</strong> Uploading a photo at dimensions other than exactly 276×118 px. The SSC portal will reject or flag files that do not match the specification precisely. Use this tool to hit the exact dimensions.</p>
+        <p><strong>Wrong format:</strong> Uploading a PNG file. SSC accepts only JPEG. This tool outputs JPEG by default.</p>
+        <p><strong>File too large:</strong> A file over 12 KB will be rejected. After resizing, check the file size. If over 12 KB, use the <a href="/compress-image-to-20kb">compress to 20 KB tool</a> (target 10 KB to be safe) to bring it within range.</p>
+        <p><strong>Coloured or lined paper:</strong> Sign on plain white unruled paper in black or dark blue ink. Coloured or lined backgrounds make the signature harder to read and may be flagged during verification.</p>
+        <p><strong>Low-quality scan:</strong> Scan or photograph the signature clearly in good lighting. The invigilator will compare the uploaded signature with your physical signature at the exam centre.</p>
+
+        <h3>Step-by-Step: How to Prepare Your SSC Signature</h3>
         <ol>
-          <li>Sign your name in black or dark blue ink on white A4 paper.</li>
-          <li>Photograph or scan the signature — a smartphone photo works if the lighting is good.</li>
-          <li>Upload the signature image using "Choose File" or drag and drop.</li>
-          <li>Dimensions are pre-set to 276×118 px and format to JPEG.</li>
-          <li>Click "Resize" and download the result.</li>
-          <li>Check the file size of the downloaded image. If it exceeds 12 KB, <a href="/compress-image-to-20kb">compress it</a> before uploading to the SSC portal.</li>
+          <li>Sign your name in black or dark blue ink on plain white A4 paper, in a space roughly 7×3 cm wide to match the 276×118 aspect ratio.</li>
+          <li>Photograph or scan the signature. A smartphone photo works fine — place the paper in good lighting, hold the phone directly overhead, and crop close to the signature edges.</li>
+          <li>Upload the signature image here. The dimensions are pre-set to 276×118 px and the format to JPEG.</li>
+          <li>Click "Resize" and download the resized signature.</li>
+          <li>Check the downloaded file size. If over 12 KB, open the <a href="/compress-image-to-20kb">20 KB compressor</a> and bring it down to 8–10 KB.</li>
+          <li>Upload the final JPEG to the SSC portal during your application.</li>
         </ol>
       </section>
 
@@ -103,7 +121,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC 12 KB signature limit</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC &amp; NTA portals</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -122,22 +162,25 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .content-section a { color: var(--site-accent); }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -145,4 +188,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

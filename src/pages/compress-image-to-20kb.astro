@@ -9,19 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Which exams require a photo under 20 KB?',
-    a: 'SSC CGL, SSC CHSL, SSC CPO, SSC MTS, and IBPS PO/Clerk/SO typically require the photograph to be under 20 KB in JPEG format. RRB NTPC and some state PSC exams also have this limit. Always check the official notification for the current exam cycle, as requirements can change.',
+    a: 'SSC CGL, SSC CHSL, SSC CPO, SSC MTS, and SSC GD Constable require photograph uploads under 20 KB in JPEG format. IBPS PO, IBPS Clerk, IBPS SO, RRB NTPC, and several state PSC recruitment portals also use this 20 KB limit. Always verify the current exam notification as size requirements can change between cycles.',
   },
   {
-    q: 'Will image quality be acceptable for exam applications?',
-    a: 'Yes. Exam portals only need to verify your identity from the photo — they do not require print-quality images. A 20 KB JPEG at 200×230 px is perfectly adequate for this purpose and is accepted by SSC and IBPS portals.',
+    q: 'How do I reduce image size to 20 KB for SSC?',
+    a: 'Upload your photo to this tool — the target is pre-set to 20 KB. The compressor uses binary search to automatically find the highest JPEG quality that keeps the output under 20 KB. For the sharpest result, first resize your photo to around 200×230 pixels using the Resize tool, then compress here.',
   },
   {
     q: 'Why does my image look blurry after compression to 20 KB?',
-    a: 'If the original photo is very large (e.g., 5 MB from a smartphone), compressing it to 20 KB requires a significant quality reduction. For better results, first resize your photo to around 200×230 pixels using the Resize tool, then compress. Smaller dimensions require far less compression to hit the 20 KB target.',
+    a: 'If the original photo is large (3–6 MB from a smartphone), very aggressive compression is needed to reach 20 KB, which causes visible quality loss. The fix: first resize your photo to a smaller pixel size — 200×230 px is standard for passport-type exam photos — using the Resize Image tool. Smaller dimensions need much less compression to reach 20 KB, so quality is significantly better.',
   },
   {
     q: 'Can I compress a PNG image to 20 KB?',
-    a: 'PNG files are much harder to compress to very small sizes because PNG uses lossless compression. For exam uploads, switch the output format to JPEG — JPEGs can easily be compressed to 20 KB while keeping the photo recognisable. Most exam portals explicitly require JPEG anyway.',
+    a: 'PNG uses lossless compression and will be much larger than JPEG at the same visual quality. For exam portals (which require JPEG anyway), switch the output format to JPEG — a clean passport-size photo in JPEG can easily be compressed to under 20 KB. Uploading PNG to exam portals will typically result in rejection regardless of file size.',
+  },
+  {
+    q: 'Will image quality be acceptable at 20 KB for exam applications?',
+    a: 'Yes. Exam portals use the photo only to verify your identity — they do not need print-quality images. A 20 KB JPEG at 200×230 px shows your face clearly and is accepted by SSC and IBPS portals. The examiner and invigilator can identify you from the compressed photo.',
+  },
+  {
+    q: 'Is there a free tool to compress image to 20 KB online without uploading?',
+    a: 'Yes — this tool. It runs entirely in your browser using the Canvas API, so your photo is never uploaded to any server. It is free to use with no account required. The compression happens in milliseconds on your own device.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/compress-image-to-20kb#app`,
-      name: `Compress Image to 20 KB — ${siteConfig.siteName}`,
-      description: 'Compress any JPG, PNG, or WebP image to under 20 KB online. No software needed. Perfect for SSC CGL, IBPS, and govt exam photo uploads.',
+      name: 'Compress Image to 20 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 20 KB online. Free, no upload, 100% private. Perfect for SSC CGL, IBPS, and govt exam photo uploads.',
       url: `${siteConfig.domain}/compress-image-to-20kb`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,39 +59,46 @@ const jsonLd = {
 ---
 
 <Layout
-  title="Compress Image to 20 KB Online — Free"
-  description="Compress any JPG, PNG, or WebP image to under 20 KB online. No software needed. Perfect for SSC CGL, IBPS, and govt exam photo uploads."
+  title="Compress Image to 20 KB — Free, No Upload"
+  description="Free tool to compress any image to under 20 KB. 100% private, no upload. For SSC CGL, IBPS & govt exam photo uploads. JPG, PNG, WebP."
   canonical={`${siteConfig.domain}/compress-image-to-20kb`}
-  keywords="compress image to 20kb, reduce image size to 20kb, compress photo to 20kb for ssc"
+  keywords="compress image to 20kb, reduce image size to 20kb, compress photo to 20kb for ssc, image compressor to 20kb, jpg to 20kb, compress jpeg to 20kb"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/compress-image-to-20kb" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>Compress Image to 20 KB</h1>
-        <p class="tool-desc">Compress any JPG, PNG, or WebP image to under 20 KB online. No software needed. Perfect for SSC CGL, IBPS, and govt exam photo uploads.</p>
+        <h1>Compress Image to 20 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 20 KB. 100% private, no upload. Perfect for SSC CGL, IBPS, RRB NTPC, and government exam photo uploads.</p>
       </header>
 
       <CompressTool targetKB={20} />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>20 KB is the standard maximum photograph size for most Staff Selection Commission (SSC) exams — including SSC CGL, SSC CHSL, SSC CPO, and SSC MTS. IBPS PO, IBPS Clerk, and RRB NTPC applications also commonly require your photograph to be under 20 KB in JPEG format. Failing to meet this requirement will cause the portal to reject your photo upload.</p>
-        <p>This tool automatically targets 20 KB by progressively reducing JPEG quality until the output falls under the limit. Because it works entirely in your browser, your photo is never uploaded to any server — making it both fast and completely private.</p>
-        <p>For best results, start with a clear passport-size photograph (200×230 px or similar). Very large photos from smartphones may look slightly soft at 20 KB because the compression ratio needed is extreme. The tip below explains how to avoid this.</p>
-        <h3>How to Use</h3>
+        <h2>Compress Image to 20 KB — For SSC, IBPS &amp; Govt Exams</h2>
+        <p>20 KB is the standard maximum photograph size for most Staff Selection Commission (SSC) examinations — SSC CGL, SSC CHSL, SSC CPO, SSC MTS, and SSC GD Constable all enforce this limit. IBPS PO, IBPS Clerk, RRB NTPC, and several state Public Service Commission portals use the same 20 KB ceiling. Submitting a photo that exceeds this size will result in an upload error and prevent form submission.</p>
+        <p>This free online image compressor automatically targets 20 KB by binary-searching for the highest JPEG quality setting that keeps the output under the limit. Because it works entirely in your browser, your passport photo or ID photo is never uploaded to any server — making it both instant and completely private. No account, no registration, and no watermark on the output.</p>
+
+        <h3>How to Compress a Photo to 20 KB</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your photo onto the tool.</li>
-          <li>The target is pre-set to 20 KB — no adjustment needed.</li>
-          <li>Make sure the output format is set to JPEG for the smallest file size.</li>
-          <li>Click "Compress" — the tool will automatically find the right quality level.</li>
-          <li>Check the result and download when ready.</li>
-          <li>Tip: If the photo looks too blurry, first <a href="/resize-image-to-passport-size">resize it to passport dimensions</a>, then compress.</li>
+          <li>Click "Choose File" or drag and drop your photo onto the upload zone. Accepts JPG, PNG, and WebP.</li>
+          <li>The target size is pre-set to 20 KB — no adjustment needed.</li>
+          <li>Make sure the output format is set to JPEG, which is the format required by SSC and most exam portals.</li>
+          <li>Click "Compress". The tool finds the optimal quality level automatically, typically in under a second.</li>
+          <li>Review the before/after file size and download when the result is acceptable.</li>
+          <li><strong>Tip:</strong> If the result looks too soft, <a href="/resize-image-to-passport-size">resize your photo to 200×230 px first</a> (passport dimensions), then compress. Smaller images need far less compression to reach 20 KB.</li>
         </ol>
+
+        <h3>Why Your Exam Photo Quality Matters</h3>
+        <p>Exam portals do not need high-resolution photos — they need a clear, recognisable image of your face. A 20 KB JPEG at 200×230 px is perfectly adequate and accepted by SSC and IBPS portals. The key is starting with a clear photograph (good lighting, white background, full face visible) before compression. A blurry original will produce an unusable compressed image regardless of the tool.</p>
+        <p>For signatures, SSC requires 276×118 pixels under 12 KB in JPEG format. Use the <a href="/signature-resizer-for-ssc">SSC Signature Resizer</a> to hit those exact dimensions, then compress if needed.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -103,7 +118,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC, NTA, banking exams</span>
+          </a>
+          <a href="/compress-image-to-100kb" class="related-card">
+            <span class="related-name">Compress to 100 KB</span>
+            <span class="related-desc">Job portals &amp; general use</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+          <a href="/signature-resizer-for-ssc" class="related-card">
+            <span class="related-name">SSC Signature Resize</span>
+            <span class="related-desc">276×118 px, under 12 KB</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -122,22 +159,25 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .content-section a { color: var(--site-accent); }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -145,4 +185,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>

@@ -9,19 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Will PNG transparency be preserved when converting to JPEG?',
-    a: 'No. JPEG does not support transparency. Any transparent areas in your PNG will be filled with a white background in the JPEG output. If your PNG has a transparent background (such as a logo or icon), and you need to keep it transparent, use PNG or WebP instead. If a white background is acceptable, converting to JPEG is fine.',
+    a: 'No. JPEG does not support transparency. Any transparent areas in your PNG will be filled with a white background in the JPEG output. If your PNG has a transparent background (a logo or icon) and you need to keep it transparent, use WebP or keep it as PNG. If a white background is acceptable, converting to JPEG is fine and gives a much smaller file.',
   },
   {
     q: 'Why is my PNG so much larger than the equivalent JPEG?',
-    a: 'PNG uses lossless compression, which stores every pixel exactly as-is. This makes PNG files very large for photographs because photos have thousands of unique pixel colours that do not compress well losslessly. JPEG uses lossy compression that discards colour information the eye barely notices, achieving far smaller file sizes. A photograph that is 4 MB as PNG might be only 300–500 KB as JPEG at good quality.',
+    a: 'PNG uses lossless compression, which stores every pixel exactly. This produces large files for photographs because photos have millions of unique pixel colours that do not compress well losslessly. JPEG uses lossy compression that discards visual information the eye barely notices, achieving far smaller file sizes. A photo that is 4 MB as PNG might be only 300–500 KB as JPEG at good quality.',
   },
   {
     q: 'What quality setting should I use when converting PNG to JPEG?',
-    a: 'For photographs, 80–85% quality gives an excellent balance — the image looks virtually indistinguishable from the source PNG at a fraction of the file size. For images with text or sharp graphics (screenshots, charts), use 90–95% to avoid JPEG artefacts on hard edges. If you need to meet a specific file size limit, lower the quality until the output falls within the required range.',
+    a: 'For photographs, 80–85% quality gives excellent results — virtually indistinguishable from the source PNG at a fraction of the file size. For images with text or sharp graphics (screenshots, charts), use 90–95% to avoid JPEG artefacts on hard edges. For strict KB limits (e.g., 20 KB for SSC, 50 KB for UPSC), lower the quality until the file is within range.',
   },
   {
     q: 'Can I compress the resulting JPG further?',
-    a: 'Yes. After converting your PNG to JPEG here, you can use the Compress Image tool on this site to target a specific file size — for example, if you need the photo under 50 KB for a government exam portal. The combination of format conversion plus targeted compression usually gives the best result.',
+    a: 'Yes. After converting your PNG to JPEG here, use the Compress Image tool to target a specific file size. For example, if you need the photo under 50 KB for a government exam portal, convert PNG to JPEG first, then compress to 50 KB. This two-step approach gives the best quality at the target file size.',
+  },
+  {
+    q: 'When should I convert PNG to JPEG?',
+    a: 'Convert PNG to JPEG when: (1) you have a photograph saved as PNG (common from design tool exports) and need the smallest possible file size; (2) a government portal or job site requires JPEG format; (3) you want to email a large PNG photo and need to reduce its size for email attachment limits; or (4) you are uploading product images to an e-commerce platform that requires JPEG.',
+  },
+  {
+    q: 'Is this free and private?',
+    a: 'Completely free, no sign-up required, and 100% private. Your PNG is converted entirely in your browser using the Canvas API and is never uploaded to any server. Instant processing and safe for any personal or sensitive photos.',
   },
 ];
 
@@ -31,8 +39,8 @@ const jsonLd = {
     {
       '@type': 'WebApplication',
       '@id': `${siteConfig.domain}/png-to-jpg#app`,
-      name: `PNG to JPG Converter — ${siteConfig.siteName}`,
-      description: 'Convert PNG images to JPEG online free. Smaller file size, great for photos and web use.',
+      name: 'PNG to JPG Converter Online Free',
+      description: 'Convert PNG to JPEG online free. Dramatically reduce file size for photographs. No upload, 100% private. Required for govt portals, job sites, and e-commerce.',
       url: `${siteConfig.domain}/png-to-jpg`,
       applicationCategory: 'MultimediaApplication',
       operatingSystem: 'Any',
@@ -51,38 +59,49 @@ const jsonLd = {
 ---
 
 <Layout
-  title="PNG to JPG Converter Online — Free"
-  description="Convert PNG images to JPEG online free. Smaller file size, great for photos and web use."
+  title="PNG to JPG Converter — Free Online"
+  description="Free PNG to JPG converter online. Reduce file size dramatically for photos. No upload, 100% private. Required for govt portals, job sites &amp; e-commerce uploads."
   canonical={`${siteConfig.domain}/png-to-jpg`}
-  keywords="png to jpg, convert png to jpeg, png jpg converter online"
+  keywords="png to jpg, convert png to jpeg, png jpg converter online, png to jpg free, reduce png file size"
   jsonLd={jsonLd}
 >
   <SiteNav currentPath="/png-to-jpg" />
   <main class="page-main">
-    <div class="container">
+    <div class="tool-screen"><div class="container">
       <header class="tool-header">
         <a href="/" class="back-link">&larr; All tools</a>
-        <h1>PNG to JPG Converter</h1>
-        <p class="tool-desc">Convert PNG images to JPEG online free. Smaller file size, great for photos and web use.</p>
+        <h1>PNG to JPG Converter — Free</h1>
+        <p class="tool-desc">Convert PNG images to JPEG free online. Reduce file size dramatically for photographs. No upload, 100% private. For government portals, job sites, and e-commerce.</p>
       </header>
 
       <ConvertTool from="PNG" to="jpeg" />
 
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
       <AdSlot slot="1111111111" />
 
       <section class="content-section">
-        <h2>About This Tool</h2>
-        <p>Converting PNG to JPEG is one of the most effective ways to dramatically reduce file size for photographic images. PNG's lossless compression is excellent for graphics, logos, and images with transparent backgrounds, but it is highly inefficient for photographs where tiny colour variations in every pixel prevent significant compression. JPEG was designed specifically for photographs and achieves compression ratios that are 10–20 times better than PNG for typical photos.</p>
-        <p>Common situations where you should convert PNG to JPEG: when you have exported a photo from a design tool as PNG and need a smaller file for web upload; when a government or job portal requires JPEG format; when you want to email a large PNG photo and need to reduce its size; or when you are uploading product images to an e-commerce platform that requires JPEG.</p>
-        <p>Note that JPEG does not support transparency. If your PNG has transparent areas (visible as a checkerboard pattern in image editors), those areas will become white in the JPEG. For logos and icons where transparency is essential, do not convert to JPEG — use PNG or WebP instead.</p>
-        <h3>How to Use</h3>
+        <h2>Convert PNG to JPEG — Reduce File Size for Photos &amp; Portals</h2>
+        <p>Converting PNG to JPEG is one of the most effective ways to dramatically reduce file size for photographic images. PNG's lossless compression is excellent for graphics, logos, and transparent images, but it is highly inefficient for photographs where tiny colour variations in every pixel prevent significant compression. JPEG was designed specifically for photographs and achieves compression ratios that are 10–20× better than PNG for typical photographic content.</p>
+        <p>Common situations that require PNG to JPEG conversion: when you have exported a photo from a design tool as PNG and need a smaller file for web upload; when a government exam portal or job application system requires JPEG format; when you want to email a large PNG photo and need to reduce its attachment size; or when uploading product images to Amazon, Flipkart, or another e-commerce platform that requires JPEG. Many corporate HR portals also require JPEG photographs specifically, rejecting PNG uploads regardless of file size.</p>
+        <p>This converter works entirely in your browser. Your PNG is decoded, drawn onto an HTML5 Canvas, and re-encoded as JPEG at your chosen quality setting. Nothing is uploaded — processing is instant and completely private. No watermarks on the output.</p>
+
+        <h3>How to Convert PNG to JPG</h3>
         <ol>
-          <li>Click "Choose File" or drag and drop your PNG image onto the tool.</li>
-          <li>JPEG is pre-selected as the output format.</li>
-          <li>Adjust the quality slider — 80% works well for most photographs.</li>
-          <li>Click "Convert" and compare the file sizes before downloading.</li>
-          <li>If you need to reach a specific file size limit, <a href="/compress-image">use the compressor</a> after conversion.</li>
+          <li><strong>Upload your PNG.</strong> Click "Choose File" or drag and drop your .png image.</li>
+          <li><strong>JPEG is pre-selected.</strong> No format change needed.</li>
+          <li><strong>Set quality.</strong> 80% works well for most photos. For sharp graphics and screenshots, use 90–95%. For strict KB limits, lower the quality until the output file size meets the requirement.</li>
+          <li><strong>Click "Convert" and compare sizes.</strong> You will typically see a 70–95% file size reduction for photographs.</li>
+          <li><strong>Download the JPEG.</strong> Upload it to the portal, email it, or use it wherever JPEG is required.</li>
+          <li><strong>Further compression if needed.</strong> Use the <a href="/compress-image">image compressor</a> to target a specific KB limit after conversion.</li>
         </ol>
+
+        <h3>PNG to JPEG for Government Exam Portals</h3>
+        <p>Most Indian government exam portals — SSC, UPSC, IBPS, NTA, RRB — require photographs in JPEG format. If your photo is currently a PNG, convert it here first. After converting, check the file size against the portal's limit:</p>
+        <p><strong>SSC CGL / IBPS:</strong> Under 20 KB → convert PNG to JPEG here, then use the <a href="/compress-image-to-20kb">20 KB compressor</a>.</p>
+        <p><strong>UPSC / NTA JEE / NEET:</strong> Under 50 KB → convert PNG to JPEG, then use the <a href="/compress-image-to-50kb">50 KB compressor</a>.</p>
+        <p><strong>Job portals / Naukri:</strong> Under 100 KB → convert PNG to JPEG, then use the <a href="/compress-image-to-100kb">100 KB compressor</a>.</p>
       </section>
 
       <AdSlot slot="2222222222" />
@@ -102,7 +121,29 @@ const jsonLd = {
           ))}
         </dl>
       </section>
-    </div>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC &amp; NTA portals</span>
+          </a>
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC &amp; IBPS portals</span>
+          </a>
+          <a href="/jpg-to-png" class="related-card">
+            <span class="related-name">JPG to PNG</span>
+            <span class="related-desc">Lossless for editing</span>
+          </a>
+          <a href="/png-to-webp" class="related-card">
+            <span class="related-name">PNG to WebP</span>
+            <span class="related-desc">Smaller web images</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
   </main>
   <Footer />
 </Layout>
@@ -121,22 +162,25 @@ const jsonLd = {
 </script>
 
 <style>
-  .page-main { padding: 2rem 0 4rem; }
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
   .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
   .tool-header { margin-bottom: 1.5rem; }
   .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
   .back-link:hover { color: var(--site-text); text-decoration: none; }
-  h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: var(--site-text); line-height: 1.2; margin: 0 0 0.75rem; }
-  .tool-desc { font-size: 1.0625rem; color: var(--site-text-muted); margin: 0; max-width: 64ch; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
   .content-section { margin: 2.5rem 0; }
-  .content-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 0.75rem; }
-  .content-section h3 { font-size: 1.125rem; font-weight: 600; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
-  .content-section p { color: var(--site-text-muted); margin: 0 0 1rem; max-width: 72ch; }
-  .content-section ol { color: var(--site-text-muted); padding-left: 1.5rem; max-width: 64ch; }
-  .content-section li { margin-bottom: 0.375rem; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
   .content-section a { color: var(--site-accent); }
   .faq-section { margin: 2.5rem 0; }
-  .faq-section h2 { font-size: 1.375rem; font-weight: 700; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
   .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
   .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
@@ -144,4 +188,19 @@ const jsonLd = {
   .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
   .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
   .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
 </style>
