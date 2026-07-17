@@ -1,6 +1,6 @@
 {
-  "name": "Image Tools",
-  "short_name": "ImgTools",
+  "name": "Snap Image Tools",
+  "short_name": "SnapImg",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

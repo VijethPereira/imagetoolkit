@@ -35,8 +35,8 @@ export const toolCategories = [
 export const allTools = toolCategories.flatMap((c) => c.tools);
 
 const siteConfig = {
-  siteName: 'Image Tools',
-  domain: 'https://example.com',   // ← fill in once domain is bought
+  siteName: 'Snap Image Tools',
+  domain: 'https://snapimagetools.com',
   tagline: 'Free image tools — compress, resize, and convert images in your browser. No uploads, 100% private.',
   primaryColor: '#7c3aed',
   gaId: '',

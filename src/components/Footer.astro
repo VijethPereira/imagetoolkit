@@ -14,6 +14,12 @@ const year = new Date().getFullYear();
         ))}
       </ul>
     </nav>
+    <div class="sister-site">
+      <span class="sister-label">Also try:</span>
+      <a href="https://quickmeasuretool.com" class="sister-link" target="_blank" rel="noopener">
+        Quick Measure Tool — free online ruler & measurement tools
+      </a>
+    </div>
     <p class="copy">&copy; {year} {siteConfig.siteName}. All rights reserved.</p>
   </div>
 </footer>
@@ -63,6 +69,28 @@ const year = new Date().getFullYear();
     color: var(--site-text);
     text-decoration: none;
   }
+
+  .sister-site {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    background: var(--site-hover);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+  }
+  .sister-label {
+    color: var(--site-text-muted);
+    flex-shrink: 0;
+  }
+  .sister-link {
+    color: var(--site-accent);
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .sister-link:hover { opacity: 0.75; text-decoration: none; }
 
   .copy {
     font-size: 0.8rem;

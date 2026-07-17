@@ -1,102 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://snapimagetools.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://example.com/compress-image</loc>
+    <loc>https://snapimagetools.com/compress-image</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/compress-image-to-20kb</loc>
+    <loc>https://snapimagetools.com/compress-image-to-20kb</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/compress-image-to-50kb</loc>
+    <loc>https://snapimagetools.com/compress-image-to-50kb</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/compress-image-to-100kb</loc>
+    <loc>https://snapimagetools.com/compress-image-to-100kb</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/compress-image-to-200kb</loc>
+    <loc>https://snapimagetools.com/compress-image-to-200kb</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/resize-image</loc>
+    <loc>https://snapimagetools.com/resize-image</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/resize-image-to-passport-size</loc>
+    <loc>https://snapimagetools.com/resize-image-to-passport-size</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/resize-image-to-600x600</loc>
+    <loc>https://snapimagetools.com/resize-image-to-600x600</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/resize-image-to-200x200</loc>
+    <loc>https://snapimagetools.com/resize-image-to-200x200</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/signature-resizer-for-ssc</loc>
+    <loc>https://snapimagetools.com/signature-resizer-for-ssc</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/jpg-to-webp</loc>
+    <loc>https://snapimagetools.com/jpg-to-webp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/png-to-webp</loc>
+    <loc>https://snapimagetools.com/png-to-webp</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/webp-to-jpg</loc>
+    <loc>https://snapimagetools.com/webp-to-jpg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/webp-to-png</loc>
+    <loc>https://snapimagetools.com/webp-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/jpg-to-png</loc>
+    <loc>https://snapimagetools.com/jpg-to-png</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/png-to-jpg</loc>
+    <loc>https://snapimagetools.com/png-to-jpg</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://example.com/about</loc>
+    <loc>https://snapimagetools.com/about</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://example.com/contact</loc>
+    <loc>https://snapimagetools.com/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://example.com/privacy-policy</loc>
+    <loc>https://snapimagetools.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -1,6 +1,7 @@
 # Image Tools — Competitor Analysis
 > **Local reference only. Do not commit or publish.**
 > Source: user research + manual audits of competitor sites
+> Domain: snapimagetools.com
 > Last updated: 2026-07-17
 
 ---
