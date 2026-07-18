@@ -81,6 +81,11 @@ const jsonLd = {
         <div class="privacy-badge">
           🔒 Your images never leave your device
         </div>
+        <p class="sister-promo">
+          Also try:&nbsp;
+          <a href="https://quickmeasuretool.com" target="_blank" rel="noopener" class="sister-link">Quick Measure Tool</a>
+          &nbsp;— free online ruler &amp; measurement tools
+        </p>
       </div>
     </section>
 
@@ -202,6 +207,18 @@ const jsonLd = {
     padding: 0.3rem 0.875rem;
     border-radius: 9999px;
   }
+
+  .sister-promo {
+    margin: 1rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+  }
+  .sister-promo .sister-link {
+    color: var(--site-accent);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .sister-promo .sister-link:hover { text-decoration: underline; }
 
   .category-section { padding: 2.5rem 0 0; }
   .category-section:last-of-type { padding-bottom: 2rem; }
