@@ -39,7 +39,7 @@ const siteConfig = {
   domain: 'https://snapimagetools.com',
   tagline: 'Free image tools — compress, resize, and convert images in your browser. No uploads, 100% private.',
   primaryColor: '#7c3aed',
-  gaId: '',
+  gaId: 'G-4G99L3JDRZ',
   adsenseId: '',
   navLinks: [
     { label: 'All Tools', href: '/' },

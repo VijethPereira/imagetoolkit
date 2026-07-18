@@ -229,11 +229,13 @@ const { currentPath = '/' } = Astro.props;
     padding: 1rem 1.5rem 1.5rem;
     transform: translateY(-8px);
     opacity: 0;
+    pointer-events: none;
     transition: transform 0.18s ease, opacity 0.18s ease;
   }
   .mobile-menu.is-open {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
   }
 
   .mobile-overlay {
@@ -243,9 +245,13 @@ const { currentPath = '/' } = Astro.props;
     z-index: 180;
     background: rgba(0, 0, 0, 0.35);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.18s ease;
   }
-  .mobile-overlay.is-open { opacity: 1; }
+  .mobile-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
   .mobile-nav-list {
     list-style: none;
@@ -274,5 +280,10 @@ const { currentPath = '/' } = Astro.props;
     .nav-links { display: none; }
     .menu-btn  { display: flex; }
     .mobile-menu, .mobile-overlay { display: block; }
+    /* Larger touch targets on mobile */
+    .icon-btn {
+      width: 2.75rem;
+      height: 2.75rem;
+    }
   }
 </style>

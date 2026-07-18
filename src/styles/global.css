@@ -83,10 +83,30 @@ body {
 a {
   color: var(--site-accent);
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 a:hover { text-decoration: underline; }
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 
 ::selection {
   background: #171717;
   color: #f2f2f2;
+}
+
+/* ─── Mobile: disable fixed-position ruler pattern ─── */
+/* All 16 tool pages use position:fixed for .tool-screen which breaks on mobile.
+   These !important overrides beat the scoped [data-astro-cid-*] selectors. */
+@media (max-width: 640px) {
+  .tool-screen {
+    position: static !important;
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+  .page-spacer {
+    display: none !important;
+  }
 }
