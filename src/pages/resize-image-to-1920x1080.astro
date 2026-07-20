@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is 1920×1080 resolution called?',
+    a: '1920×1080 is called Full HD (FHD), 1080p, or sometimes just "1080". It is the most common desktop monitor resolution worldwide and the standard for HDTVs, laptop screens, and modern projectors. The "p" in 1080p stands for progressive scan. Full HD has 2,073,600 pixels in total (just over 2 megapixels), which is why DSLR cameras with 24-megapixel sensors can dramatically downscale images to this size without any loss of apparent sharpness.',
+  },
+  {
+    q: 'What is the correct size for a desktop wallpaper?',
+    a: 'For most modern desktops and laptops, the correct wallpaper size is 1920×1080 pixels (Full HD). If you have a 4K (3840×2160) monitor, you would ideally use a 4K wallpaper, but 1920×1080 works fine too — it will be upscaled by the operating system, which usually looks acceptable. For older or budget monitors at 1280×720, a 1920×1080 wallpaper is downscaled and still looks sharp.',
+  },
+  {
+    q: 'Should website hero images be 1920×1080?',
+    a: 'Yes — 1920×1080 is the standard canvas size for full-width website hero images and banner images. Modern web design assumes a maximum viewport width of 1920 px for most users. A hero image at 1920×1080 fills the full screen on all standard monitors without being upscaled. For web use, compress to around 150–400 KB JPEG to avoid slow page loads.',
+  },
+  {
+    q: 'What size should streaming overlays be for OBS?',
+    a: 'OBS (Open Broadcaster Software) and Streamlabs use a 1920×1080 canvas by default for 1080p streaming. Overlays, alert boxes, webcam frames, and scene backgrounds should all be sized at 1920×1080 so they align correctly in the OBS canvas without scaling. Resize your overlay assets to 1920×1080 before importing them into OBS to ensure precise positioning.',
+  },
+  {
+    q: 'What is the correct PowerPoint or Google Slides slide size for widescreen?',
+    a: 'PowerPoint\'s "Widescreen" presentation size is 33.87 × 19.05 cm, which at 96 DPI equals exactly 1280×720 pixels. However, when exported as images at higher quality settings (96 DPI), slides render at 1280×720. At 150 DPI export quality, they render at 1920×1080 pixels. Set your export DPI to 150 or higher and you get 1920×1080 slide images suitable for YouTube video exports and full-HD displays.',
+  },
+  {
+    q: 'Is this tool free and does it upload my images?',
+    a: 'Completely free with no account required. All resizing happens in your browser using the HTML5 Canvas API. Your image is never uploaded to any server — all processing is local and instant. You can safely resize personal photos, branded assets, and commercial images without privacy or watermark concerns.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-1920x1080#app`,
+      name: 'Resize Image to 1920×1080 px Free Online',
+      description: 'Resize any image to 1920×1080 pixels (Full HD / 1080p) free online. No upload, 100% private. For desktop wallpapers, website hero images, streaming overlays, and presentations.',
+      url: `${siteConfig.domain}/resize-image-to-1920x1080`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 1920×1080 px — Free Online"
+  description="Free online tool to resize any image to 1920×1080 pixels (Full HD / 1080p). No upload, 100% private. For desktop wallpapers, website hero images, streaming overlays, and presentation slides."
+  canonical={`${siteConfig.domain}/resize-image-to-1920x1080`}
+  keywords="resize image to 1920x1080, 1080p wallpaper size, full hd image resize, 1920x1080 wallpaper, hd desktop wallpaper size"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-1920x1080" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 1920×1080 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 1920×1080 pixels (Full HD / 1080p). For desktop wallpapers, website hero images, streaming overlays, and presentations. No upload, 100% private.</p>
+      </header>
+
+      <ResizeTool width={1920} height={1080} lockAspect={false} outputFormat="jpeg" presetLabel="1920×1080 px (Full HD / 1080p)" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 1920×1080 — Full HD Wallpapers, Hero Images &amp; Streaming Overlays</h2>
+        <p>1920×1080 pixels — known as Full HD, FHD, or 1080p — is the most common desktop monitor resolution worldwide and the gold standard for digital content. It is the resolution of most modern HDTVs, laptop screens, desktop monitors, and projectors. When designing or editing images for digital display, starting with a 1920×1080 canvas ensures your content fills any standard screen edge-to-edge without black bars or scaling artefacts.</p>
+        <p>Website hero images and banner images at 1920×1080 achieve full-bleed coverage on all standard screens. Modern web design frameworks (Bootstrap, Tailwind, and custom CSS) assume a maximum viewport of 1920 px wide for hero sections. Uploading a hero image at exactly 1920×1080 means the browser serves it at native resolution on standard monitors — no upscaling, no quality loss, maximum visual impact.</p>
+        <p>Streaming setups using OBS (Open Broadcaster Software), Streamlabs OBS, or XSplit use 1920×1080 as the default canvas for 1080p streaming. Overlay graphics, webcam frame borders, alert box backgrounds, and scene transition assets should all be created and resized to 1920×1080 to align correctly in the OBS canvas without scaling or misalignment. Resize your overlay assets to 1920×1080 before importing into OBS for pixel-perfect results.</p>
+        <p>PowerPoint and Google Slides in "widescreen" mode use a 16:9 aspect ratio. When slides are exported as images at high quality (150 DPI or higher), they render at 1920×1080. Creating presentations at this resolution ensures sharp text and graphics when displayed on 1080p projectors in conference rooms, classrooms, and event venues.</p>
+        <p>YouTube video backgrounds — used in YouTube Studio's channel customisation to appear behind your channel art on connected TVs — should be 1920×1080. Windows desktop wallpapers and macOS desktop pictures also use 1920×1080 as the native resolution on most machines. If you are creating a custom desktop wallpaper for yourself, your team, or as a branded asset, 1920×1080 is the right size.</p>
+
+        <h3>File Size for 1920×1080 Images</h3>
+        <p>A 1920×1080 JPEG at quality 85 typically weighs 300–600 KB depending on image complexity. A photographic scene with many details (cityscape, nature, crowd) will be at the higher end; a clean flat-design graphic or minimalist photo will be lower. For web hero images, aim for under 500 KB — use the <a href="/compress-image">image compressor</a> after resizing if needed. For desktop wallpapers and streaming overlays, file size is less critical.</p>
+        <p>For print applications (posters, banners, merchandise), 1920×1080 at screen resolution (72–96 DPI) is not sufficient — print requires at least 150 DPI and ideally 300 DPI. A 1920×1080 image at 300 DPI would physically print at only about 6.4×3.6 inches (A6-ish). For large-format print, you would need a much higher-resolution source image.</p>
+
+        <h3>How to Resize to 1920×1080 px</h3>
+        <ol>
+          <li><strong>Prepare a 16:9 crop.</strong> 1920×1080 has a 16:9 aspect ratio. If your source image is not 16:9, crop it to the appropriate ratio before resizing to avoid stretching. For portraits: crop a wide band. For square images: crop to 16:9 from the centre.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop. Dimensions are pre-set to 1920×1080 px.</li>
+          <li><strong>Select output format.</strong> JPEG for photos and web images (smallest file). PNG for graphics, text overlays, or transparency.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 1920×1080 px image is ready to use as a wallpaper, website hero, streaming overlay, or presentation background.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-1280x720" class="related-card">
+            <span class="related-name">Resize to 1280×720</span>
+            <span class="related-desc">YouTube thumbnails &amp; HD</span>
+          </a>
+          <a href="/resize-image-to-1080x1080" class="related-card">
+            <span class="related-name">Resize to 1080×1080</span>
+            <span class="related-desc">Instagram square posts</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image-to-1mb" class="related-card">
+            <span class="related-name">Compress to 1 MB</span>
+            <span class="related-desc">Reduce large image file size</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

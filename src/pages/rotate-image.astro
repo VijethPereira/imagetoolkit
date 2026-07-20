@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import RotateTool from '../components/tools/RotateTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why does my phone photo appear sideways or upside down?',
+    a: 'Smartphones use an accelerometer to detect the orientation the phone was held in when taking the photo. This orientation data is stored in the image\'s EXIF metadata as an "Orientation" tag. Many photo viewers, browsers, and apps respect this tag and rotate the display automatically. However, some platforms — social media uploads, certain CMS systems, and older image editors — ignore EXIF orientation, displaying the photo at its raw orientation (which may be rotated 90° or 180° from what you intended). Rotating the image with this tool bakes the correct orientation into the pixel data itself, fixing the issue permanently regardless of whether the platform reads EXIF.',
+  },
+  {
+    q: 'How do I rotate an image 90 degrees online?',
+    a: 'Upload your image using the file picker or drag and drop, then click the "Rotate 90° clockwise" or "Rotate 90° counter-clockwise" button. Click "Download" to save the rotated image. The operation is instant and happens entirely in your browser — no upload to any server required.\\',
+  },
+  {
+    q: 'What is the difference between rotating and flipping an image?',
+    a: 'Rotating turns the entire image around its centre point — clockwise or counter-clockwise — changing which edge is at the top. Flipping (also called mirroring) reverses the image along a horizontal or vertical axis without changing which edge is at the top. A horizontal flip creates a mirror image. A vertical flip turns the image upside down along its width. Both operations are useful for different purposes: rotating fixes orientation issues, flipping creates mirror images for e-commerce product listings or symmetry effects.\\',
+  },
+  {
+    q: 'Why do scanned documents often appear upside down?',
+    a: 'Flatbed scanners and document cameras save images based on how the physical document was placed on the glass. If you placed the document with the text facing away or at an angle, the resulting scan will be rotated. Unlike smartphone photos, scanned documents rarely contain EXIF orientation metadata — what you scan is what you get, raw pixel rotation included. Use this tool to rotate scanned documents to the correct reading orientation before uploading to storage, OCR tools, or sharing.\\',
+  },
+  {
+    q: 'Can I rotate images for Indian government exam portals like SSC or UPSC?',
+    a: 'Yes. If your scanned signature or photograph is rotated sideways or upside down, use this tool to rotate it to the correct orientation before uploading. Government exam portals (SSC CGL, UPSC, IBPS, NTA) require photos and signatures in a specific upright orientation. After rotating, also check if the portal has specific file size or dimension requirements — use the resize or compress tools if needed.\\',
+  },
+  {
+    q: 'Is this tool free and does it keep my images private?',
+    a: 'Yes — completely free, no account required, and 100% private. All rotation and flipping is performed in your browser using the HTML5 Canvas API. Your image never leaves your device and is never uploaded to any server. You can safely rotate sensitive documents, ID photos, and personal images.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/rotate-image#app`,
+      name: 'Rotate Image Online Free',
+      description: 'Rotate any image 90°, 180°, or flip horizontally/vertically online for free. No upload, 100% private. Fix phone photo orientation, rotate scanned documents, mirror product photos.',
+      url: `${siteConfig.domain}/rotate-image`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Rotate Image Online — Free"
+  description="Rotate any image 90°, 180°, or flip horizontally/vertically online for free. No upload, 100% private. Fix photo orientation, rotate scanned documents, mirror product photos."
+  canonical={`${siteConfig.domain}/rotate-image`}
+  keywords="rotate image online, rotate image 90 degrees, flip image horizontal, rotate photo online free, image rotator"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/rotate-image" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Rotate Image Online — Free</h1>
+        <p class="tool-desc">Rotate any image 90°, 180°, or flip horizontally and vertically — entirely in your browser. No upload, 100% private. Fix photo orientation, rotate scanned documents, mirror product images.</p>
+      </header>
+
+      <RotateTool />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Rotate &amp; Flip Images Online — Fix Orientation Instantly</h2>
+        <p>Smartphones often save photos in the wrong orientation. When you hold your phone in portrait mode and shoot, the camera sensor captures the image in a fixed landscape orientation — then stores a rotation flag in the EXIF metadata to tell viewers how to display it correctly. Many platforms honour this EXIF flag. But many others do not — social media uploaders, some CMS systems, older image editors, and government exam portals may display your photo sideways or upside down because they read the raw pixel data without checking the rotation metadata.</p>
+        <p>The fix is permanent rotation: instead of relying on a metadata flag, you physically rotate the pixel data of the image. After rotating with this tool, the image will display correctly on every platform, every viewer, and every device — regardless of whether they read EXIF orientation. No more sideways profile photos, no more upside-down document scans.</p>
+        <p>Scanned documents arrive rotated far more often than you might expect. A flatbed scanner saves images based on where you physically placed the paper on the glass. Place the paper upside down and the scan is upside down. Place it landscape when it should be portrait and the scan is sideways. Unlike smartphone photos, scans rarely contain orientation metadata — the rotated pixels are exactly what you get. Rotating with this tool corrects the scan before you upload it, share it, or run it through OCR.</p>
+        <p>Flipping images has its own uses beyond fixing orientation. E-commerce product listings for fashion, accessories, and consumer goods often need mirror-image photos — showing a bag from both the left and right, or a watch on both wrists. Flipping a photo horizontally creates the mirror image instantly. Symmetry effects for profile pictures, artistic photography, and social media graphics are also easy to achieve with a horizontal flip.</p>
+        <p>For Indian exam portals — SSC CGL, UPSC, IBPS PO, NTA NEET/JEE, and similar — photo and signature uploads must be in the correct upright orientation. A scanned signature that appears sideways will fail to upload or be rejected by the portal's preview. Rotating with this tool and then checking the dimensions and file size with the resize tool ensures your upload is both correctly oriented and within portal requirements.</p>
+
+        <h3>How to Rotate or Flip Your Image</h3>
+        <ol>
+          <li><strong>Upload your image.</strong> Click "Choose File" or drag and drop any JPEG, PNG, or WebP image.</li>
+          <li><strong>Choose your rotation.</strong> Click "Rotate 90° clockwise", "Rotate 90° counter-clockwise", "Rotate 180°", "Flip horizontal", or "Flip vertical" depending on what you need.</li>
+          <li><strong>Preview the result.</strong> The preview updates instantly after each operation. You can chain multiple operations — rotate then flip if needed.</li>
+          <li><strong>Download.</strong> Click "Download" to save the rotated/flipped image. Everything happens in your browser — your image is never uploaded anywhere.</li>
+        </ol>
+
+        <h3>Common Use Cases</h3>
+        <p><strong>Fix phone photo orientation:</strong> The most common use — rotating a sideways or upside-down photo taken on a smartphone to the correct orientation before sharing or uploading.</p>
+        <p><strong>Rotate scanned documents and signatures:</strong> Correct the orientation of a scanned signature or document before uploading to exam portals, HR systems, or cloud storage.</p>
+        <p><strong>Mirror product photos for e-commerce:</strong> Create left/right or front/back mirror views of products by flipping horizontally, reducing the need to shoot the same product twice from mirror angles.</p>
+        <p><strong>Symmetry and creative effects:</strong> Flip an image horizontally and overlay with the original for symmetry effects, used in portrait photography, logo creation, and social media graphics.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Reduce file size for upload</span>
+          </a>
+          <a href="/grayscale-image" class="related-card">
+            <span class="related-name">Grayscale Image</span>
+            <span class="related-desc">Convert to grey tones</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

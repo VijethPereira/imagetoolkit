@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why do Shopify and WooCommerce use 300×300 for thumbnails?',
+    a: 'Shopify and WooCommerce default product grids display thumbnails at 300 px wide on desktop. At this size, product details — colour, texture, shape — are clear enough for customers to identify the product without clicking. Files are also manageable: a clean product shot at 300×300 JPEG quality 80 is 15–40 KB, loading fast even on mobile connections.',
+  },
+  {
+    q: 'Will my image look stretched if it is not square?',
+    a: 'Yes — if your image is not a 1:1 square and you resize to 300×300 without the aspect ratio locked, it will stretch. To avoid this, crop to square first (centred on your product or subject), then resize. For e-commerce, a clean white-background square crop is standard practice on platforms like Amazon and Flipkart.',
+  },
+  {
+    q: 'Is 300×300 good for Etsy shop thumbnails?',
+    a: 'Yes. Etsy displays product listing thumbnails at various sizes depending on the layout (search grid, shop homepage, featured section) but all of them are square and fall within the 300 px range. A 300×300 source image will display crisply in all Etsy contexts. Etsy recommends at least 2000 px for your primary listing photo, but for the thumbnail optimised for display size, 300 px is ideal.',
+  },
+  {
+    q: 'What file size should a 300×300 JPEG be?',
+    a: 'A clean product photo at 300×300 pixels, JPEG quality 80, typically compresses to 15–40 KB depending on the image complexity. A flat-lay with simple background might be 12 KB; a detailed texture photograph might be 45 KB. For web use, anything under 50 KB at 300×300 is excellent performance.',
+  },
+  {
+    q: 'Can I use PNG for 300×300 product thumbnails?',
+    a: 'You can, but JPEG is almost always better for product photos. PNG at 300×300 for a colour photograph is typically 80–150 KB — 3–5x larger than JPEG at equivalent visual quality. Use PNG only if your product image requires a transparent background, or if it is a logo/illustration with flat colours where PNG\'s lossless compression is efficient.',
+  },
+  {
+    q: 'Is this tool free and does it upload my images to a server?',
+    a: 'Completely free, no sign-up required, and 100% private. All resizing happens in your browser using the HTML5 Canvas API. Your images are never uploaded to any server, making it safe for product photos and sensitive commercial images.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-300x300#app`,
+      name: 'Resize Image to 300×300 px Free Online',
+      description: 'Resize any image to 300×300 pixels free online. No upload, 100% private. For Shopify thumbnails, WooCommerce grids, Etsy shop images, and e-commerce catalogues.',
+      url: `${siteConfig.domain}/resize-image-to-300x300`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 300×300 px — Free Online"
+  description="Free online tool to resize any image to 300×300 pixels. No upload, 100% private. For Shopify thumbnails, WooCommerce product grids, Etsy listings, and e-commerce catalogues."
+  canonical={`${siteConfig.domain}/resize-image-to-300x300`}
+  keywords="resize image to 300x300, 300x300 image resize, product thumbnail 300x300, shopify image size 300"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-300x300" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 300×300 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 300×300 pixels. No upload, 100% private. For Shopify thumbnails, WooCommerce product grids, Etsy shop images, and e-commerce catalogues.</p>
+      </header>
+
+      <ResizeTool width={300} height={300} lockAspect={false} outputFormat="jpeg" presetLabel="300×300 px" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 300×300 Pixels — E-commerce Thumbnails &amp; Catalogue Images</h2>
+        <p>300×300 pixels is the baseline thumbnail size for e-commerce catalogue pages across the web. Shopify themes and WooCommerce default grid views commonly render product thumbnails at 300 px wide — it is the sweet spot where product detail is visible and load times remain fast. If your store's thumbnail grid looks inconsistent or blurry, it is usually because product images were uploaded at different dimensions and the platform is scaling them inconsistently.</p>
+        <p>Uploading pre-resized 300×300 images means the platform serves your image at exactly the resolution it was designed for — no additional scaling, no quality loss, no inconsistent cropping. Every product in your grid appears at the same dimensions with the same apparent quality.</p>
+        <p>Etsy, one of the world's largest e-commerce platforms for handmade and vintage goods, displays shop thumbnails at square dimensions in the 200–300 px range. A 300×300 px image covers all Etsy display contexts cleanly. For marketplaces like Amazon's subsidiary sites, Flipkart's third-party seller listings, and Meesho catalogue uploads, 300×300 is a safe, universally-accepted thumbnail size.</p>
+        <p>At 300×300, JPEG compression is remarkably efficient. A clean product photograph — a pair of shoes on white, a piece of jewellery, a cosmetic product — compresses to 15–40 KB at JPEG quality 80. This means a product grid of 24 thumbnails loads in well under 1 MB total, even on slow mobile connections. Fast-loading product grids directly improve conversion rates, which is why many e-commerce performance guides specifically target thumbnail size and quality.</p>
+        <p>For mobile app icons on older platforms (pre-2017 Android icon specifications used 300 px grids) and some enterprise software dashboards, 300×300 is also a common requirement. If your company's internal tools or CRM software requires profile or product thumbnails, 300×300 covers the majority of cases.</p>
+
+        <h3>How to Resize to 300×300 px</h3>
+        <ol>
+          <li><strong>Prepare a square crop.</strong> For product photos, place your product on a clean background and crop to a square with the product centred. E-commerce platforms universally prefer square product images for consistent grid display.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop. The dimensions are pre-set to 300×300 px.</li>
+          <li><strong>Select output format.</strong> JPEG for product photos (smallest file size, fastest load). PNG if your product requires a transparent or white background that you want perfectly preserved.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 300×300 px thumbnail is ready to upload to Shopify, WooCommerce, Etsy, or any other e-commerce platform.</li>
+        </ol>
+
+        <h3>Common Use Cases</h3>
+        <p><strong>Shopify product thumbnails:</strong> Most Shopify themes display product grids at 300 px wide. A pre-resized 300×300 image ensures pixel-perfect display with no additional scaling by the theme.</p>
+        <p><strong>WooCommerce catalogue grid:</strong> WooCommerce's default shop loop generates thumbnails at 300×300 px. Uploading at exactly this size bypasses WordPress's image regeneration and ensures your images display at their original quality.</p>
+        <p><strong>Etsy shop images:</strong> Etsy thumbnails in search results and shop homepages are displayed as squares in the 200–300 px range. A 300×300 source covers all display contexts.</p>
+        <p><strong>Older social platform profile pictures:</strong> Some older social networks and professional platforms (now superseded by modern sizes) historically used 300×300 for profile picture storage.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-200x200" class="related-card">
+            <span class="related-name">Resize to 200×200</span>
+            <span class="related-desc">Avatars &amp; small thumbnails</span>
+          </a>
+          <a href="/resize-image-to-600x600" class="related-card">
+            <span class="related-name">Resize to 600×600</span>
+            <span class="related-desc">Social profiles &amp; e-commerce</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">Web &amp; portal file limits</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

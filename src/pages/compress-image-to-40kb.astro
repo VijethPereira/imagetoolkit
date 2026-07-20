@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Does UPSC Civil Services require a photo under 40 KB?',
+    a: 'Yes. UPSC (Union Public Service Commission) online applications for Civil Services (IAS/IPS/IFS) Preliminary examination consistently require a recent photograph in JPEG format under 40 KB. The same 40 KB limit applies to IES (Indian Engineering Services) and IFS (Indian Forest Service) online forms. Signature upload limits are usually lower — typically 20 KB for UPSC forms.',
+  },
+  {
+    q: 'What are the UPSC photo specifications for online applications?',
+    a: 'UPSC specifies: photograph in JPEG format, file size under 40 KB, minimum dimensions 300×400 px (width×height), white or off-white background, formal attire, taken within the last 6 months. The candidate should be clearly visible facing forward without dark glasses. Hats or caps are not permitted except for religious headgear.',
+  },
+  {
+    q: 'Does NDA (National Defence Academy) also use 40 KB?',
+    a: 'Yes. NDA and NA (Naval Academy) online application forms require the photograph to be under 40 KB in JPEG format. The photo specifications are similar to UPSC — formal appearance, plain background, clear face. Defence recruitment applications in general tend to use 40 KB as the standard photo limit.',
+  },
+  {
+    q: 'How do I get the best quality JPEG at 40 KB?',
+    a: 'Resize your photo to the minimum dimensions required by UPSC (300×400 px) or slightly larger (e.g., 400×500 px). At 300×400 px, a 40 KB JPEG will be at a relatively high quality setting — UPSC photos at 40 KB look sharp and professional. Upload here and the tool finds the best quality automatically. For even sharper results use 400×500 px, which still comfortably fits in 40 KB at good quality.',
+  },
+  {
+    q: 'Can I compress a coloured background photo for UPSC?',
+    a: 'UPSC requires a white or off-white background. If your photo has a coloured background, you will need to either retake the photo correctly or use photo editing software to change the background before uploading to this compressor. Submitting a photo with the wrong background can lead to application rejection at the verification stage.',
+  },
+  {
+    q: 'Does this tool change the image dimensions when compressing?',
+    a: 'No. This tool only adjusts JPEG quality to reduce the file size to under 40 KB — it does not resize or crop. Your image dimensions remain exactly as they were when uploaded. If you need to resize first, use the Resize Image tool, then return here to compress to 40 KB.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-40kb#app`,
+      name: 'Compress Image to 40 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 40 KB online. Free, no upload, 100% private. For UPSC Civil Services, IES, IFS, and NDA online applications.',
+      url: `${siteConfig.domain}/compress-image-to-40kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 40 KB — Free, No Upload"
+  description="Free tool to compress any image to under 40 KB. 100% private, no upload. For UPSC Civil Services, IES, IFS, and NDA online applications. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-40kb`}
+  keywords="compress image to 40kb, reduce to 40kb, upsc photo 40kb, nda signature size, compress image upsc"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-40kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 40 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 40 KB. 100% private, no upload. For UPSC Civil Services, IES, IFS, NDA applications, and defence recruitment portals.</p>
+      </header>
+
+      <CompressTool targetKB={40} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 40 KB — UPSC, IES, IFS &amp; Defence Recruitment</h2>
+        <p>40 KB is the standard photograph upload limit set by the Union Public Service Commission (UPSC) for its flagship Civil Services Preliminary examination — the gateway to the IAS, IPS, and IFS cadres. The same limit applies to UPSC's Indian Engineering Services (IES) examination, Indian Forest Service (IFS) examination, and Combined Defence Services (CDS) applications. Additionally, NDA (National Defence Academy) and Naval Academy (NA) online forms use 40 KB as the photo ceiling.</p>
+        <p>UPSC is among the most rigorous exam authorities in India for photo specification enforcement. At the document verification stage, candidates may be rejected if their uploaded photo does not meet specifications — including file size. Uploading a 45 KB file when the limit is 40 KB will typically trigger an upload error on the portal itself.</p>
+        <p>This free browser-based compressor targets 40 KB precisely, finding the highest JPEG quality that fits under the limit. Your photo never leaves your device.</p>
+
+        <h3>UPSC Photo Requirements — What You Need to Know</h3>
+        <p>UPSC's Civil Services application specifies these requirements for the photograph:</p>
+        <ol>
+          <li>JPEG format (.jpg or .jpeg extension)</li>
+          <li>File size under 40 KB</li>
+          <li>Minimum 300×400 px (width × height); higher resolution accepted up to the file size limit</li>
+          <li>White or off-white background</li>
+          <li>Formal attire, no dark glasses, no hat (except religious headgear)</li>
+          <li>Photo taken within the past 6 months</li>
+          <li>Face clearly visible, looking directly at the camera</li>
+        </ol>
+        <p>For the signature, UPSC uses a lower limit — typically 20 KB. Use <a href="/compress-image-to-20kb">Compress to 20 KB</a> for your UPSC signature file.</p>
+
+        <h3>Getting the Best Quality at 40 KB for UPSC</h3>
+        <p>At UPSC's minimum required dimension of 300×400 px, a 40 KB JPEG sits at a comfortable quality level — most JPEGs at 300×400 px reach 40 KB at quality settings around 75–85%, which is the well-established sweet spot for professional photo quality. The result will be a sharp, clear photograph suitable for identity verification both at the portal submission stage and at the actual examination hall.</p>
+        <p>If you want even sharper quality, upload at 400×500 px — this resolution still fits comfortably within 40 KB at good quality. However, UPSC's portal will only display the photo at a thumbnail size on the admit card, so quality beyond 300×400 px provides diminishing returns for the purpose of exam documentation.</p>
+        <p>For other UPSC-adjacent exam portals that use different limits, see <a href="/compress-image-to-50kb">Compress to 50 KB</a> or <a href="/compress-image-to-20kb">Compress to 20 KB</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">UPSC signature, SSC CGL, IBPS</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">College portals &amp; NTA forms</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

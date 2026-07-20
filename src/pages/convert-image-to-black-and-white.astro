@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ConvertTool from '../components/tools/ConvertTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is a high-contrast black and white conversion?',
+    a: 'A high-contrast black and white conversion takes a colour or grayscale image and pushes each pixel toward either pure black (0) or pure white (255), eliminating or dramatically reducing the midtones (grey values). The result is a graphic, high-contrast image that looks like print, ink, or silhouette art — very different from grayscale, which preserves smooth tonal transitions.\\',
+  },
+  {
+    q: 'What is the difference between grayscale and black &amp; white?',
+    a: 'Grayscale preserves all 256 shades of grey between black and white — it looks like a classic black-and-white photograph, with rich shadow and highlight detail. High-contrast black &amp; white pushes pixels to the extremes (pure black or pure white), eliminating midtones. The result is graphical rather than photographic — like a newspaper line drawing, a silhouette, or bold typographic art. Use grayscale for photography and tonal images; use B&amp;W high-contrast for graphic design, OCR preparation, and artistic effects.\\',
+  },
+  {
+    q: 'How does this help with OCR and document recognition?',
+    a: 'OCR (Optical Character Recognition) software works best on high-contrast images where text is pure black on a pure white background. Coloured paper backgrounds, grey shadows, and uneven scan lighting can confuse OCR algorithms. Converting a scanned document to high-contrast black &amp; white cleans up the background, darkens the text, and produces the ideal binary image for OCR processing. This is especially useful for old scanned documents, photocopies, or images taken with a phone camera.\\',
+  },
+  {
+    q: 'Can I use this to prepare passport-style photo backgrounds for cutout?',
+    a: 'Yes — for digital cutout workflows, converting an image to high-contrast black &amp; white can help isolate subjects against uniform backgrounds. However, for actual passport and ID photo submissions, you must submit the original colour photograph. Use the B&amp;W converter for intermediate creative or technical steps, not for the final submission. For correctly-sized passport photos, use the passport size resizer tool.\\',
+  },
+  {
+    q: 'Is this useful for creating coloring book pages from photos?',
+    a: 'Yes — this is one of the most popular creative uses. Converting a photograph or illustration to high-contrast black &amp; white outlines is the first step in creating a coloring page or line art. The high-contrast conversion preserves the edges and outlines of the subject while eliminating interior colour detail, producing an outline-heavy image that works well as a coloring page. For best results, start with a photo that has clear, defined edges and good lighting.\\',
+  },
+  {
+    q: 'Is this tool free and does it upload my images?',
+    a: 'Completely free with no account required. All conversion happens in your browser using the HTML5 Canvas API — your image is never uploaded to any server. Processing is instant and completely private. You can safely convert personal photos, official documents, and commercial images without any privacy concern.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/convert-image-to-black-and-white#app`,
+      name: 'Convert Image to Black and White Online Free',
+      description: 'Convert any colour image to high-contrast black and white online for free. No upload, 100% private. For graphic art, OCR preparation, silhouettes, coloring pages, and editorial photography.',
+      url: `${siteConfig.domain}/convert-image-to-black-and-white`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Convert Image to Black and White — Free Online"
+  description="Convert any colour image to high-contrast black and white online for free. No upload, 100% private. For graphic art, OCR preparation, silhouettes, coloring pages, and editorial photography."
+  canonical={`${siteConfig.domain}/convert-image-to-black-and-white`}
+  keywords="convert image to black and white, black and white photo converter, black white image online, b&w photo converter, black white filter"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/convert-image-to-black-and-white" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Convert Image to Black &amp; White — Free Online</h1>
+        <p class="tool-desc">Convert any colour image to high-contrast black and white online for free. Pushes pixels toward pure black or pure white for a graphic, high-contrast result. No upload, 100% private.</p>
+      </header>
+
+      <ConvertTool filterMode="bw" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Convert Image to High-Contrast Black &amp; White — Graphic Art, OCR &amp; More</h2>
+        <p>Black and white conversion with high contrast is fundamentally different from grayscale. While grayscale preserves the full tonal range of an image — all 256 shades of grey — high-contrast black and white pushes each pixel toward one of two extremes: pure black or pure white. The result is a graphic, stark image stripped of tonal nuance. Midtones are reduced or eliminated. What remains are the edges, outlines, and bold contrasts that give the image its defining structure.</p>
+        <p>This style of conversion has a long history in printmaking, editorial photography, and graphic design. Newspaper print, woodcut illustrations, linocut art, and screen-printed graphics all rely on the graphic power of pure black on white. High-contrast B&amp;W conversion digitally replicates this aesthetic, allowing you to transform any photograph into a bold graphic element.</p>
+        <p>One of the most practical applications is OCR (Optical Character Recognition) preparation. OCR software — used to extract text from scanned documents, images of printed text, or mobile document scans — works best with pure black text on a pure white background. When you scan a printed document on cream-coloured paper under imperfect lighting, the result is grey text on an off-white, shadow-streaked background. Converting to high-contrast B&amp;W before OCR processing darkens the text to black, whitens the background, and eliminates shadow streaks — giving the OCR engine the ideal binary image for accurate text extraction.</p>
+        <p>In the Indian context, this is directly useful for processing government documents. Applications, affidavits, and certificates scanned from physical documents often suffer from yellowing paper, grey shadows, and uneven print density. A high-contrast B&amp;W conversion can dramatically improve the scannability of these documents for both human readers and automated OCR systems.</p>
+        <p>Silhouette art uses high-contrast B&amp;W as its foundation. A photograph converted to pure black and white — where the subject is dark and the background is white — becomes an immediate silhouette template for graphic design, merchandise printing, and digital art. T-shirt graphics, sticker designs, and icon art frequently start as photos converted to high-contrast B&amp;W and then refined in vector tools.</p>
+        <p>Coloring book pages and printable line art are another popular use. A photograph of a pet, a landscape, or a famous monument — converted to high-contrast B&amp;W — produces an outline-dominated image that can be printed and coloured by hand. Children's coloring books, adult colouring pages, and educational printables are all created from this technique. The high-contrast conversion preserves the edges and outlines of the subject while stripping away the interior colour detail that would make the image too complex to colour.</p>
+        <p>For logo creation from photos, high-contrast B&amp;W is the essential first step. Brand logos require strict colour control — they must look good in both colour and black-and-white contexts (business cards, letterheads, rubber stamps). Starting with a high-contrast B&amp;W conversion of a photo-based graphic ensures the logo retains its impact when printed without colour.</p>
+
+        <h3>Grayscale vs. High-Contrast B&amp;W — When to Use Each</h3>
+        <p><strong>Use grayscale</strong> (available via the <a href="/grayscale-image">grayscale converter</a>) when you want to preserve the tonal richness of the original image. Photography, document scans with photographs, academic journal figures, and artistic black-and-white portraits all benefit from grayscale's smooth tonal transitions.</p>
+        <p><strong>Use high-contrast B&amp;W</strong> (this tool) when you want a graphic, editorial, or binary result. OCR preparation, silhouette art, coloring pages, logo creation, newspaper-style editorial images, and document cleanup all benefit from the stark contrast of pure black on pure white.</p>
+
+        <h3>How to Convert to Black &amp; White</h3>
+        <ol>
+          <li><strong>Upload your image.</strong> Click "Choose File" or drag and drop any JPEG, PNG, or WebP image.</li>
+          <li><strong>Preview the result.</strong> The high-contrast B&amp;W preview appears instantly. Images with strong existing contrast (clear subjects, good lighting) convert most cleanly.</li>
+          <li><strong>Choose output format.</strong> PNG is recommended for high-contrast B&amp;W images (lossless, preserves sharp edges). JPEG works too but may introduce compression artefacts at hard black-white edges.</li>
+          <li><strong>Download.</strong> Click "Download" to save your black and white image. All processing is done locally — no upload required.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/grayscale-image" class="related-card">
+            <span class="related-name">Grayscale Image</span>
+            <span class="related-desc">Smooth grey tones, full range</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Reduce JPEG/PNG file size</span>
+          </a>
+          <a href="/jpg-to-png" class="related-card">
+            <span class="related-name">JPG to PNG</span>
+            <span class="related-desc">Lossless conversion for graphics</span>
+          </a>
+          <a href="/png-to-jpg" class="related-card">
+            <span class="related-name">PNG to JPG</span>
+            <span class="related-desc">Convert PNG to JPEG</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

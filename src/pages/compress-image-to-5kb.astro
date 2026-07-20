@@ -1,0 +1,204 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Which NTA exams require a signature under 5 KB?',
+    a: 'NTA (National Testing Agency) requires signatures under 5 KB in JPEG format for NEET UG, JEE Main, CUET UG, and CUET PG applications. The photo upload limit is usually 10–20 KB, but the signature limit is consistently 5 KB across most NTA forms. Always check the current information bulletin as size limits are occasionally revised.',
+  },
+  {
+    q: 'How do I compress a signature image to 5 KB for NTA?',
+    a: 'First resize your signature to 160×60 pixels (NTA\'s required dimensions). Then upload it to this tool with the target pre-set to 5 KB and output format set to JPEG. The compressor finds the highest quality that fits under 5 KB automatically. Starting small (160×60 px) means you need very little compression to reach 5 KB, so the result looks sharp.',
+  },
+  {
+    q: 'Can I compress a photo (not just a signature) to 5 KB?',
+    a: 'Yes, but 5 KB is very small for a full photograph. A 200×230 px passport-size JPEG at 5 KB will look heavily compressed. If your portal requires a photo under 5 KB, first resize the image to the smallest acceptable pixel dimensions, then compress here. For signatures (which have much simpler visual content) 5 KB is entirely adequate.',
+  },
+  {
+    q: 'Why does NTA set such a small file size limit for signatures?',
+    a: 'NTA processes millions of applications simultaneously. Limiting signature uploads to 5 KB reduces server storage requirements and speeds up form processing at peak submission times. NEET alone receives over 2 million applications — at 5 KB per signature, total storage is around 10 GB versus 500 GB at a more generous 250 KB limit.',
+  },
+  {
+    q: 'What format should the 5 KB image be in for NTA portals?',
+    a: 'NTA requires JPEG format for both the photo and signature. PNG and WebP files will be rejected at upload. This tool defaults to JPEG output. If your original signature is a PNG (common for scanned documents with white backgrounds), uploading it here will convert it to JPEG and compress to under 5 KB in one step.',
+  },
+  {
+    q: 'Is this tool safe to use for my NTA signature upload?',
+    a: 'Yes. The compression happens entirely in your browser using the Canvas API — your signature image is never sent to any server. Nothing is stored, logged, or transmitted. You can use this tool confidently for exam document preparation. After compression, download and verify the file size before uploading to the NTA portal.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-5kb#app`,
+      name: 'Compress Image to 5 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 5 KB online. Free, no upload, 100% private. Perfect for NTA signature uploads for NEET, JEE Main, and CUET.',
+      url: `${siteConfig.domain}/compress-image-to-5kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 5 KB — Free, No Upload"
+  description="Free tool to compress any image to under 5 KB. 100% private, no upload. For NTA signature uploads — NEET, JEE Main, CUET. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-5kb`}
+  keywords="compress image to 5kb, reduce image size to 5kb, nta signature 5kb, compress photo to 5kb, 5kb image compressor"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-5kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 5 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo or signature to under 5 KB. 100% private, no upload. Perfect for NTA exam signature uploads — NEET, JEE Main, and CUET portals.</p>
+      </header>
+
+      <CompressTool targetKB={5} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 5 KB — For NTA Exam Signature Uploads</h2>
+        <p>5 KB is the signature upload limit enforced by the National Testing Agency (NTA) across its major national examinations — NEET UG (medical entrance), JEE Main (engineering entrance), CUET UG, and CUET PG. When you fill out an NTA application form, the signature field will reject any file larger than 5 KB. This is among the smallest file size requirements of any Indian government portal, and it catches many applicants off guard.</p>
+        <p>This free tool targets exactly 5 KB by automatically finding the highest JPEG quality that keeps your image under the limit. Everything runs in your browser — your signature is never uploaded to any server, making it completely private and instant.</p>
+
+        <h3>How to Compress a Signature to 5 KB for NTA</h3>
+        <ol>
+          <li>Sign on white paper with a dark (black or blue) pen. Photograph or scan the signature on a clean white background.</li>
+          <li>Crop the image tightly around the signature only — remove excess white space.</li>
+          <li><strong>Resize first:</strong> NTA requires the signature to be 160×60 pixels. Use the <a href="/resize-image">Resize Image tool</a> to set exact dimensions before compressing. This single step dramatically improves quality at 5 KB.</li>
+          <li>Upload your 160×60 px signature image here. The target is pre-set to 5 KB.</li>
+          <li>Ensure output format is JPEG — NTA portals require JPEG signatures.</li>
+          <li>Click "Compress" and download the result. Verify the file size before uploading to the NTA form.</li>
+        </ol>
+
+        <h3>Why 5 KB Is So Small — and How to Get the Best Quality</h3>
+        <p>NTA handles over 2 million NEET applications and nearly 1.2 million JEE Main applications each cycle. Limiting each signature to 5 KB reduces server storage by orders of magnitude compared to a generous limit. At 5 KB, a 160×60 pixel JPEG looks perfectly acceptable — a signature has simpler visual content than a photograph, so the compression works in your favour.</p>
+        <p>The most common mistake is trying to compress a large smartphone photograph directly to 5 KB. A 4000×3000 px image squeezed to 5 KB will be unreadable. Always resize to 160×60 px first. At that resolution, reaching 5 KB requires only moderate compression — your signature remains clean and legible.</p>
+        <p>For NTA photo uploads (which use a different limit, usually 10–20 KB depending on the exam), see <a href="/compress-image-to-10kb">Compress Image to 10 KB</a> or <a href="/compress-image-to-20kb">Compress Image to 20 KB</a>. For SSC-specific signature sizing, use the <a href="/signature-resizer-for-ssc">SSC Signature Resizer</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-10kb" class="related-card">
+            <span class="related-name">Compress to 10 KB</span>
+            <span class="related-desc">NTA photo, state exam portals</span>
+          </a>
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC CGL, IBPS, RRB NTPC</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/signature-resizer-for-ssc" class="related-card">
+            <span class="related-name">SSC Signature Resize</span>
+            <span class="related-desc">276×118 px, under 12 KB</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

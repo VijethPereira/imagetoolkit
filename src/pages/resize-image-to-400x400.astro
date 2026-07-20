@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the recommended profile picture size for WhatsApp?',
+    a: 'WhatsApp recommends uploading profile pictures at 400×400 pixels. This gives a sharp display when contacts tap to view the full-size photo, while keeping the file size manageable (typically 30–60 KB as JPEG). WhatsApp displays the DP in a circular crop at much smaller sizes (around 50–80 px) in chat lists, but the full 400 px image is served when contacts view your profile.',
+  },
+  {
+    q: 'What size does Discord use for profile photos?',
+    a: 'Discord displays profile pictures at 32 px in chat and up to 128 px in the user panel, but stores and serves at up to 1024 px. Uploading at 400×400 gives Discord enough resolution to display sharply on all device types and screen densities without the overhead of a very large file. For Discord servers where your avatar appears frequently, 400 px provides a good quality-to-size balance.',
+  },
+  {
+    q: 'Does Telegram have a required profile photo size?',
+    a: 'Telegram displays profile photos in circles at various sizes — tiny in chat lists, larger on profiles. Like WhatsApp and Discord, Telegram stores a higher-resolution version for full-size viewing. A 400×400 px image works well: it is large enough to look good when contacts tap to view, and small enough to upload quickly. Telegram accepts images up to 10 MB, so file size is rarely the constraint.',
+  },
+  {
+    q: 'What is the difference between display size and storage size for messaging apps?',
+    a: 'Messaging apps use two separate sizes: the display size (how big the avatar appears in the app UI — often 40–80 px) and the storage size (the full-resolution image stored on the platform\'s servers — often 400–1024 px). When a contact taps your avatar to view it full size, they see the stored resolution. Uploading at 400×400 ensures the full-size view looks sharp, even though the in-chat thumbnail is much smaller.',
+  },
+  {
+    q: 'Will a 400×400 image look stretched if I upload a non-square photo?',
+    a: 'Yes — if your photo is portrait or landscape orientation and you resize to 400×400 without cropping first, it will be stretched. All messaging apps crop profile pictures into circles anyway, so stretching is doubly noticeable. For best results, crop your photo to a 1:1 square centred on your face before resizing to 400×400.',
+  },
+  {
+    q: 'Is this tool free and does it upload my image anywhere?',
+    a: 'Completely free with no account needed. All resizing happens locally in your browser using the HTML5 Canvas API — your image is never sent to any server. You can safely resize personal photos for WhatsApp, Telegram, Discord, or any other platform without privacy concerns.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-400x400#app`,
+      name: 'Resize Image to 400×400 px Free Online',
+      description: 'Resize any image to 400×400 pixels free online. No upload, 100% private. For WhatsApp DP, Discord profile photo, Telegram profile picture, and messaging app avatars.',
+      url: `${siteConfig.domain}/resize-image-to-400x400`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 400×400 px — Free Online"
+  description="Free online tool to resize any image to 400×400 pixels. No upload, 100% private. For WhatsApp DP, Discord profile photo, Telegram profile picture, and messaging app avatars."
+  canonical={`${siteConfig.domain}/resize-image-to-400x400`}
+  keywords="resize image to 400x400, whatsapp dp 400x400, discord profile photo size, profile photo 400x400"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-400x400" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 400×400 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 400×400 pixels. No upload, 100% private. For WhatsApp DP, Discord, Telegram profile photos, and messaging app avatars.</p>
+      </header>
+
+      <ResizeTool width={400} height={400} lockAspect={false} outputFormat="jpeg" presetLabel="400×400 px" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 400×400 Pixels — WhatsApp DP, Discord &amp; Messaging Apps</h2>
+        <p>WhatsApp, the world's most-used messaging app, recommends profile pictures at 400×400 pixels. This size strikes the right balance: large enough to look sharp when a contact taps to view the full-size photo, but small enough that the file loads quickly even on slower connections. WhatsApp displays the DP as a small circle in chat lists — typically 40–60 px — but serves the full stored image when contacts open your profile. Uploading at 400×400 gives both views the best possible quality.</p>
+        <p>Discord operates on similar principles. Profile pictures are displayed at 32 px in chat, 40 px in server member lists, and up to 128 px in the user information panel. Discord stores profile pictures at up to 1024 px and serves the appropriate size based on context. Uploading at 400×400 ensures you look sharp at all display sizes Discord uses, without the overhead of uploading a much larger file that Discord would scale down anyway.</p>
+        <p>Telegram profile photos follow the same pattern. Telegram shows your photo as a small circle in group chats and larger on your profile and in contact lists. The 400×400 px source covers all these display contexts cleanly. Telegram accepts images up to 10 MB, so file size constraints are rarely a concern — the 400 px limit here is about choosing the right resolution, not squeezing under a file size cap.</p>
+        <p>Other platforms that work well with 400×400 px profile photos: Signal (same display logic as WhatsApp), Slack (displays avatars at up to 192 px but stores at higher resolution), Microsoft Teams (displays at 192 px in most views), and Zoom (profile picture shown at 96–192 px). In all cases, a 400×400 source provides more than enough resolution for every display context.</p>
+
+        <h3>Understanding Display Size vs. Storage Size</h3>
+        <p>A common source of confusion: the size you see an avatar displayed in the app is not the size the platform stores. Messaging apps use two different sizes:</p>
+        <p><strong>Display size</strong> is how large the avatar appears in the UI — in chat lists and conversation threads, this is typically 40–80 px. The avatar appears tiny because screen real estate is limited and the focus should be on the conversation text, not the photos.</p>
+        <p><strong>Storage size</strong> is the full-resolution image the platform keeps on its servers. When a contact taps or clicks your avatar to view it full size, they see this larger version. For WhatsApp, this can be up to 640 px wide; for Discord, up to 1024 px. Uploading at 400×400 ensures the full-size view looks excellent.</p>
+        <p>This is why profile photos can look sharp when tapped but blurry if you uploaded a small image. If you uploaded a 100×100 image, the platform might display it fine at 50 px in chat, but when someone taps to view full-size at 400 px, it will appear blurry and pixelated — because you only gave it 100 pixels to work with.</p>
+
+        <h3>How to Resize to 400×400 px</h3>
+        <ol>
+          <li><strong>Crop to square first.</strong> Since messaging apps display profile photos as circles, crop your photo to a 1:1 square with your face or subject centred. This prevents stretching and ensures the important part of the image is visible.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop. The dimensions are pre-set to 400×400 px.</li>
+          <li><strong>Select output format.</strong> JPEG for photos (typically 30–60 KB at 400×400), PNG for logos or artwork requiring sharp edges.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 400×400 px image is ready to upload as your WhatsApp DP, Discord profile picture, or Telegram photo.</li>
+        </ol>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-600x600" class="related-card">
+            <span class="related-name">Resize to 600×600</span>
+            <span class="related-desc">Social media &amp; WhatsApp DP</span>
+          </a>
+          <a href="/resize-image-to-200x200" class="related-card">
+            <span class="related-name">Resize to 200×200</span>
+            <span class="related-desc">Avatars &amp; thumbnails</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Reduce file size for upload</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

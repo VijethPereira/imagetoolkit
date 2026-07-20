@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Do international university portals like CommonApp accept photos up to 500 KB?',
+    a: 'CommonApp (used for US university applications) does not typically require a photo upload. However, individual university supplemental portals and international university application systems (UK UCAS, Australian UAC, Canadian OUAC) often require passport-style photos in the 200–500 KB range for student ID creation and visa documentation. 500 KB is safe for almost all such portals.',
+  },
+  {
+    q: 'Do IIT and IIM portals use a 500 KB photo limit?',
+    a: 'IIT admissions via JoSAA counselling use 75 KB, while GATE-based IIT PG admissions and IIM admission portals for CAT/XAT/GMAT processes may use higher limits of 100–500 KB depending on the institution and year. Specifically, IIM online application portals (for MBA admissions) have used 500 KB in some cycles. Always check the specific portal\'s current requirements.',
+  },
+  {
+    q: 'Can I use 500 KB for email newsletter inline images?',
+    a: 'Email clients display inline images at screen size, not print size. A 500 KB inline image in an HTML email can cause spam filter issues (larger HTML emails are more likely to be flagged) and loads slowly for recipients on mobile data. For email newsletters, target 100–300 KB per image. 500 KB is more appropriate for web pages and portals than for email.',
+  },
+  {
+    q: 'What resolution gives the best quality at 500 KB?',
+    a: 'At 500 KB, you have a large quality budget. A 2000×2000 px JPEG at 500 KB uses approximately quality 65–75%, which looks excellent on screen. A 1200×1600 px portrait at 500 KB would be at quality 80–88% — approaching the maximum useful JPEG quality. For most professional use cases, 1200×1600 px at 500 KB is more than enough.',
+  },
+  {
+    q: 'Is 500 KB appropriate for e-commerce main product images?',
+    a: 'Yes. Amazon and Flipkart accept main product images up to several MB, but the practical sweet spot for a main product image is 300–600 KB. At 500 KB and 2000×2000 px (meeting Amazon\'s zoom requirement), your product image will have sharp detail in the zoomed view while remaining within a reasonable file size. Variation images and secondary shots should be smaller (200–300 KB).',
+  },
+  {
+    q: 'Does this tool handle large input files like 10 MB DSLR photos?',
+    a: 'Yes. The tool accepts images of any input size — DSLR RAW exports, scanned documents at high DPI, and smartphone photos can all be uploaded. The Canvas API compresses them to 500 KB in your browser. Note that very large images (over 30 MB) may take a few seconds longer to process depending on your device speed.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-500kb#app`,
+      name: 'Compress Image to 500 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 500 KB online. Free, no upload, 100% private. For university application portals, e-commerce main images, and high-quality web photos.',
+      url: `${siteConfig.domain}/compress-image-to-500kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 500 KB — Free, No Upload"
+  description="Free tool to compress any image to under 500 KB. 100% private, no upload. For university portals, IIM/IIT applications, e-commerce main images, and professional photos. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-500kb`}
+  keywords="compress image to 500kb, reduce to 500kb, compress photo 500kb, university portal photo, college application photo"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-500kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 500 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 500 KB. 100% private, no upload. For university application portals, IIM and IIT admissions, e-commerce main images, and high-quality professional photos.</p>
+      </header>
+
+      <CompressTool targetKB={500} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 500 KB — University Portals &amp; High-Quality Web Images</h2>
+        <p>500 KB is the upper boundary for images that need to be high quality while remaining web-practical. International university application portals — particularly supplemental portals attached to UK, Australian, and Canadian university systems — commonly accept photos and documents up to 500 KB. In India, IIM (Indian Institute of Management) online application portals for MBA admissions (based on CAT, XAT, or GMAT scores) have used limits of 200–500 KB for photographs in various cycles. Graduate admissions portals at IITs for GATE-qualified candidates also commonly use this range.</p>
+        <p>Beyond education portals, 500 KB represents the practical "maximum web quality" point — a 2000×2000 px JPEG at 500 KB looks excellent at virtually any web display size. This makes it appropriate for e-commerce main product photos, professional portfolio images, real estate property photos, and any context where you want near-original quality while still meeting platform upload restrictions.</p>
+        <p>This compressor runs in your browser with no uploads, no account, and no server processing. Your files stay completely private.</p>
+
+        <h3>When to Use 500 KB vs Larger Sizes</h3>
+        <p>500 KB is the practical ceiling for web use. Above 500 KB per image, you enter a range where the quality improvement becomes imperceptible on screens (because screens have finite pixel density) while the file size continues to grow. The exception is when images need to be downloaded and printed — print use may genuinely require 1 MB or more per image for sufficient DPI.</p>
+        <p>For web use, 500 KB at 2000×2000 px gives you a JPEG quality around 65–70%, which is enough for excellent screen quality. At 1200×1600 px and 500 KB, quality rises to around 82–88% — visually indistinguishable from lossless for typical viewing distances.</p>
+
+        <h3>How to Use This Tool for University Application Photos</h3>
+        <ol>
+          <li>Get a recent passport-style or professional photograph. Many universities require a formal background and recent date (within 6 months).</li>
+          <li>Resize to the dimensions your specific university portal specifies — commonly 400×500 px to 1200×1600 px. Use the <a href="/resize-image">Resize Image tool</a>.</li>
+          <li>Upload here. Target is pre-set to 500 KB. Select JPEG output.</li>
+          <li>Download and upload to the university application portal.</li>
+        </ol>
+        <p>For smaller limits commonly used at exam portals, see <a href="/compress-image-to-400kb">Compress to 400 KB</a>. For very large image needs (e.g., high-quality print previews), see <a href="/compress-image-to-1mb">Compress to 1 MB</a>. For JPEG format-specific compression, use <a href="/compress-jpg">Compress JPG</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-400kb" class="related-card">
+            <span class="related-name">Compress to 400 KB</span>
+            <span class="related-desc">LinkedIn &amp; HR portals</span>
+          </a>
+          <a href="/compress-image-to-1mb" class="related-card">
+            <span class="related-name">Compress to 1 MB</span>
+            <span class="related-desc">CMS &amp; website builder uploads</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/compress-jpg" class="related-card">
+            <span class="related-name">Compress JPG</span>
+            <span class="related-desc">JPEG quality slider control</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

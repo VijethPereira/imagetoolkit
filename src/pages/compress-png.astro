@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Does compressing a PNG to PNG actually reduce the file size?',
+    a: 'Yes, but with caveats. PNG uses lossless deflate compression. Re-encoding a PNG through the Canvas API strips embedded metadata (EXIF data, colour profiles, comments) and re-applies compression, which often reduces file size by 10–30% for PNGs that were saved with suboptimal compression settings. However, if your PNG was already well-optimised, the reduction may be minimal. For significant size reduction, converting to WebP or JPEG is far more effective.\\',
+  },
+  {
+    q: 'When should I use PNG instead of JPEG or WebP?',
+    a: 'PNG is best for: screenshots and UI captures (sharp edges around text and icons stay crisp), logos and graphics with text, images that require a transparent background, and illustrations with flat colours or geometric shapes. For photographs, JPEG or WebP produces far smaller files at equivalent quality. A typical photograph saved as PNG is 3–5x larger than the same image as JPEG at quality 85%.\\',
+  },
+  {
+    q: 'Will compressing PNG affect image quality?',
+    a: 'This tool re-encodes to PNG, which is lossless — the visual content of the image is preserved exactly. You will not see any quality degradation, blurring, or color shifting. The only changes are metadata removal and potentially improved deflate compression. If you need lossy compression (smaller file sizes with some quality trade-off), convert to JPEG using PNG to JPG or to WebP using PNG to WebP.\\',
+  },
+  {
+    q: 'Why is my PNG file still large after compression?',
+    a: 'PNG compression is inherently limited for photographs and complex images because lossless compression cannot discard visual information. A 1200×800 photograph saved as PNG will typically be 1–4 MB regardless of compression settings, because the image data itself is that large. For photographs, use JPEG or WebP. PNG compression is most effective on images with large uniform colour areas (logos, illustrations, diagrams) where the deflate algorithm can find many repeated patterns.\\',
+  },
+  {
+    q: 'Does converting PNG to WebP save more space than PNG to JPEG?',
+    a: 'For photographs, JPEG and WebP produce similar sizes (WebP typically 25–34% smaller than equivalent JPEG). For graphics with transparency or sharp edges, WebP significantly outperforms JPEG because WebP supports both lossless and lossy modes with better efficiency than PNG in lossy mode. For content with transparency, WebP lossless or PNG are the only options — JPEG does not support transparency.\\',
+  },
+  {
+    q: 'Can I compress a transparent PNG without losing the transparency?',
+    a: 'Yes — re-encoding to PNG preserves the alpha (transparency) channel. If you convert a transparent PNG to JPEG, the transparency is lost and replaced with a white background. To keep transparency while reducing file size, compress to PNG here (limited reduction) or convert to WebP using PNG to WebP (WebP supports transparency and is usually 20–30% smaller than PNG for the same image).\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-png#app`,
+      name: 'Compress PNG Online Free',
+      description: 'Compress PNG images online. Free, no upload, 100% private. Reduce PNG file size by stripping metadata and re-encoding. Lossless — no quality loss.',
+      url: `${siteConfig.domain}/compress-png`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress PNG Online Free — No Upload, No Quality Loss"
+  description="Free tool to compress PNG images online. Strips metadata, re-encodes losslessly. No upload, 100% private. Reduce PNG file size for logos, screenshots, and graphics."
+  canonical={`${siteConfig.domain}/compress-png`}
+  keywords="compress png, compress png online, reduce png size, png compressor, optimize png file size, png image compress"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-png" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress PNG Online</h1>
+        <p class="tool-desc">Free tool to reduce PNG file size. Re-encodes losslessly — no quality loss, transparency preserved. No upload, 100% private. For logos, screenshots, graphics, and web images.</p>
+      </header>
+
+      <CompressTool outputFormat="png" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>How PNG Compression Works — and Why It's Different From JPEG</h2>
+        <p>PNG (Portable Network Graphics) uses lossless compression based on the deflate algorithm — the same algorithm used in ZIP files. Unlike JPEG, which discards visual information to achieve smaller file sizes, PNG compression cannot lose any image data. Every pixel in the output PNG is identical to the input. This makes PNG compression fundamentally different from JPEG compression in both method and outcome.</p>
+        <p>When you compress a PNG here, the tool strips embedded metadata (EXIF camera data, colour profiles, software comments, GPS data) and re-encodes the image data using the Canvas API's PNG encoder. Metadata can account for 10–50 KB of a PNG file. For images already saved without metadata and with good deflate settings, the reduction will be minimal. For PNGs exported from design tools like Figma, Sketch, or Adobe XD — which sometimes embed detailed layer metadata — the reduction can be 15–30%.</p>
+        <p>For dramatically smaller PNG-like output, the best approach is format conversion rather than PNG-to-PNG compression. Converting PNG to WebP via <a href="/png-to-webp">PNG to WebP</a> typically reduces file size by 25–50% with no visible quality loss. Converting to JPEG via <a href="/png-to-jpg">PNG to JPG</a> reduces it by 60–80% (with some quality loss, and without transparency support).</p>
+
+        <h3>When PNG Is the Right Format</h3>
+        <p>Despite being larger than JPEG at equivalent visual quality for photographs, PNG is the correct choice for several common image types:</p>
+        <ol>
+          <li><strong>Screenshots and UI captures:</strong> PNG preserves the sharp edges of UI elements, text, icons, and borders. JPEG introduces noticeable blurring and colour fringing around these edges (called JPEG ringing artifacts). Screenshot-sharing tools like Lightshot, Snagit, and macOS/Windows default to PNG for this reason.</li>
+          <li><strong>Logos and brand graphics:</strong> Logos often have flat colours, thin lines, and text that look poor in JPEG. PNG reproduces these cleanly. The transparency support also allows logos to work on any background colour.</li>
+          <li><strong>Images requiring a transparent background:</strong> JPEG does not support transparency. Any image that needs a transparent or cut-out background must be saved as PNG or WebP.</li>
+          <li><strong>Illustrations and diagrams:</strong> Flat-colour artwork with sharp edges compresses well in PNG because the deflate algorithm finds many repeated colour sequences. These images may actually be smaller as PNG than as JPEG at equivalent quality.</li>
+        </ol>
+
+        <h3>PNG vs WebP vs JPEG — File Size Comparison</h3>
+        <p>For a typical 1200×800 px photograph: PNG is approximately 800 KB–2 MB (lossless, all quality), JPEG at quality 85 is approximately 150–300 KB, WebP at quality 85 is approximately 100–200 KB. For the same image as a logo or screenshot with flat colours: PNG might be 50–100 KB, WebP lossless is 40–80 KB, JPEG at quality 85 might be 80–150 KB with visible artifacts on edges.</p>
+        <p>For general PNG compression tips — especially for reducing PNG output from this tool further — consider using <a href="/compress-image">Compress Image</a> for cross-format compression or <a href="/compress-jpg">Compress JPG</a> if you're working with photographs that don't require transparency.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/png-to-webp" class="related-card">
+            <span class="related-name">PNG to WebP</span>
+            <span class="related-desc">25–50% smaller, with transparency</span>
+          </a>
+          <a href="/png-to-jpg" class="related-card">
+            <span class="related-name">PNG to JPG</span>
+            <span class="related-desc">Smallest file for photos</span>
+          </a>
+          <a href="/compress-jpg" class="related-card">
+            <span class="related-name">Compress JPG</span>
+            <span class="related-desc">JPEG quality slider control</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

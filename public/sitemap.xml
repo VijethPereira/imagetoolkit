@@ -17,8 +17,56 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://snapimagetools.com/compress-jpg</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-png</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-5kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-10kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-15kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://snapimagetools.com/compress-image-to-20kb</loc>
     <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-25kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-30kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-40kb</loc>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -29,14 +77,56 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://snapimagetools.com/compress-image-to-75kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://snapimagetools.com/compress-image-to-100kb</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://snapimagetools.com/compress-image-to-150kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://snapimagetools.com/compress-image-to-200kb</loc>
     <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-300kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-400kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-500kb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-1mb</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/compress-image-to-2mb</loc>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -61,14 +151,70 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://snapimagetools.com/resize-image-to-600x600</loc>
-    <lastmod>2026-07-17</lastmod>
+    <loc>https://snapimagetools.com/resize-image-to-100x100</loc>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://snapimagetools.com/resize-image-to-200x200</loc>
     <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-300x300</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-400x400</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-600x600</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-1080x1080</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-1280x720</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/resize-image-to-1920x1080</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rotate & filter tools -->
+  <url>
+    <loc>https://snapimagetools.com/rotate-image</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/grayscale-image</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snapimagetools.com/convert-image-to-black-and-white</loc>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

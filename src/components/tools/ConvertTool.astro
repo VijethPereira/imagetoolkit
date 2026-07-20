@@ -1,10 +1,11 @@
 ---
 interface Props {
-  from?: string;    // source format label e.g. 'JPG'
-  to?: string;      // target format: 'jpeg' | 'png' | 'webp'
-  quality?: number; // default 0.92
+  from?: string;           // source format label e.g. 'JPG'
+  to?: string;             // target format: 'jpeg' | 'png' | 'webp'
+  quality?: number;        // default 0.92
+  filterMode?: 'grayscale' | 'bw';  // canvas filter applied before encoding
 }
-const { from, to, quality = 0.92 } = Astro.props;
+const { from, to, quality = 0.92, filterMode } = Astro.props;
 ---
 
 <section
@@ -12,6 +13,7 @@ const { from, to, quality = 0.92 } = Astro.props;
   id="convert-tool"
   data-to={to ?? ''}
   data-quality={quality.toString()}
+  data-filter-mode={filterMode ?? ''}
 >
   <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Upload image">
     <div class="drop-inner">
@@ -59,7 +61,7 @@ const { from, to, quality = 0.92 } = Astro.props;
     </div>
 
     <button class="btn-primary" id="convert-btn">
-      {to ? `Convert to ${to.toUpperCase()}` : 'Convert Image'}
+      {filterMode === 'grayscale' ? 'Convert to Grayscale' : filterMode === 'bw' ? 'Convert to Black & White' : to ? `Convert to ${to.toUpperCase()}` : 'Convert Image'}
     </button>
   </div>
 
@@ -106,7 +108,8 @@ const { from, to, quality = 0.92 } = Astro.props;
   const previewImg = document.getElementById('preview-img') as HTMLImageElement;
   const dropInner = dropZone.querySelector('.drop-inner') as HTMLElement;
 
-  const presetTo = tool.dataset.to || null;
+  const presetTo    = tool.dataset.to || null;
+  const filterMode  = tool.dataset.filterMode || '';
   let currentFile: File | null = null;
   let previewUrl: string | null = null;
 
@@ -174,7 +177,10 @@ const { from, to, quality = 0.92 } = Astro.props;
       canvas.height = img.naturalHeight;
       const ctx = canvas.getContext('2d')!;
       if (fmt === 'jpeg') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+      if (filterMode === 'grayscale') ctx.filter = 'grayscale(1)';
+      if (filterMode === 'bw')        ctx.filter = 'grayscale(1) contrast(500%)';
       ctx.drawImage(img, 0, 0);
+      ctx.filter = 'none';
 
       const blob = await new Promise<Blob>((res, rej) => {
         canvas.toBlob((b) => b ? res(b) : rej(new Error('failed')), mime, quality);

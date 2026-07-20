@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why do e-commerce platforms recommend images under 300 KB?',
+    a: 'E-commerce platforms like Amazon Seller Central and Flipkart Seller Hub accept large images (up to 10 MB in some cases), but 300 KB per secondary or variation image is the recommended upper bound for fast gallery loading. Product listing pages display multiple images in carousels — if each image is 2–3 MB, the page becomes slow on mobile networks. At 300 KB per image, a 10-image product gallery loads comfortably on 4G.',
+  },
+  {
+    q: 'What is the ideal image size for WordPress blog posts?',
+    a: 'For WordPress, Google recommends serving images under 200 KB for body images and under 500 KB for hero/banner images. 300 KB is a practical target for featured images — it gives excellent quality at full desktop width while remaining fast on mobile. At 1200×800 px (a typical featured image ratio), 300 KB JPEG uses a quality setting around 80–85%, which looks indistinguishable from the original on screen.',
+  },
+  {
+    q: 'How does compressing to 300 KB affect web page speed?',
+    a: 'Image weight is the single largest contributor to web page load time for most content sites. A page with five 1 MB images takes much longer to load than a page with five 300 KB images. Google\'s Core Web Vitals — particularly LCP (Largest Contentful Paint) — are directly influenced by image size. Reducing a 1.5 MB featured image to 300 KB can improve LCP by 1–2 seconds on mobile.',
+  },
+  {
+    q: 'Can I compress product images to 300 KB for social media?',
+    a: 'Yes — 300 KB is a good target for social media content images. Facebook, Instagram, and Twitter all compress images on upload, but feeding them a pre-optimised 300 KB source gives you more control over the output quality. At 1080×1080 px (square post format) or 1200×628 px (link preview), 300 KB provides excellent quality for social platforms.',
+  },
+  {
+    q: 'Does this tool work with large e-commerce product photos?',
+    a: 'Yes. You can upload product photos of any size — 5 MB, 20 MB, or larger — and the tool will compress them to under 300 KB. The Canvas API processes the image locally in your browser without size restrictions. For e-commerce product photos, consider also using the Resize Image tool to set appropriate pixel dimensions (at least 1000×1000 px for Amazon main images) before compressing.',
+  },
+  {
+    q: 'What format should product images be in for Amazon and Flipkart?',
+    a: 'Amazon requires the main image to be JPEG, TIFF, or PNG format with a white background. Flipkart also prefers JPEG for product images. For secondary images and variation shots, JPEG at under 300 KB is the practical standard. This tool outputs JPEG by default, which is compatible with both marketplaces.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-300kb#app`,
+      name: 'Compress Image to 300 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 300 KB online. Free, no upload, 100% private. For e-commerce product images, blog photos, and social media content.',
+      url: `${siteConfig.domain}/compress-image-to-300kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 300 KB — Free, No Upload"
+  description="Free tool to compress any image to under 300 KB. 100% private, no upload. For e-commerce product images, blog featured photos, and social media content. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-300kb`}
+  keywords="compress image to 300kb, reduce to 300kb, compress product image 300kb, blog image compress, compress photo 300kb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-300kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 300 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 300 KB. 100% private, no upload. Ideal for e-commerce product galleries, WordPress blog images, and social media content optimisation.</p>
+      </header>
+
+      <CompressTool targetKB={300} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 300 KB — E-commerce, Blogs &amp; Social Media</h2>
+        <p>300 KB is widely recognised as the practical upper boundary for web-optimised images. It represents the balance between visual quality — good enough for full-screen display on desktop and retina mobile screens — and loading speed. Images larger than 300 KB begin to noticeably affect page load times, particularly on mobile connections where 80% of Indian internet users browse. Images smaller than 100 KB at full display resolution start to show visible compression artifacts.</p>
+        <p>E-commerce platforms sit at the center of this. Amazon Seller Central recommends product images of at least 1000×1000 px on white background for zoom functionality, but secondary gallery images and variation shots work well at 300 KB. Flipkart, Myntra, Nykaa, and Meesho seller portals similarly benefit from 300 KB secondary images that load quickly in product carousels.</p>
+        <p>Blog and content platforms follow the same logic. WordPress developers and site speed consultants routinely target 200–300 KB for featured images, knowing this range passes Google PageSpeed Insights without visible quality loss at typical content widths of 1200 px.</p>
+
+        <h3>Why 300 KB Is the Web Image Standard</h3>
+        <p>Web performance research consistently shows that image loading time has a direct impact on bounce rate and conversion. A 1-second delay in page load time can reduce mobile conversions by up to 20%. The math is straightforward: a 300 KB image loads 3x faster than a 900 KB image on the same connection. For a product gallery with 8 images, the difference between 300 KB/image (2.4 MB total) and 1 MB/image (8 MB total) is the difference between loading in 1 second versus 3–4 seconds on a typical 4G connection.</p>
+        <p>Google's Core Web Vitals directly penalise slow LCP (Largest Contentful Paint). If your page's largest visible element at load time is a hero image, keeping it under 300 KB is one of the most effective optimisations you can make. Sites with good Core Web Vitals scores rank higher in Google search results, making 300 KB optimisation a direct SEO strategy.</p>
+
+        <h3>How to Compress Images to 300 KB for E-commerce</h3>
+        <ol>
+          <li>For product photos, ensure the main image is on a white background and dimensions are at least 1000×1000 px (Amazon minimum for zoom).</li>
+          <li>Upload your product photo here. Target is pre-set to 300 KB.</li>
+          <li>Select JPEG as output format for maximum compatibility.</li>
+          <li>Download the optimised image and verify dimensions and file size.</li>
+          <li>For WebP output (better compression, ~25% smaller), use <a href="/compress-jpg">Compress JPG</a> first, then convert to <a href="/jpg-to-webp">JPG to WebP</a> if your platform supports WebP.</li>
+        </ol>
+        <p>For even smaller file sizes, try <a href="/compress-image-to-200kb">Compress to 200 KB</a>. For larger files where quality is paramount, try <a href="/compress-image-to-500kb">Compress to 500 KB</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-200kb" class="related-card">
+            <span class="related-name">Compress to 200 KB</span>
+            <span class="related-desc">General web &amp; portal images</span>
+          </a>
+          <a href="/compress-image-to-500kb" class="related-card">
+            <span class="related-name">Compress to 500 KB</span>
+            <span class="related-desc">High-quality web images</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/compress-jpg" class="related-card">
+            <span class="related-name">Compress JPG</span>
+            <span class="related-desc">JPEG quality slider control</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

@@ -1,0 +1,207 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the standard size for a forum avatar or profile icon?',
+    a: '100×100 pixels is the traditional standard for forum profile pictures on platforms like Reddit, Stack Overflow, phpBB-based forums, and legacy web apps. At this size, a face is still recognisable and the file is tiny — typically 4–12 KB as a JPEG — making it ideal for high-traffic pages where hundreds of avatars load simultaneously.',
+  },
+  {
+    q: 'Will resizing to 100×100 make my image blurry?',
+    a: 'Downscaling to 100×100 can introduce blur if the source image contains fine detail. The best approach is to start with a tight crop of your subject — just the face or focal point — before resizing. This way, the most important detail fills all 100 pixels rather than being diluted by background. Our tool uses the browser\'s built-in Canvas API which applies bilinear interpolation for clean results.',
+  },
+  {
+    q: 'Why do some platforms show avatars even smaller than 100×100?',
+    a: 'Many platforms display avatars at 32 px, 40 px, or 64 px in feeds and comment threads, but store and serve higher-resolution originals (100 px or larger) for when users click to view the full profile picture. Uploading at 100×100 ensures you look sharp in both the small display size and the full-size view.',
+  },
+  {
+    q: 'Should I use JPEG or PNG for a 100×100 avatar?',
+    a: 'For portraits and photos, JPEG is the better choice — it produces smaller files (4–10 KB vs 20–40 KB for PNG) with no visible quality difference at 100×100. Use PNG only if your avatar has a transparent background (logos, illustrations) or very sharp flat-colour art where PNG\'s lossless compression is actually more efficient.',
+  },
+  {
+    q: 'Is 100×100 too small for a meaningful image?',
+    a: '100×100 is the minimum meaningful size for a face-based avatar. Below 80 px, facial features become difficult to distinguish. At 100 px, with good cropping — face centred, minimal background — you can clearly identify a person. For abstract or logo avatars, 100×100 is more than sufficient.',
+  },
+  {
+    q: 'Is this tool free and does it upload my image anywhere?',
+    a: 'Yes — completely free, no account required, and 100% private. All resizing happens in your browser using the HTML5 Canvas API. Your image is never sent to any server, so you can safely resize personal profile photos without privacy concerns.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-100x100#app`,
+      name: 'Resize Image to 100×100 px Free Online',
+      description: 'Resize any image to 100×100 pixels free online. No upload, 100% private. For forum avatars, profile icons, and small thumbnails.',
+      url: `${siteConfig.domain}/resize-image-to-100x100`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 100×100 px — Free Online"
+  description="Free online tool to resize any image to 100×100 pixels. No upload, 100% private. For forum avatars, profile icons, CMS thumbnails, and small profile pictures."
+  canonical={`${siteConfig.domain}/resize-image-to-100x100`}
+  keywords="resize image to 100x100, 100x100 image resize, avatar resize 100x100, thumbnail resize 100x100"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-100x100" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 100×100 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 100×100 pixels. No upload, 100% private. Perfect for forum avatars, profile icons, and small thumbnails.</p>
+      </header>
+
+      <ResizeTool width={100} height={100} lockAspect={false} outputFormat="jpeg" presetLabel="100×100 px" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 100×100 Pixels — For Avatars, Icons &amp; Thumbnails</h2>
+        <p>Small but mighty — 100×100 pixels is the traditional standard size for forum profile pictures, legacy web app avatars, and browser favicon-adjacent uses. Platforms like Reddit, Stack Overflow, phpBB-powered forums, and older social networks all centre their community identity around the humble 100 px square avatar. Despite being tiny, a well-crafted 100×100 image communicates identity instantly.</p>
+        <p>One reason 100×100 remains relevant is performance. A page listing hundreds of user avatars — a busy forum thread, a team directory, a comment section — needs those avatars to be small files that load instantly. A 100×100 JPEG at quality 80 is typically 5–15 KB, whereas a 400×400 or 600×600 image at the same quality might be 30–100 KB. Multiply by 200 avatars on one page and the bandwidth difference is enormous.</p>
+        <p>100×100 px is also the minimum meaningful avatar size for face recognition. Below 80 pixels, facial features — eyes, nose, the shape of a face — start to blend together and become unrecognisable. At 100 px, a well-cropped portrait is still clearly identifiable. This is why the 100 px threshold became the de facto floor for profile picture dimensions across the web.</p>
+        <p>Some CMS platforms (WordPress, Drupal, older Joomla themes) generate a 100×100 px thumbnail automatically from uploaded images. If your CMS is generating blurry or poorly-cropped thumbnails, resizing your source image to exactly 100×100 before uploading gives you full control over the crop and sharpness — bypassing the CMS's own (often mediocre) thumbnail algorithm.</p>
+
+        <h3>Tips for Sharp 100×100 Downscaling</h3>
+        <p>The key to a sharp 100×100 avatar is what you do <em>before</em> you resize. Start by cropping your image tightly around the subject — just the face, just the logo mark, just the key object. Remove as much background as possible. When you then resize to 100×100, every one of those 10,000 pixels is working hard to represent your subject rather than background noise.</p>
+        <p>Avoid resizing a large, uncropped photo directly to 100×100. A 4000×3000 pixel portrait cropped at face level will look sharp at 100 px; the same photo resized from its full frame will show a tiny face surrounded by blurred background, where the face itself occupies only a fraction of the pixels.</p>
+
+        <h3>How to Resize to 100×100 px</h3>
+        <ol>
+          <li><strong>Crop first.</strong> If possible, crop your image to a 1:1 square focused on the most important part before uploading. This gives the best result at 100×100.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop. The dimensions are pre-set to 100×100 px.</li>
+          <li><strong>Select output format.</strong> JPEG for photos, PNG for logos or transparent-background images.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 100×100 px image is ready to upload as a forum avatar, profile icon, or CMS thumbnail.</li>
+        </ol>
+
+        <h3>Common Use Cases</h3>
+        <p><strong>Forum avatars:</strong> Reddit, Stack Overflow, phpBB and XenForo forums, Discourse communities, and many legacy web forums display profile pictures at or near 100 px. Uploading at exactly 100×100 ensures no additional resizing or quality loss by the platform.</p>
+        <p><strong>CMS thumbnails:</strong> Older WordPress themes and Drupal sites with grid layouts use 100×100 px "thumbnail" image sizes. Uploading a pre-resized 100×100 image bypasses the CMS crop algorithm and gives you pixel-perfect control.</p>
+        <p><strong>App icons and favicons (adjacent):</strong> While favicon.ico uses 16×16 and 32×32, some browser extension icons and small app icons use 100×100 as a source from which the browser scales down. A clean 100×100 source scales to smaller sizes better than resizing from a large original.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-200x200" class="related-card">
+            <span class="related-name">Resize to 200×200</span>
+            <span class="related-desc">Avatars &amp; thumbnails</span>
+          </a>
+          <a href="/resize-image-to-300x300" class="related-card">
+            <span class="related-name">Resize to 300×300</span>
+            <span class="related-desc">E-commerce thumbnails</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

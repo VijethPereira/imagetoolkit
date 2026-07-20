@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Does JoSAA counselling require a photo under 75 KB?',
+    a: 'Yes. JoSAA (Joint Seat Allocation Authority) counselling for IITs, NITs, IIITs, and other GFTIs uses a 75 KB photo upload limit for its online registration and choice-filling portal. The photo must be in JPEG format with a white or off-white background, taken within the last 6 months. Always check the current JoSAA counselling information bulletin as specifications may be updated each year.',
+  },
+  {
+    q: 'What are DU (Delhi University) admission photo requirements?',
+    a: 'Delhi University admission portal (CSAS — Common Seat Allocation System) has used photo upload limits around 50–100 KB depending on the cycle. At 75 KB, your photo will comfortably pass most DU and central university admission portals. JPEG format is required. A 400×500 px photo at 75 KB will look sharp and professional for the application.',
+  },
+  {
+    q: 'How does 75 KB compare to the 50 KB and 100 KB limits?',
+    a: 'At standard admission photo dimensions (400×500 px), 75 KB allows a JPEG quality setting around 80–88%, which produces a genuinely sharp, professional-looking photograph. Compared to exam portal limits (20–40 KB), 75 KB at 400×500 px is a significant quality step up — fine hair details, fabric texture, and background gradients all look noticeably better. It is slightly lower quality than 100 KB but the difference is minimal.',
+  },
+  {
+    q: 'Can I use the same photo for JoSAA counselling and JEE Main exam?',
+    a: 'Technically you can use the same photograph, but the file size limits differ. NTA JEE Main uses a 10–20 KB limit for photos, while JoSAA counselling uses 75 KB. The same photo at different compression levels will be needed. Use this tool (75 KB) for JoSAA and the Compress to 20 KB tool for JEE Main applications.',
+  },
+  {
+    q: 'What resolution should I use for a 75 KB admission photo?',
+    a: 'Most college admission portals accept 200×230 px (exam-size) up to 400×500 px or larger. For a 75 KB limit, using 400×500 px or even 600×750 px is practical — a 600×750 px JPEG can fit under 75 KB at moderate quality (around 65–70%) and will look excellent. Use the Resize Image tool to set your preferred dimensions, then compress here to 75 KB.',
+  },
+  {
+    q: 'Is this compressor suitable for university admission portal photos?',
+    a: 'Yes. This tool targets exactly 75 KB, runs entirely in your browser (no upload to any server), and outputs JPEG format — which is what college and university admission portals require. It is free, with no account or registration needed. After downloading, verify the file size before uploading to your specific portal.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-75kb#app`,
+      name: 'Compress Image to 75 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 75 KB online. Free, no upload, 100% private. For JoSAA counselling, DU admissions, and university portal photo uploads.',
+      url: `${siteConfig.domain}/compress-image-to-75kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 75 KB — Free, No Upload"
+  description="Free tool to compress any image to under 75 KB. 100% private, no upload. For JoSAA counselling, DU admissions, and university portal photo uploads. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-75kb`}
+  keywords="compress image to 75kb, reduce to 75kb, josaa photo size, du admission photo, college admission photo 75kb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-75kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 75 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 75 KB. 100% private, no upload. For JoSAA counselling (IIT/NIT seats), DU admissions, and state university portal photo requirements.</p>
+      </header>
+
+      <CompressTool targetKB={75} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 75 KB — JoSAA, DU &amp; University Admission Portals</h2>
+        <p>75 KB is the photo upload limit used by JoSAA (Joint Seat Allocation Authority), the centralized counselling portal that allocates seats in IITs, NITs, IIITs, and other Government-funded Technical Institutes (GFTIs) based on JEE Advanced and JEE Main ranks. With over 45,000 seats across premier engineering institutions, JoSAA processes hundreds of thousands of registrations each year — hence the slightly relaxed photo limit compared to exam portals.</p>
+        <p>Delhi University's CSAS (Common Seat Allocation System) portal for undergraduate admissions, Jawaharlal Nehru University (JNU), and many state university admission management systems also use photo limits in the 50–100 KB range. At 75 KB, you are safely within the limits of most college and university portals while getting significantly better image quality than exam portals allow.</p>
+        <p>This compressor runs entirely in your browser — your photo is processed locally using the Canvas API and never sent to any server. The tool binary-searches for the highest JPEG quality under 75 KB automatically.</p>
+
+        <h3>How 75 KB Photo Quality Differs From Exam Portal Photos</h3>
+        <p>The difference between a 20 KB exam portal photo and a 75 KB college admission photo is striking when viewed side-by-side. At 400×500 px — a good resolution for college admission — a 75 KB JPEG has approximately 375 bytes per kilopixel. At 20 KB, the same resolution would have only 100 bytes per kilopixel. This 3.75x data advantage translates to visibly smoother skin tones, crisper eyebrows and hair, and cleaner representation of the background.</p>
+        <p>This quality matters more for college admissions than for exam halls, because the photo appears on the admit card, student ID card, and sometimes on degree certificates — documents that persist for years rather than hours.</p>
+
+        <h3>Recommended Photo Specifications for JoSAA and University Portals</h3>
+        <ol>
+          <li>Use a professional or well-lit studio photo with a white or light-coloured plain background.</li>
+          <li>Resize to at least 400×500 px using the <a href="/resize-image">Resize Image tool</a>. Higher resolution is better for 75 KB — try 600×750 px.</li>
+          <li>Upload here, target pre-set to 75 KB, output JPEG.</li>
+          <li>Download and verify size. For JoSAA: upload through the official JoSAA portal during the registration window.</li>
+        </ol>
+        <p>For JEE Main NTA exam uploads (which use a different, smaller limit), see <a href="/compress-image-to-20kb">Compress to 20 KB</a>. For portals using a 100 KB limit, see <a href="/compress-image-to-100kb">Compress to 100 KB</a>. For the 50 KB standard used by some portals, see <a href="/compress-image-to-50kb">Compress to 50 KB</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC, NTA, some college portals</span>
+          </a>
+          <a href="/compress-image-to-100kb" class="related-card">
+            <span class="related-name">Compress to 100 KB</span>
+            <span class="related-desc">Job portals &amp; general use</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

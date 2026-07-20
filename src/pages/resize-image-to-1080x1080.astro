@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the recommended size for an Instagram square post?',
+    a: 'Instagram\'s recommended size for a square post is 1080×1080 pixels at a 1:1 aspect ratio. Uploading at exactly 1080×1080 means Instagram serves your image without any additional resampling — what you upload is what your followers see. Uploading smaller images (like 600×600) causes Instagram to upscale them, which can introduce softness and compression artefacts.',
+  },
+  {
+    q: 'Can I use 1080×1080 for Facebook posts?',
+    a: 'Yes. Facebook supports 1080×1080 px square posts and displays them in the feed at this resolution on high-DPI devices. Facebook also uses square images for ad creatives, carousel posts, and some profile cover photo elements. Uploading at 1080×1080 ensures your image is served at full quality across all Facebook display contexts.',
+  },
+  {
+    q: 'What is the minimum YouTube channel icon size?',
+    a: 'YouTube requires channel icons to be at least 800×800 pixels. Using 1080×1080 — the next standard size up — ensures your channel icon looks sharp on 4K displays and retina screens, where 800 px might appear slightly soft. YouTube displays channel icons at various sizes across the platform (from 48 px in search results to 800 px+ on channel pages), so more resolution is always beneficial.',
+  },
+  {
+    q: 'Why does Instagram require a square image specifically?',
+    a: 'Instagram\'s original format was exclusively square — the 1:1 aspect ratio was a defining characteristic of the platform from its founding. While Instagram now supports portrait (4:5) and landscape (1.91:1) formats, square posts remain the most common format for feed posts and are guaranteed to display without cropping in the grid view of your profile. A square post shows in full in the grid, whereas portrait posts are cropped to a square in the grid.',
+  },
+  {
+    q: 'What happens if my original image is not square?',
+    a: 'If your original image is not square (for example, a 16:9 landscape photo or a 4:3 camera shot), resizing to 1080×1080 will stretch it. To avoid distortion, crop your image to a 1:1 square first — centred on the main subject — then resize. Instagram itself lets you adjust the crop when uploading, but doing it yourself beforehand gives more precise control over what appears in the square frame.',
+  },
+  {
+    q: 'Is this tool free and does it upload my images to any server?',
+    a: 'Completely free with no account required. All resizing is done locally in your browser using the HTML5 Canvas API. Your images are never uploaded to any server, so you can safely resize personal and commercial photos without privacy or watermark concerns.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-1080x1080#app`,
+      name: 'Resize Image to 1080×1080 px Free Online',
+      description: 'Resize any image to 1080×1080 pixels free online. No upload, 100% private. For Instagram square posts, Facebook posts, YouTube channel icons, and LinkedIn company logos.',
+      url: `${siteConfig.domain}/resize-image-to-1080x1080`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 1080×1080 px — Free Online"
+  description="Free online tool to resize any image to 1080×1080 pixels. No upload, 100% private. For Instagram square posts, Facebook posts, YouTube channel icons, and LinkedIn company logos."
+  canonical={`${siteConfig.domain}/resize-image-to-1080x1080`}
+  keywords="resize image to 1080x1080, instagram square size, 1080x1080 image, instagram post size resize"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-1080x1080" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 1080×1080 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 1080×1080 pixels — the standard for Instagram square posts, Facebook posts, YouTube channel icons, and LinkedIn company logos.</p>
+      </header>
+
+      <ResizeTool width={1080} height={1080} lockAspect={false} outputFormat="jpeg" presetLabel="1080×1080 px (Instagram Square)" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 1080×1080 — Instagram Square, YouTube Channel Icon &amp; More</h2>
+        <p>Instagram's recommended square post size is 1080×1080 pixels. Uploading at this exact resolution means your image is served to followers without any additional resampling — what you upload is precisely what they see. When you upload a smaller image, Instagram scales it up, introducing softness and compression artefacts. When you upload a larger image, Instagram compresses and scales it down, which can introduce banding in gradients and loss of fine detail. 1080×1080 is the Goldilocks size: no scaling needed in either direction.</p>
+        <p>Facebook also supports 1080×1080 px square posts in the main feed. Facebook's ad creation tools, carousel posts, and some page cover photo configurations all support or recommend the 1:1 aspect ratio at 1080 px. Uploading at this size ensures your Facebook content displays at full quality across all display types — desktop, mobile, and tablet.</p>
+        <p>YouTube's channel icon should be at least 800×800 pixels (the platform's minimum), but 1080×1080 is the recommended size for future-proofing. YouTube displays channel icons at many different sizes across the platform: 48 px in search results, 88 px in video overlays, 240 px on the channel page sidebar, and at larger sizes on channel home pages and YouTube TV. A 1080 px source ensures crisp rendering at every display size, including on 4K displays and high-DPI mobile screens where 800 px starts to appear slightly soft.</p>
+        <p>LinkedIn company pages use square logos and profile images for feed posts. The recommended size for LinkedIn post images is 1200×627 px (landscape), but for square posts and company logo images, 1080×1080 covers all LinkedIn display contexts. If you are sharing a branded square graphic or product showcase on LinkedIn, 1080×1080 is the correct size.</p>
+
+        <h3>Understanding Aspect Ratio for Square Posts</h3>
+        <p>A 1:1 aspect ratio means width and height are equal. Smartphone cameras and DSLR cameras typically shoot in 4:3 (standard) or 16:9 (wide) ratios — not square. To get a square image from a standard camera photo, you need to crop it.</p>
+        <p>When preparing a photo for Instagram, crop to 1:1 first, centred on your subject, before resizing to 1080×1080. This prevents the distortion that occurs when a non-square image is forced into a square frame. Instagram's own upload interface allows you to adjust the crop, but doing it yourself gives you more control — especially useful when the subject is off-centre or you want precise control over what appears in the square frame.</p>
+
+        <h3>How to Resize to 1080×1080 px</h3>
+        <ol>
+          <li><strong>Crop to 1:1 square.</strong> Crop your original photo to a square format centred on your main subject. This prevents distortion when resizing to 1080×1080.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop your cropped square image. Dimensions are pre-set to 1080×1080 px.</li>
+          <li><strong>Select output format.</strong> JPEG for photos (optimal for Instagram and Facebook). PNG for graphics, logos, or illustrations with flat colours or transparency.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 1080×1080 px image is ready to post on Instagram, Facebook, or upload as your YouTube channel icon.</li>
+        </ol>
+
+        <h3>File Size Expectations</h3>
+        <p>A 1080×1080 JPEG at quality 85 typically weighs 150–400 KB depending on image complexity. Instagram compresses images upon upload to approximately 100–200 KB regardless of what you upload. Starting with a high-quality 1080×1080 image gives Instagram's compression algorithm the best possible source material, resulting in a better-quality final output than starting with a smaller or lower-quality image.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-1280x720" class="related-card">
+            <span class="related-name">Resize to 1280×720</span>
+            <span class="related-desc">YouTube thumbnails &amp; HD</span>
+          </a>
+          <a href="/resize-image-to-600x600" class="related-card">
+            <span class="related-name">Resize to 600×600</span>
+            <span class="related-desc">Social profiles &amp; WhatsApp</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image-to-500kb" class="related-card">
+            <span class="related-name">Compress to 500 KB</span>
+            <span class="related-desc">Reduce large image file size</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

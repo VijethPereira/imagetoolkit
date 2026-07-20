@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Which state PSC portals require a photo under 15 KB?',
+    a: 'Maharashtra Public Service Commission (MPSC), Rajasthan Public Service Commission (RPSC), and Bihar Public Service Commission (BPSC) have all used a 15 KB photo limit for various examination notifications. TS EAMCET (Telangana State Engineering, Agriculture and Medical Common Entrance Test) and some AP (Andhra Pradesh) state entrance portal notifications have also specified this threshold. Always check the latest official notification, as limits can vary between exam cycles.\\',
+  },
+  {
+    q: 'How do I compress an image to exactly 15 KB?',
+    a: 'Upload your photo here — the target is pre-set to 15 KB. The compressor uses binary search to find the highest JPEG quality that produces a file under 15 KB. For best results, resize your photo to around 200×230 px first using the Resize Image tool. At that resolution, reaching 15 KB requires moderate compression, and the output remains clearly recognisable.\\',
+  },
+  {
+    q: 'What is the difference between 15 KB, 20 KB, and 10 KB limits?',
+    a: '15 KB falls squarely between the SSC standard of 20 KB and the NTA photo limit (which varies between 10–20 KB). At 200×230 px, the visible quality difference between 10 KB, 15 KB, and 20 KB is real but modest. All three produce a clear, recognisable face suitable for identity verification on exam portals. If your specific portal says 15 KB, use this tool — submitting a 16 or 20 KB file will cause an upload rejection.\\',
+  },
+  {
+    q: 'Do I need to resize before compressing to 15 KB?',
+    a: 'Strongly recommended, yes. If you upload a 4 MB smartphone photo and target 15 KB, the tool will achieve 15 KB but at very heavy compression, resulting in a visibly degraded image. Resize to 200×230 px first using the Resize Image tool. At that pixel count, 15 KB provides excellent quality for an exam photo.\\',
+  },
+  {
+    q: 'Does this tool work for MPSC Rajyaseva exam photo requirements?',
+    a: 'Yes. MPSC Rajyaseva and other MPSC examinations typically require a recent passport-size photograph in JPEG format under 15 KB. This tool targets exactly 15 KB with JPEG output. Pair it with the Passport Size Photo tool to resize to 200×230 px before compressing, which gives you the cleanest result for MPSC uploads.\\',
+  },
+  {
+    q: 'Is my personal photo safe when using this tool?',
+    a: 'Yes. All processing happens locally in your browser using the HTML5 Canvas API. Your image never leaves your device and is not sent to any server. There are no cookies, no logins, and no stored files. The tool is safe to use with ID photos, passport photos, or any personal document images.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-15kb#app`,
+      name: 'Compress Image to 15 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 15 KB online. Free, no upload, 100% private. For MPSC, RPSC, BPSC, TS EAMCET and state PSC portals.',
+      url: `${siteConfig.domain}/compress-image-to-15kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 15 KB — Free, No Upload"
+  description="Free tool to compress any image to under 15 KB. 100% private, no upload. For MPSC, RPSC, BPSC and state PSC exam portals. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-15kb`}
+  keywords="compress image to 15kb, reduce to 15kb, mpsc photo size 15kb, state psc photo 15kb, compress jpg 15kb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-15kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 15 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 15 KB. 100% private, no upload. Perfect for MPSC, RPSC, BPSC and other state PSC exam portal photo uploads.</p>
+      </header>
+
+      <CompressTool targetKB={15} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 15 KB — State PSC &amp; Regional Exam Portals</h2>
+        <p>15 KB is the photo upload limit used by several state-level Public Service Commission (PSC) portals across India. Maharashtra Public Service Commission (MPSC), Rajasthan Public Service Commission (RPSC), and Bihar Public Service Commission (BPSC) have all published exam notifications specifying this exact limit for photograph uploads. Additionally, state entrance examinations including TS EAMCET (Telangana) and some Andhra Pradesh state portals have used 15 KB as their ceiling.</p>
+        <p>This 15 KB limit sits between the tight NTA 10 KB threshold and the more common SSC 20 KB standard. Understanding where your specific exam falls in this hierarchy helps you use the right tool. When the notification says 15 KB, submitting even a 16 KB file will result in an upload error — precision matters.</p>
+        <p>This free compressor targets exactly 15 KB by finding the highest quality JPEG that fits under the limit. It runs entirely in your browser, so your photo is never uploaded to any server.</p>
+
+        <h3>How to Compress Your Photo to 15 KB for State PSC Portals</h3>
+        <ol>
+          <li>Take a clear passport-size photograph — white or light background, full face visible, good lighting, no glasses glare.</li>
+          <li>Resize to the dimensions your specific portal requires. Most state PSCs accept a 200×230 px or passport-size photo. Use the <a href="/resize-image-to-passport-size">Passport Size Photo Resizer</a> for standard passport dimensions.</li>
+          <li>Upload the resized JPEG or PNG to this tool.</li>
+          <li>The target is set to 15 KB. Ensure the output format is JPEG.</li>
+          <li>Click "Compress" and review the output quality.</li>
+          <li>Download and verify the file size is under 15 KB before submitting your application.</li>
+        </ol>
+
+        <h3>MPSC, RPSC, and BPSC Photo Requirements</h3>
+        <p>State PSC portals vary slightly in their exact specifications. MPSC Rajyaseva and departmental exams typically require a recent colour photograph against a white background in JPEG format, under 15 KB, with a file name matching your roll number or registration number. RPSC (Rajasthan) and BPSC (Bihar) follow similar conventions.</p>
+        <p>The common requirements across state PSCs are: JPEG format, file size under 15 KB, a recent photograph (not more than 3 months old), and passport-size dimensions. Some portals additionally specify minimum pixel dimensions — typically 200×230 px or 150×200 px — to prevent candidates from submitting tiny, unrecognisable thumbnail images.</p>
+        <p>If you also need to compress your signature image, check <a href="/compress-image-to-10kb">Compress to 10 KB</a> for signature files (many state PSCs use 10 KB for signatures while using 15 KB for photos). For the central exam standard, see <a href="/compress-image-to-20kb">Compress to 20 KB</a> for SSC exams.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-10kb" class="related-card">
+            <span class="related-name">Compress to 10 KB</span>
+            <span class="related-desc">NTA photo, state signature uploads</span>
+          </a>
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC CGL, IBPS, RRB NTPC</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

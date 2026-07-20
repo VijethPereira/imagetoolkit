@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Which exams require a photo or signature under 10 KB?',
+    a: 'NTA uses a 10 KB limit for certain signature uploads in NEET and JEE Main (though the most common NTA signature limit is 5 KB — check your specific exam notification). Several state-level exams and some SSC portals also accept 10 KB. Railway Recruitment Board (RRB) Group D and other entry-level RRB exams have used 10 KB photo limits. Always read the current exam advertisement for the exact size limits.',
+  },
+  {
+    q: 'How do I compress an image to 10 KB?',
+    a: 'Upload your image to this tool — the target is pre-set to 10 KB. For the best result, resize your photo to the target pixel dimensions first (e.g., 200×230 px for a passport-size photo, or 160×60 px for a signature). A smaller image needs much less compression to reach 10 KB, so the output looks significantly sharper. The tool uses binary search to find the highest JPEG quality that stays under 10 KB.',
+  },
+  {
+    q: 'Is 10 KB enough for an acceptable passport-size photo?',
+    a: 'At 200×230 pixels, a JPEG at 10 KB looks clear enough to identify a person — which is all exam portals require. You will notice more compression than at 20 KB, but the face remains recognisable and the photo will pass the portal upload check. If your portal allows up to 20 KB, use the higher limit for marginally better quality.',
+  },
+  {
+    q: 'Why do SSC portals use 10 KB or 20 KB limits?',
+    a: 'SSC processes millions of applications in compressed windows. Small photo limits reduce upload times on government server infrastructure (which may not always be high-bandwidth), reduce total storage, and ensure forms submit quickly even on slow mobile connections common in smaller cities and rural areas where many candidates apply.',
+  },
+  {
+    q: 'Can I compress a PNG to 10 KB for exam portals?',
+    a: 'Yes — this tool accepts PNG input and outputs JPEG, which is what exam portals require. PNG with lossless compression is much larger than JPEG at equivalent quality, so PNG files will almost certainly exceed 10 KB without conversion. Set the output format to JPEG before compressing. Uploading a PNG directly to exam portals typically results in rejection.',
+  },
+  {
+    q: 'Does this tool upload my photo to the internet?',
+    a: 'No. Everything happens locally in your browser. Your photo is processed using the HTML5 Canvas API on your own device and is never sent to any server. This makes it suitable for sensitive documents like exam photos and ID images. There is no account required and no file size limit on the input.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-10kb#app`,
+      name: 'Compress Image to 10 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 10 KB online. Free, no upload, 100% private. For NTA exams, SSC portals, and state recruitment boards.',
+      url: `${siteConfig.domain}/compress-image-to-10kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 10 KB — Free, No Upload"
+  description="Free tool to compress any image to under 10 KB. 100% private, no upload. For NTA photo uploads, SSC portals, and state exam boards. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-10kb`}
+  keywords="compress image to 10kb, reduce to 10kb, nta photo 10kb, ssc photo 10kb, compress jpeg to 10kb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-10kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 10 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 10 KB. 100% private, no upload. For NTA exam photo uploads, SSC portals, and state recruitment board applications.</p>
+      </header>
+
+      <CompressTool targetKB={10} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 10 KB — NTA, SSC &amp; State Exam Portals</h2>
+        <p>10 KB sits between the ultra-tight 5 KB signature limit used by NTA and the more common 20 KB photo limit used by SSC. Multiple exam authorities use this exact threshold: some NTA exam notifications specify 10 KB for photo uploads (while keeping signatures at 5 KB), several state board recruitment portals use 10 KB, and certain Railway Recruitment Board (RRB) entry-level examinations have also used this limit. When your specific portal requires 10 KB, using a tool built for that target is far more reliable than manually adjusting quality settings.</p>
+        <p>This compressor runs entirely in your browser using the Canvas API. Your photo never leaves your device, making it both instant and completely private. The binary search algorithm finds the highest possible JPEG quality that keeps the output under 10 KB automatically.</p>
+
+        <h3>How to Get the Best Quality at 10 KB</h3>
+        <ol>
+          <li>Start with a clear photograph — good lighting, white or neutral background, no shadows on the face.</li>
+          <li>Resize to target dimensions first. For a passport-type exam photo, resize to 200×230 px using the <a href="/resize-image">Resize Image tool</a>. For signatures, resize to 160×60 px or whatever dimensions your portal specifies.</li>
+          <li>Upload the resized image here. The target is pre-set to 10 KB.</li>
+          <li>Select JPEG as the output format — all exam portals require JPEG.</li>
+          <li>Click "Compress" and download the result. Verify the file is under 10 KB before uploading to the exam portal.</li>
+        </ol>
+
+        <h3>10 KB vs 5 KB vs 20 KB — Choosing the Right Target</h3>
+        <p>The difference between these sizes is more significant than it might seem. At 200×230 px — a standard exam photo resolution — a 20 KB JPEG looks noticeably sharper than a 10 KB JPEG, and a 10 KB JPEG is substantially clearer than a 5 KB one. However, all three sizes are "good enough" for exam portal identity verification, where the requirement is recognition rather than print quality.</p>
+        <p>If your portal allows 20 KB, always use <a href="/compress-image-to-20kb">Compress to 20 KB</a> for the best quality. If you specifically need 5 KB for an NTA signature, use <a href="/compress-image-to-5kb">Compress to 5 KB</a>. Use this 10 KB tool only when your specific exam notification explicitly states this limit.</p>
+        <p>For SSC-specific signature requirements (276×118 px, under 12 KB), the <a href="/signature-resizer-for-ssc">SSC Signature Resizer</a> handles both dimensions and compression in one step.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-5kb" class="related-card">
+            <span class="related-name">Compress to 5 KB</span>
+            <span class="related-desc">NTA signature — NEET, JEE Main</span>
+          </a>
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC CGL, IBPS, RRB NTPC</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/signature-resizer-for-ssc" class="related-card">
+            <span class="related-name">SSC Signature Resize</span>
+            <span class="related-desc">276×118 px, under 12 KB</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

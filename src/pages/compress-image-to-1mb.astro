@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why do CMS platforms impose a 1 MB image limit?',
+    a: 'Content Management Systems like WordPress (with default settings), Webflow, Squarespace, and Wix often impose a 1 MB limit per image upload to prevent users from inadvertently slowing down their sites. At 1 MB, a full-width desktop hero image at 2400×1600 px looks excellent, loads in under 0.5 seconds on broadband, and doesn\'t require lazy loading optimization. CMS platforms found 1 MB to be the natural threshold where user-uploaded images don\'t harm site performance.',
+  },
+  {
+    q: 'Does WhatsApp compress photos before sending?',
+    a: 'Yes. WhatsApp compresses photos sent through the app to approximately 50–100 KB for a typical smartphone photo. If you want to send a photo without WhatsApp compression, use the "Document" option to send the file as-is. At 1 MB, a photo sent as a document preserves far more quality than the WhatsApp auto-compression. For casual sharing, WhatsApp\'s automatic compression is fine — for professional images, send as a document.',
+  },
+  {
+    q: 'What resolution can a 1 MB JPEG hold at good quality?',
+    a: 'A 1 MB JPEG can hold a 3000×2000 px image at quality ~75%, a 2400×1600 px image at quality ~82%, or a 1920×1280 px image at quality ~90%. Any of these resolutions is full-screen on desktop. For most web purposes, 2400×1600 px at 1 MB is the practical optimum — it covers retina displays at common content widths and looks excellent on any screen.\\',
+  },
+  {
+    q: 'Does Instagram recompress images uploaded under 1 MB?',
+    a: 'Instagram recompresses all uploaded images to their own internal format and quality settings, regardless of input size. Uploading a 1 MB image gives Instagram higher-quality source material to work with, resulting in a better-looking final post than uploading a heavily pre-compressed image. For Instagram posts, square images at 1080×1080 px or portrait images at 1080×1350 px under 1 MB are the recommended starting point.\\',
+  },
+  {
+    q: 'Is 1 MB appropriate for a website\'s hero or banner image?',
+    a: 'Generally yes — 1 MB is acceptable for a hero image that spans the full desktop width (typically 1920 px or 2400 px). However, modern web development practice recommends serving differently-sized images to different devices using srcset. A mobile device might receive a 300 KB version while a desktop gets the 1 MB version. If you\'re not using responsive images, target 500 KB–1 MB for the hero. For better compression, convert to WebP using the JPG to WebP tool.',
+  },
+  {
+    q: 'Can I compress a PNG screenshot to 1 MB?',
+    a: 'Yes. Screenshots are often saved as PNG which can be 3–10 MB. Compressing to 1 MB JPEG reduces the size dramatically while maintaining screen-readable quality. However, if your screenshot contains text or UI elements with sharp edges (icons, buttons, code), JPEG compression may introduce visible blurring around these edges. For screenshots with text, consider converting to WebP (which handles both sharp edges and photos better than JPEG) or keeping as PNG if file size is not a concern.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-1mb#app`,
+      name: 'Compress Image to 1 MB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 1 MB online. Free, no upload, 100% private. For CMS uploads, social media, email, and general web use.',
+      url: `${siteConfig.domain}/compress-image-to-1mb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 1 MB — Free, No Upload"
+  description="Free tool to compress any image to under 1 MB. 100% private, no upload. For CMS platforms, WordPress, social media, email attachments, and web use. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-1mb`}
+  keywords="compress image to 1mb, reduce image to 1mb, compress photo to 1mb, 1mb image compressor"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-1mb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 1 MB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 1 MB. 100% private, no upload. For WordPress uploads, social media sharing, email attachments, and general web image optimisation.</p>
+      </header>
+
+      <CompressTool targetKB={1024} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 1 MB — The Web Standard for General Use</h2>
+        <p>1 MB (1024 KB) is the practical standard for general-purpose web images. It represents the balance point where image quality is indistinguishable from the original on screen, loading time is reasonable on any broadband connection, and file size fits within the upload limits of most CMS platforms, email clients, and web services. WordPress's default maximum upload size before resizing is often set to 1 MB. Webflow, Squarespace, Wix, and Ghost all handle 1 MB images without issues.</p>
+        <p>Modern smartphone cameras produce images of 5–25 MB. DSLR photos can be 20–50 MB as RAW files and 3–8 MB as JPEGs. Compressing these to 1 MB retains all visible quality for web viewing while reducing the file to a fraction of its original size — making uploads faster, server storage cheaper, and page loads quicker for visitors.</p>
+        <p>This compressor runs entirely in your browser. It targets exactly 1 MB (1024 KB) using binary search to find the highest quality that fits. No uploads, no account, no watermark.</p>
+
+        <h3>1 MB — The Sweet Spot for Social Media and Email</h3>
+        <p>Social media platforms recompress your images to their own formats regardless of input quality. However, starting with a higher-quality source image consistently produces better results after platform recompression. For Instagram, Twitter/X, and Facebook, uploading a 1 MB source image gives the platform's compression algorithm better material to work with than uploading a heavily pre-compressed 200 KB image.</p>
+        <p>For email attachments, 1 MB per inline image is the practical ceiling before recipients start noticing slow-loading emails. Most business email servers accept individual attachments up to 10–25 MB, but individual inline images over 1 MB can cause slow rendering in email clients, especially on mobile. If you need to send multiple product photos, 1 MB per image is a reasonable target that won't overwhelm recipients.</p>
+
+        <h3>How to Compress DSLR and Smartphone Photos to 1 MB</h3>
+        <ol>
+          <li>Upload your original photo — this tool handles images of any size.</li>
+          <li>Target is pre-set to 1 MB (1024 KB). Select JPEG output for photos.</li>
+          <li>For screenshots or graphics with text, consider PNG or WebP to avoid JPEG's tendency to blur sharp edges.</li>
+          <li>Click "Compress" and preview the result. Quality at 1 MB is excellent for virtually any input image.</li>
+          <li>Download and use directly — for web, CMS, email, or social media upload.</li>
+        </ol>
+        <p>For even smaller sizes with good quality, see <a href="/compress-image-to-500kb">Compress to 500 KB</a>. For high-resolution e-commerce images, see <a href="/compress-image-to-2mb">Compress to 2 MB</a>. To convert to modern WebP format for 25–34% smaller files, use <a href="/jpg-to-webp">JPG to WebP</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-500kb" class="related-card">
+            <span class="related-name">Compress to 500 KB</span>
+            <span class="related-desc">University portals &amp; high quality</span>
+          </a>
+          <a href="/compress-image-to-2mb" class="related-card">
+            <span class="related-name">Compress to 2 MB</span>
+            <span class="related-desc">E-commerce &amp; portfolio images</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/jpg-to-webp" class="related-card">
+            <span class="related-name">JPG to WebP</span>
+            <span class="related-desc">25–34% smaller than JPEG</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

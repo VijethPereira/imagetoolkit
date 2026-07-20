@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ConvertTool from '../components/tools/ConvertTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is a grayscale image?',
+    a: 'A grayscale image is one where each pixel is represented by a single value — its luminosity, or brightness — ranging from pure black (0) to pure white (255) through 256 shades of grey. All colour information is removed; what remains is the tonal structure of the image: the highlights, midtones, and shadows. Grayscale images are not just "colourless" — they preserve the full tonal range of the original, just without the hue.\\',
+  },
+  {
+    q: 'Why are grayscale images smaller than colour images?',
+    a: 'A colour image stores three values per pixel (Red, Green, Blue — the RGB channels). A true grayscale image stores only one value per pixel. This means a grayscale image has one-third the raw data of the equivalent colour image. After JPEG compression, this difference is even more pronounced — grayscale JPEGs are typically 60–70% smaller than the colour version at equivalent visual quality. For document scans, switching from colour to grayscale can reduce file sizes by 70–80% with no loss of readability.\\',
+  },
+  {
+    q: 'What is the difference between grayscale and black &amp; white?',
+    a: 'In image editing, "grayscale" and "black &amp; white" mean different things. A grayscale image preserves all 256 shades of grey — smooth transitions from light to dark, full tonal range, rich shadow and highlight detail. A "black and white" high-contrast conversion pushes pixels toward pure black or pure white, reducing or eliminating the midtones. Grayscale looks like a classic photograph. High-contrast black &amp; white looks like a graphic, silhouette, or newspaper print.\\',
+  },
+  {
+    q: 'When should I use grayscale for document scanning?',
+    a: 'Use grayscale for document scans when: the document contains photographs or complex graphics that require tonal detail; the text is printed at varying densities; or you need to reduce file size significantly compared to a colour scan without losing readability. For text-only documents where maximum file compression is the goal, pure black-and-white (binary/1-bit) scanning is even smaller — but grayscale is the practical middle ground that preserves detail and reduces size.\\',
+  },
+  {
+    q: 'Can I submit a grayscale photo for government forms or exams?',
+    a: 'Most Indian government portals and exam systems (SSC, UPSC, IBPS, NTA) require colour photographs for ID and exam registration. Do not submit a grayscale photo unless the portal explicitly allows it. Check the specific instructions for each portal. Grayscale is appropriate for documents like typed letters, affidavits, and text-only forms — not for ID-style photographs.\\',
+  },
+  {
+    q: 'Is this grayscale tool free and private?',
+    a: 'Yes — completely free, no sign-up required, and 100% private. The grayscale conversion happens in your browser using the HTML5 Canvas API. Your image is never uploaded to any server. All processing is local and instant.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/grayscale-image#app`,
+      name: 'Grayscale Image Converter Online Free',
+      description: 'Convert any colour image to grayscale online for free. No upload, 100% private. For photography, document scanning, academic papers, and reducing file size.',
+      url: `${siteConfig.domain}/grayscale-image`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Grayscale Image Online — Free Converter"
+  description="Convert any colour image to grayscale online for free. No upload, 100% private. Preserve tonal range, reduce file size, and prepare images for print, academic papers, or document scanning."
+  canonical={`${siteConfig.domain}/grayscale-image`}
+  keywords="grayscale image online, convert image to grayscale, black and white image converter, grayscale photo converter, make image grayscale"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/grayscale-image" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Grayscale Image Converter — Free Online</h1>
+        <p class="tool-desc">Convert any colour image to grayscale online for free. Preserves full tonal range — highlights, shadows, and midtones. No upload, 100% private. For photography, scanning, and document preparation.</p>
+      </header>
+
+      <ConvertTool filterMode="grayscale" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Convert Image to Grayscale Online — Preserve Tonal Range, Reduce File Size</h2>
+        <p>Grayscale images remove colour information from each pixel, replacing the three RGB channels (Red, Green, Blue) with a single luminosity value. The result is an image expressed entirely in shades of grey — from pure black to pure white — with all shadows, highlights, and tonal transitions preserved. Grayscale is not simply "black and white": it retains the full range of tonal values that makes the original image visually rich, just without any colour hue.</p>
+        <p>The conversion from colour to grayscale uses a luminosity-weighted formula that reflects how human eyes perceive brightness. Green contributes most to perceived brightness (roughly 59%), red contributes moderately (about 30%), and blue contributes the least (around 11%). This weighting means that a red object and a green object at the same brightness will convert to different grey values, preserving the relative tonal contrast that makes the original image legible and visually interesting.</p>
+        <p>One of the most practical reasons to convert images to grayscale is file size reduction. A colour photograph in JPEG format stores three channels of colour data per pixel. A grayscale version stores only one channel — reducing the raw pixel data by two-thirds. After JPEG compression, a grayscale image of the same scene is typically 60–70% smaller than the colour original at equivalent visual quality. For document scans in particular — affidavits, typed letters, form copies — switching from colour scanning to grayscale scanning can reduce file size by 75% or more with zero impact on text legibility.</p>
+        <p>Academic papers and technical publications often require grayscale figures, especially in journals with print editions where colour printing is expensive or unavailable. If you are submitting a research paper with photographs, charts, or screenshots, converting to grayscale ensures your images display correctly in both digital (PDF) and print versions of the journal. The tonal contrast of a well-converted grayscale image is often sufficient to convey the same information as colour.</p>
+        <p>Document scanning for archival purposes benefits from grayscale in multiple ways. Compared to colour scans, grayscale scans are smaller, faster to process, and easier to store in bulk. Compared to pure binary black-and-white (1-bit) scans, grayscale preserves more detail — useful for scanned photos, illustrations, and handwritten documents where the variation in ink density carries meaning.</p>
+        <p>For photography, grayscale conversion is an artistic choice. Removing colour draws attention to composition, texture, light, and form. Street photography, portraiture, and architectural photography are classic domains for grayscale, where colour can distract from the structural elements of the image. Unlike simply desaturating in a photo editor, a good grayscale conversion (using luminosity weighting) produces richer tonal contrast and a more "film-like" quality.</p>
+
+        <h3>How to Convert to Grayscale</h3>
+        <ol>
+          <li><strong>Upload your image.</strong> Click "Choose File" or drag and drop any JPEG, PNG, or WebP image.</li>
+          <li><strong>Preview.</strong> The grayscale preview appears instantly, showing the full tonal range of your image without colour.</li>
+          <li><strong>Choose output format and quality.</strong> JPEG for the smallest grayscale file (best for photos and document scans). PNG for lossless grayscale (best for illustrations and text documents).</li>
+          <li><strong>Download.</strong> Click "Download" to save your grayscale image. The conversion is done entirely in your browser — nothing is uploaded.</li>
+        </ol>
+
+        <h3>Grayscale vs. Black &amp; White: Which to Use?</h3>
+        <p>Choose grayscale when you want to preserve the tonal richness of the original image — for photography, document scans with photographs, academic figures, and artistic effects. The smooth gradient of grey tones conveys depth, texture, and light.</p>
+        <p>Choose high-contrast black &amp; white (available via the <a href="/convert-image-to-black-and-white">B&amp;W converter</a>) when you want a graphic, high-contrast look — for silhouettes, coloring book pages, logos, OCR document preparation, and images where pure black text on white background is the goal.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/convert-image-to-black-and-white" class="related-card">
+            <span class="related-name">Black &amp; White</span>
+            <span class="related-desc">High-contrast B&amp;W conversion</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Reduce JPEG/PNG file size</span>
+          </a>
+          <a href="/png-to-jpg" class="related-card">
+            <span class="related-name">PNG to JPG</span>
+            <span class="related-desc">Convert PNG to JPEG</span>
+          </a>
+          <a href="/jpg-to-png" class="related-card">
+            <span class="related-name">JPG to PNG</span>
+            <span class="related-desc">Convert JPEG to PNG</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

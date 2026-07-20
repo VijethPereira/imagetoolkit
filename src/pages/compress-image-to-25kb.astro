@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Which banking exams require a photo under 25 KB?',
+    a: 'IBPS Specialist Officer (IBPS SO) and certain Railway Recruitment Board (RRB) portals for officer-grade posts use a 25 KB photo limit. Some cooperative bank recruitment portals and state finance department exam portals also use this threshold. Always verify the current advertisement — IBPS updates specifications between recruitment cycles.',
+  },
+  {
+    q: 'How do I compress a photo to 25 KB for IBPS?',
+    a: 'Upload your photo to this tool — the target is pre-set to 25 KB. For best results, resize to 200×230 px first using the Resize Image tool, then compress here with JPEG output. The tool automatically finds the highest quality that fits under 25 KB. At 200×230 px, a 25 KB JPEG looks marginally better than the SSC-standard 20 KB because there is slightly more budget for quality.',
+  },
+  {
+    q: 'What is the difference between 25 KB and 20 KB for exam photos?',
+    a: 'At standard exam photo dimensions (200×230 px), 25 KB allows a slightly higher JPEG quality than 20 KB. The visual difference is small — both look acceptable for identity verification. However, if your IBPS SO notification specifies 25 KB, use this tool rather than the 20 KB tool, because a file compressed to 19 KB will technically pass but you might as well use the full budget for better quality.',
+  },
+  {
+    q: 'Do I need to upload a JPEG or can I upload PNG for IBPS SO?',
+    a: 'IBPS portals require JPEG format for photos. Upload your image here (PNG, WebP, or JPEG accepted as input) and set the output format to JPEG before compressing. The tool will convert your image to JPEG and compress it to under 25 KB in one step.',
+  },
+  {
+    q: 'My 25 KB photo looks blurry after compression — how do I fix it?',
+    a: 'The most common cause is starting with a large photo and compressing heavily. If your original is a 3–5 MB smartphone photo, it needs massive compression to reach 25 KB, causing visible blurring. Fix: resize to 200×230 px first using the Resize Image tool, then compress. At 200×230 px, reaching 25 KB requires only moderate JPEG compression, and the result is significantly sharper.',
+  },
+  {
+    q: 'Is this tool free and safe for IBPS SO photo preparation?',
+    a: 'Yes — free, no account required, and completely private. Your photo never leaves your device. The compression happens in your browser using the Canvas API. After downloading, always verify the file size and preview it before uploading to the IBPS portal.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-25kb#app`,
+      name: 'Compress Image to 25 KB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 25 KB online. Free, no upload, 100% private. For IBPS SO, RRB officer portals, and banking exam photo uploads.',
+      url: `${siteConfig.domain}/compress-image-to-25kb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 25 KB — Free, No Upload"
+  description="Free tool to compress any image to under 25 KB. 100% private, no upload. For IBPS SO, RRB officer portals, and banking exam photo uploads. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-25kb`}
+  keywords="compress image to 25kb, reduce to 25kb, ibps so photo size, rrb photo 25kb, banking exam photo compress"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-25kb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 25 KB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 25 KB. 100% private, no upload. For IBPS Specialist Officer, RRB officer portals, and banking exam photo requirements.</p>
+      </header>
+
+      <CompressTool targetKB={25} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 25 KB — IBPS SO &amp; Banking Exam Portals</h2>
+        <p>25 KB is the photo upload limit used by IBPS Specialist Officer (IBPS SO) recruitment portals and some Railway Recruitment Board (RRB) officer-grade applications. It sits just above the SSC standard of 20 KB, giving marginally better quality while still maintaining the small file size required for high-volume exam portal submissions. Several cooperative bank recruitment bodies and state finance department exams also use this 25 KB ceiling.</p>
+        <p>The IBPS SO examination recruits Specialist Officers across IT Officer, Agriculture Field Officer, Marketing Officer, HR/Personnel Officer, Law Officer, and Rajbhasha Adhikari roles. While requirements vary between cycles, the photo and signature size limits are among the most consistent specifications — 25 KB for the photo and a lower limit (typically 12–20 KB) for the signature.</p>
+        <p>This free compressor runs entirely in your browser. It finds the highest possible JPEG quality that produces a file under 25 KB using binary search — meaning you always get the best quality the size budget allows.</p>
+
+        <h3>How to Prepare and Compress Your Photo to 25 KB</h3>
+        <ol>
+          <li>Take a recent passport-size photograph with a white or light-coloured background. Your face should be clearly visible, well-lit, and centred in the frame.</li>
+          <li>Resize to 200×230 px using the <a href="/resize-image-to-passport-size">Passport Size Photo Resizer</a> before compressing. Starting at the correct dimensions means far less compression is needed to reach 25 KB.</li>
+          <li>Upload the resized photo here. Target is pre-set to 25 KB.</li>
+          <li>Select JPEG as the output format (required by IBPS portals).</li>
+          <li>Click "Compress" and preview the result. Download when satisfied.</li>
+          <li>Check the downloaded file size is under 25 KB before uploading to the IBPS SO portal.</li>
+        </ol>
+
+        <h3>Tips for Crisp Photos at 25 KB</h3>
+        <p>At 200×230 pixels, 25 KB provides a JPEG quality level high enough for a clean, sharp exam photo. The face, hair, and clothing details will be recognisable. The improvement over 20 KB is real but subtle — you will notice it in the smoothness of skin tones and the sharpness of text on clothing or badges, but not dramatically.</p>
+        <p>The biggest quality improvement comes from lighting and composition of the original photo, not from the compression target. A well-lit photo taken against a white wall, cropped to show your face from shoulders up, will compress far more cleanly than a poorly-lit photo with a cluttered background, regardless of the target KB.</p>
+        <p>If your IBPS SO notification uses a different photo limit, use <a href="/compress-image-to-20kb">Compress to 20 KB</a> for the SSC-standard size or <a href="/compress-image-to-50kb">Compress to 50 KB</a> for portals with a more generous limit.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-20kb" class="related-card">
+            <span class="related-name">Compress to 20 KB</span>
+            <span class="related-desc">SSC CGL, IBPS PO, RRB NTPC</span>
+          </a>
+          <a href="/compress-image-to-50kb" class="related-card">
+            <span class="related-name">Compress to 50 KB</span>
+            <span class="related-desc">UPSC, NTA, college portals</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/resize-image-to-passport-size" class="related-card">
+            <span class="related-name">Passport Size Photo</span>
+            <span class="related-desc">413×531 px / 35×45 mm</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

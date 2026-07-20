@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import ResizeTool from '../components/tools/ResizeTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What is the recommended YouTube thumbnail size?',
+    a: 'YouTube\'s official recommended thumbnail size is 1280×720 pixels with a 16:9 aspect ratio and a minimum width of 640 pixels. Thumbnails must be under 2 MB and in JPG, GIF, or PNG format. At 1280×720, your thumbnail appears sharp in YouTube search results, home feed, suggested videos sidebar, and on YouTube TV. Smaller thumbnails appear blurry on large screens; larger thumbnails take longer to load without any visible benefit.',
+  },
+  {
+    q: 'What does HD (720p) mean for image resolution?',
+    a: 'HD stands for High Definition. In the context of video and image resolution, 720p specifically means 1280×720 pixels with a 16:9 aspect ratio. The "p" stands for progressive scan. 720p was the first widely-adopted HD standard, replacing the old 480p standard definition. For still images, 1280×720 is the HD baseline — it is the minimum resolution that modern audiences associate with "high quality" digital content.',
+  },
+  {
+    q: 'Is 1280×720 used for wallpapers?',
+    a: 'Yes. 1280×720 was the standard HD desktop wallpaper resolution for Windows Vista and Windows 7-era PCs. While most modern monitors are now 1920×1080 or higher, 1280×720 wallpapers are still widely used on older laptops, budget screens, and some small-form-factor displays. Many wallpaper sites still categorise 1280×720 as "HD" in their download options.',
+  },
+  {
+    q: 'Why is the 16:9 aspect ratio important for YouTube thumbnails?',
+    a: 'YouTube\'s player and feed are designed around the 16:9 widescreen ratio. A thumbnail that is not 16:9 will be letterboxed (black bars added top and bottom) or pillarboxed (black bars added left and right) in the YouTube interface, making it look unprofessional and wasting valuable visible thumbnail space. Always ensure your 1280×720 thumbnail uses the full 16:9 frame with no black bars.',
+  },
+  {
+    q: 'Can I use 1280×720 for presentations?',
+    a: 'Yes. Many older presentation templates and screen sizes use a 1280×720 canvas. Microsoft PowerPoint\'s widescreen format is 1920×1080, but 1280×720 is still used for presentations designed for 720p projectors and screens. Game development tools, digital signage software, and some training platform video templates also use 1280×720 as a standard canvas size.',
+  },
+  {
+    q: 'Is this tool free and private?',
+    a: 'Completely free with no sign-up required. All resizing happens in your browser using the HTML5 Canvas API — your image is never uploaded to any server. You can safely resize YouTube thumbnails, game screenshots, and other content without any privacy or watermark concerns.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/resize-image-to-1280x720#app`,
+      name: 'Resize Image to 1280×720 px Free Online',
+      description: 'Resize any image to 1280×720 pixels free online. No upload, 100% private. For YouTube thumbnails, HD wallpapers, presentation backgrounds, and 720p content.',
+      url: `${siteConfig.domain}/resize-image-to-1280x720`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Resize Image to 1280×720 px — Free Online"
+  description="Free online tool to resize any image to 1280×720 pixels (HD / 720p). No upload, 100% private. For YouTube thumbnails, HD wallpapers, presentations, and game screenshots."
+  canonical={`${siteConfig.domain}/resize-image-to-1280x720`}
+  keywords="resize image to 1280x720, youtube thumbnail size, hd wallpaper size, 720p image resize, 1280x720 thumbnail"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/resize-image-to-1280x720" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Resize Image to 1280×720 px — Free</h1>
+        <p class="tool-desc">Free online tool to resize any image to 1280×720 pixels (HD / 720p). For YouTube thumbnails, HD wallpapers, presentation backgrounds, and game store screenshots. No upload, 100% private.</p>
+      </header>
+
+      <ResizeTool width={1280} height={720} lockAspect={false} outputFormat="jpeg" presetLabel="1280×720 px (HD / 720p)" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Resize Image to 1280×720 — YouTube Thumbnails, HD Wallpapers &amp; More</h2>
+        <p>YouTube's official recommended thumbnail size is 1280×720 pixels with a 16:9 aspect ratio. A correctly-sized thumbnail appears crisp in YouTube search results, suggested videos, home feed, and on YouTube TV and smart TVs. When you upload a smaller thumbnail — say 640×360 — YouTube serves it at 1280×720 equivalent display sizes on large screens, making it appear blurry and less professional. Starting at 1280×720 means zero upscaling, zero quality loss.</p>
+        <p>1280×720 is also the standard HD (720p) resolution — the minimum quality that modern viewers associate with "high definition." This was the resolution that defined the HD era for consumers, first appearing on HDTVs in the early 2000s and becoming the internet standard for video in the mid-2010s. For still images, a 1280×720 canvas is the natural choice for HD wallpapers, presentation backgrounds, and any content intended for 720p displays.</p>
+        <p>Windows 7-era desktop wallpapers and many presentation themes still use 1280×720. Laptops with 1280×720 screens (common in the budget segment even today) display wallpapers at exactly this resolution with no scaling. Presentation slides designed for HD projectors — a common setup in conference rooms, schools, and training centres — target 1280×720 as the safe minimum for legible text and sharp graphics.</p>
+        <p>Game storefronts use 1280×720 extensively. Steam game screenshots are displayed at 1280×720 as the maximum size in search results and game library tiles. Itch.io game listing screenshots, Epic Games Store promotional screenshots, and Microsoft Store game listings all support or recommend 1280×720 as the standard screenshot resolution. If you are publishing a game or app, having screenshots at exactly this resolution ensures they display correctly across all store fronts.</p>
+        <p>The 16:9 aspect ratio (16 wide, 9 tall) is the defining characteristic of 1280×720. This ratio matches the shape of modern TV screens, computer monitors, laptop displays, and smartphone screens in landscape mode. Content designed in 16:9 fills these screens without black bars. When forcing a non-16:9 image into a 1280×720 frame, the image will be distorted — always crop to 16:9 before resizing.</p>
+
+        <h3>How to Resize to 1280×720 px</h3>
+        <ol>
+          <li><strong>Prepare a 16:9 crop.</strong> For YouTube thumbnails and wallpapers, crop your original image to a 16:9 ratio (for example, 1920×1080, 3840×2160, or any width-to-height ratio of 16:9) before resizing. This prevents distortion.</li>
+          <li><strong>Upload the image.</strong> Click "Choose File" or drag and drop. Dimensions are pre-set to 1280×720 px.</li>
+          <li><strong>Select output format.</strong> JPEG for photos and thumbnails (YouTube requires JPG, PNG, or GIF). PNG for graphics, text-heavy designs, or images with transparency.</li>
+          <li><strong>Click "Resize" and download.</strong> Your 1280×720 px image is ready to upload as a YouTube thumbnail, HD wallpaper, or game screenshot.</li>
+        </ol>
+
+        <h3>YouTube Thumbnail Best Practices</h3>
+        <p>A great YouTube thumbnail at 1280×720 is more than just the right pixel count. Use high-contrast text (white or yellow with a dark outline) that is readable even at the small display sizes YouTube uses in search results. Include a face — thumbnails with expressive faces get more clicks. Use a consistent visual style across your channel so viewers recognise your content instantly. Keep the file size under 2 MB (YouTube's limit) — a 1280×720 JPEG at quality 85 is typically 150–350 KB, well within limits.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/resize-image-to-1920x1080" class="related-card">
+            <span class="related-name">Resize to 1920×1080</span>
+            <span class="related-desc">Full HD / 1080p wallpaper</span>
+          </a>
+          <a href="/resize-image-to-1080x1080" class="related-card">
+            <span class="related-name">Resize to 1080×1080</span>
+            <span class="related-desc">Instagram square posts</span>
+          </a>
+          <a href="/resize-image" class="related-card">
+            <span class="related-name">Resize Image</span>
+            <span class="related-desc">Any custom pixel dimensions</span>
+          </a>
+          <a href="/compress-image-to-500kb" class="related-card">
+            <span class="related-name">Compress to 500 KB</span>
+            <span class="related-desc">Reduce large image file size</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

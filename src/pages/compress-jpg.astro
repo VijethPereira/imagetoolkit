@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'What JPEG quality setting gives the best balance of size and quality?',
+    a: 'The widely-accepted sweet spot is quality 75–85%. Below quality 70, JPEG artifacts become visible in areas of smooth gradient (sky, skin tones) and sharp edges start to show "ringing" (ghost edges). Above quality 90, file size grows rapidly with almost no visible quality improvement on screen. For web photos, quality 80 is the standard recommended by Google PageSpeed and web performance specialists. For professional printing, use quality 90+.\\',
+  },
+  {
+    q: 'Why does JPEG use lossy compression?',
+    a: 'JPEG (Joint Photographic Experts Group) was designed specifically for photographs. It exploits the fact that the human eye is less sensitive to high-frequency detail (fine texture, sharp edges) than to broad colour and brightness changes. JPEG discards high-frequency information in small 8×8 pixel blocks, which dramatically reduces file size with minimal perceived quality loss for typical photographic content. This is why JPEG works well for photos but poorly for sharp-edged graphics, text, and logos.\\',
+  },
+  {
+    q: 'Why do Indian exam portals require JPEG format?',
+    a: 'JPEG is required by SSC, IBPS, NTA, UPSC, and other exam portals for several reasons: JPEG files are consistently smaller than PNG for photographs (1/3 to 1/5 the size at equivalent quality), JPEG is universally supported by all browsers and image processing systems, and JPEG\'s small size helps portals enforce the low file size limits (5–50 KB) that reduce server load during high-traffic exam registration periods.',
+  },
+  {
+    q: 'What is the difference between JPG and JPEG?',
+    a: 'JPG and JPEG are identical formats — the difference is only in the file extension. Early Windows systems limited file extensions to 3 characters, so JPEG became JPG. Modern systems support both. All exam portals, image editors, and browsers treat .jpg and .jpeg files identically. This tool outputs JPEG regardless of whether you name the file .jpg or .jpeg.\\',
+  },
+  {
+    q: 'Should I resize before compressing a JPEG?',
+    a: 'For exam portals: yes, always resize to the required dimensions first (e.g., 200×230 px for SSC photos), then compress to the required KB limit. The JPEG quality needed to reach 20 KB at 200×230 px is much higher than what\'s needed at 2000×2300 px — so pre-resizing dramatically improves output quality. For web photos and professional images: resize to the target display dimensions, then use quality 80 for excellent results at minimal file size.',
+  },
+  {
+    q: 'Can I compress multiple JPEGs at once?',
+    a: 'This tool currently processes one image at a time to ensure maximum quality and 100% private browser-only processing. For batch compression of multiple photos, you can process each file individually here. The tool is fast — typically compressing each image in under a second in your browser.\\',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-jpg#app`,
+      name: 'Compress JPG Online Free',
+      description: 'Compress JPEG/JPG images online with quality slider. Free, no upload, 100% private. Reduce JPG file size for exam portals, web use, and professional photos.',
+      url: `${siteConfig.domain}/compress-jpg`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress JPG Online Free — Quality Slider, No Upload"
+  description="Free tool to compress JPG/JPEG images online. Quality slider control, no upload, 100% private. For exam portals, web images, and professional photos. PNG and WebP also accepted."
+  canonical={`${siteConfig.domain}/compress-jpg`}
+  keywords="compress jpg, compress jpg online, reduce jpg size, jpeg compressor, compress jpeg file, jpg image compress"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-jpg" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress JPG Online</h1>
+        <p class="tool-desc">Free JPEG compressor with quality slider. Accepts JPG, PNG, and WebP. No upload, 100% private. For exam portal photos, web images, and professional JPEG optimisation.</p>
+      </header>
+
+      <CompressTool outputFormat="jpeg" />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>JPEG Compression Explained — Quality, File Size &amp; Best Practices</h2>
+        <p>JPEG is the world's most widely used image format for photographs, and it remains the dominant format required by Indian government exam portals, job portals, banking exam systems, and most web applications. Understanding how JPEG quality works helps you get the smallest possible file size without visible quality loss — which matters both when hitting strict exam upload limits and when optimising website images for speed.</p>
+        <p>JPEG compression is lossy — it permanently discards some image information to achieve smaller file sizes. The quality slider (1–100) controls how much information is discarded. At quality 1, almost all fine detail is discarded and the image looks blocky and smeared. At quality 100, almost nothing is discarded and the file size is only slightly smaller than an uncompressed format. The sweet spot — quality 75–85 — keeps the image looking excellent to the naked eye while cutting file size by 60–80% compared to quality 100.</p>
+
+        <h3>JPEG Quality Settings — Practical Guide</h3>
+        <p>Here is what different quality ranges mean in practice:</p>
+        <ol>
+          <li><strong>Quality 1–30:</strong> Heavy compression, visible blocking and smearing. Only use when hitting extremely tight targets like 5–10 KB for signatures, and only after resizing to small dimensions first.</li>
+          <li><strong>Quality 30–60:</strong> Noticeable compression artifacts, especially on smooth gradients (sky, skin) and sharp text/logo edges. Acceptable for thumbnails and non-critical uses.</li>
+          <li><strong>Quality 60–80:</strong> Standard web quality range. At quality 75–80, most web images look excellent. Google PageSpeed and WebP specifications use quality 80 as the default recommendation. This range covers most exam portal requirements when the photo is already at correct dimensions.</li>
+          <li><strong>Quality 80–90:</strong> Professional web quality. Used by professional photography sites, e-commerce main images, and publication web graphics. Artifacts are virtually invisible.</li>
+          <li><strong>Quality 90–100:</strong> Near-lossless to lossless JPEG. File sizes grow rapidly with minimal visible improvement. Use only for archiving or print preparation.</li>
+        </ol>
+
+        <h3>JPEG for Exam Portals — Key Tips</h3>
+        <p>All major Indian government exam portals require JPEG: SSC CGL, IBPS PO, IBPS Clerk, NTA NEET, JEE Main, UPSC Civil Services, BPSC, MPSC, and hundreds of others. The reason is consistent: JPEG is the smallest format for photographs, it is universally supported, and it enforces the low file size limits that protect portal servers during peak registration periods.</p>
+        <p>For best results on exam portals: first resize your photo to the exact pixel dimensions required (use <a href="/resize-image-to-passport-size">Passport Size Photo Resizer</a> for passport-size photos), then use a fixed-KB compressor (like <a href="/compress-image-to-20kb">Compress to 20 KB</a> for SSC or <a href="/compress-image-to-40kb">Compress to 40 KB</a> for UPSC) rather than the quality slider. The fixed-KB tools automatically find the highest quality that fits the limit. Use this JPG compressor with the quality slider when you want to control quality directly rather than targeting a specific file size.</p>
+        <p>For PNG-to-JPEG conversion, upload your PNG here and the tool will output JPEG. To convert to WebP format for significantly smaller file sizes, use <a href="/jpg-to-webp">JPG to WebP</a>. To keep PNG format without quality loss, use <a href="/compress-png">Compress PNG</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/compress-png" class="related-card">
+            <span class="related-name">Compress PNG</span>
+            <span class="related-desc">Lossless PNG compression</span>
+          </a>
+          <a href="/jpg-to-webp" class="related-card">
+            <span class="related-name">JPG to WebP</span>
+            <span class="related-desc">25–34% smaller than JPEG</span>
+          </a>
+          <a href="/jpg-to-png" class="related-card">
+            <span class="related-name">JPG to PNG</span>
+            <span class="related-desc">Lossless conversion from JPEG</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

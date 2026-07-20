@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteNav from '../components/SiteNav.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import CompressTool from '../components/tools/CompressTool.astro';
+import siteConfig from '../site.config.ts';
+
+const faqs = [
+  {
+    q: 'Why do e-commerce main product photos need to be 2 MB or less?',
+    a: 'Amazon requires main product images of at least 1000×1000 px for zoom functionality, and accepts files up to 10 MB. However, 2 MB per main image is the practical optimum — it provides enough detail for the zoom view while keeping the product listing page load time reasonable. Flipkart and Myntra follow similar patterns. Images over 2 MB per product slow down category browsing pages that display dozens of products simultaneously.',
+  },
+  {
+    q: 'Is 2 MB appropriate for real estate property photos?',
+    a: 'Yes. MagicBricks, 99acres, Housing.com, and NoBroker accept property photos up to 5–10 MB, but 2 MB per photo is the recommended upper limit for web listings. At 2 MB and 4000×3000 px or 3000×2000 px, a property photo looks excellent in full-screen gallery view. Buyers zooming into details like flooring, fixtures, and kitchen fittings can see them clearly. Uploading at 2 MB also keeps the listing\'s total image weight manageable.',
+  },
+  {
+    q: 'What resolution can I achieve at 2 MB with good quality?',
+    a: 'At 2 MB JPEG: a 4000×3000 px image (12 MP) at quality ~75%, a 3000×2000 px image at quality ~85%, or a 2000×2000 px square at quality ~92%. All of these look excellent on any screen. 4000×3000 px at 2 MB is sufficient for online viewing of very fine detail like text in signage, fabric weave in clothing, or gem cut in jewellery — the common product detail use cases.',
+  },
+  {
+    q: 'Can I compress RAW photography files to 2 MB with this tool?',
+    a: 'This tool accepts JPEG, PNG, and WebP inputs — not RAW formats (CR2, NEF, ARW, etc.). To use this tool with RAW files, first export the RAW to JPEG in your photo editing software (Lightroom, Darktable, or your camera\'s software), then upload the JPEG here to compress to 2 MB. The output will be a compressed JPEG at exactly under 2 MB.',
+  },
+  {
+    q: 'Does compressing to 2 MB affect print quality?',
+    a: 'At 2 MB, print quality depends heavily on the dimensions. A 2000×2000 px JPEG at 2 MB (quality ~92%) prints well at 5×5 inches at 400 DPI but will look pixelated at A4 size (8.3×11.7 inches at 300 DPI, which requires 2490×3507 px). For print, always use the original high-resolution file and compress only the web version. This tool is optimised for web and upload use, not print.',
+  },
+  {
+    q: 'Which photography portfolio platforms support 2 MB image uploads?',
+    a: 'Adobe Portfolio (included with Creative Cloud), Format, Squarespace (photography plan), Pixieset, and SmugMug all handle 2 MB images without issue. Some accept much larger files but recommend under 2–5 MB for fast gallery loading. At 2 MB, even gallery pages with 20–30 images load efficiently using lazy loading, which these platforms implement automatically.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${siteConfig.domain}/compress-image-to-2mb#app`,
+      name: 'Compress Image to 2 MB Online Free',
+      description: 'Compress any JPG, PNG, or WebP image to under 2 MB online. Free, no upload, 100% private. For e-commerce main product photos, real estate listings, and photography portfolios.',
+      url: `${siteConfig.domain}/compress-image-to-2mb`,
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'Any',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title="Compress Image to 2 MB — Free, No Upload"
+  description="Free tool to compress any image to under 2 MB. 100% private, no upload. For e-commerce product photos (Amazon, Flipkart), real estate listings, and photography portfolios. JPG, PNG, WebP."
+  canonical={`${siteConfig.domain}/compress-image-to-2mb`}
+  keywords="compress image to 2mb, reduce to 2mb, compress photo 2mb, e-commerce product photo 2mb"
+  jsonLd={jsonLd}
+>
+  <SiteNav currentPath="/compress-image-to-2mb" />
+  <main class="page-main">
+    <div class="tool-screen"><div class="container">
+      <header class="tool-header">
+        <a href="/" class="back-link">&larr; All tools</a>
+        <h1>Compress Image to 2 MB Online</h1>
+        <p class="tool-desc">Free tool to compress any photo to under 2 MB. 100% private, no upload. For e-commerce main product images, real estate property photos, and professional photography portfolios.</p>
+      </header>
+
+      <CompressTool targetKB={2048} />
+
+    </div></div>
+    <div class="page-spacer" aria-hidden="true"></div>
+    <div class="page-content"><div class="container">
+      <AdSlot slot="1111111111" />
+
+      <section class="content-section">
+        <h2>Compress Image to 2 MB — E-commerce, Real Estate &amp; Photography</h2>
+        <p>2 MB represents the upper tier of web-optimised photography — large enough to display sharp detail in zoomed product views, gallery previews, and full-screen property photos, yet manageable enough for web servers and CDNs to deliver quickly. This is why it has become the practical standard for e-commerce main product images, real estate listing photos, and photography portfolio previews.</p>
+        <p>Amazon's main product image specification requires at least 1000×1000 px for zoom functionality. At 2 MB and 2000×2000 px, a JPEG product photo uses approximately 90% quality — the threshold where compression artifacts are invisible to the naked eye on screen, even when zoomed. Flipkart, Myntra, Nykaa, and Meesho follow similar quality expectations for their marketplace listings, where product visuals directly affect click-through rate and conversion.</p>
+        <p>This compressor handles files of any input size and targets exactly 2 MB (2048 KB). Processing happens locally in your browser — no uploads, no server, no privacy concerns.</p>
+
+        <h3>Real Estate Photography at 2 MB — Why It Works</h3>
+        <p>Indian real estate portals — MagicBricks, 99acres, Housing.com, NoBroker, and PropTiger — display property images in full-screen gallery view where buyers zoom into details: flooring patterns, kitchen fittings, bathroom fixtures, view from windows, and building exterior. At 2 MB and 3000×2000 px or 4000×3000 px, all of these details render clearly in the gallery view. Property buyers make shortlisting decisions based on photo quality — poor compression directly reduces enquiry rates.</p>
+        <p>Real estate agents who upload 10–20 MB uncompressed files see the same gallery quality as agents who compress to 2 MB first, but their listings load significantly slower — which hurts SEO ranking on the portal and viewer retention rate. Compressing to 2 MB is the smart balance between visual quality and platform performance.</p>
+
+        <h3>Photography Portfolio — 2 MB for Web Previews</h3>
+        <ol>
+          <li>Export your edited photo from Lightroom or other software as a high-quality JPEG (quality 90+).</li>
+          <li>Upload to this tool. Target is pre-set to 2 MB.</li>
+          <li>The output will be the highest quality that fits in 2 MB — which at typical portfolio dimensions (3000×2000 px) is around quality 82–88%.</li>
+          <li>Download and upload to your portfolio platform (Format, Pixieset, Adobe Portfolio, SmugMug).</li>
+          <li>Keep your original high-resolution files for print orders and client deliveries.</li>
+        </ol>
+        <p>For images where 2 MB is more than you need, try <a href="/compress-image-to-1mb">Compress to 1 MB</a>. For format conversion that gives 25–34% smaller files at the same quality, see <a href="/jpg-to-webp">JPG to WebP</a> or <a href="/png-to-webp">PNG to WebP</a>. For general compression with quality control, use <a href="/compress-image">Compress Image</a>.</p>
+      </section>
+
+      <AdSlot slot="2222222222" />
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <button type="button" aria-expanded="false" class="faq-toggle">
+                  {q}<span class="faq-icon" aria-hidden="true">+</span>
+                </button>
+              </dt>
+              <dd class="faq-a" hidden><p>{a}</p></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="related-section">
+        <h2>Related Tools</h2>
+        <div class="related-grid">
+          <a href="/compress-image-to-1mb" class="related-card">
+            <span class="related-name">Compress to 1 MB</span>
+            <span class="related-desc">CMS, social media &amp; web use</span>
+          </a>
+          <a href="/compress-image" class="related-card">
+            <span class="related-name">Compress Image</span>
+            <span class="related-desc">Custom quality &amp; size target</span>
+          </a>
+          <a href="/jpg-to-webp" class="related-card">
+            <span class="related-name">JPG to WebP</span>
+            <span class="related-desc">25–34% smaller than JPEG</span>
+          </a>
+          <a href="/png-to-webp" class="related-card">
+            <span class="related-name">PNG to WebP</span>
+            <span class="related-desc">Smaller PNG alternative</span>
+          </a>
+        </div>
+      </section>
+    </div></div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.querySelectorAll('.faq-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      var dd = btn.closest('.faq-item').querySelector('.faq-a');
+      var icon = btn.querySelector('.faq-icon');
+      dd.hidden = expanded;
+      if (icon) icon.textContent = expanded ? '+' : '−';
+    });
+  });
+</script>
+
+<style>
+  .page-main { padding: 0; }
+  .tool-screen { position: fixed; top: 64px; left: 0; right: 0; height: calc(100vh - 64px); overflow-y: auto; background: var(--site-bg); z-index: 1; padding: 2rem 0 1.5rem; }
+  .page-spacer { height: 100vh; }
+  .page-content { position: relative; z-index: 2; background: var(--site-bg); padding: 2rem 0 4rem; }
+  .container { max-width: 860px; margin-inline: auto; padding-inline: 1.5rem; }
+  .tool-header { margin-bottom: 1.5rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.875rem; color: var(--site-text-muted); text-decoration: none; margin-bottom: 1rem; transition: color 0.15s; }
+  .back-link:hover { color: var(--site-text); text-decoration: none; }
+  h1 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 600; letter-spacing: -1.28px; color: var(--site-text); line-height: 1.15; margin: 0 0 0.75rem; }
+  .tool-desc { font-size: 1.0625rem; color: var(--site-body); margin: 0; max-width: 64ch; line-height: 1.6; }
+  .content-section { margin: 2.5rem 0; }
+  .content-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 0.75rem; }
+  .content-section h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 1.75rem 0 0.5rem; }
+  .content-section p { color: var(--site-body); margin: 0 0 1rem; max-width: 72ch; line-height: 1.6; }
+  .content-section ol { color: var(--site-body); padding-left: 1.5rem; max-width: 64ch; margin: 0 0 1rem; }
+  .content-section li { margin-bottom: 0.5rem; line-height: 1.6; }
+  .content-section a { color: var(--site-accent); }
+  .faq-section { margin: 2.5rem 0; }
+  .faq-section h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.96px; color: var(--site-text); margin: 0 0 1.25rem; }
+  .faq-list { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-item { border: 1px solid var(--site-border); border-radius: 8px; overflow: hidden; }
+  .faq-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: var(--site-bg-card); border: none; color: var(--site-text); font-size: 0.9375rem; font-weight: 600; text-align: left; cursor: pointer; transition: background 0.15s; }
+  .faq-toggle:hover { background: var(--site-hover); }
+  .faq-icon { font-size: 1.25rem; line-height: 1; flex-shrink: 0; color: var(--site-text-muted); }
+  .faq-a { margin: 0; padding: 0 1.25rem 1rem; background: var(--site-bg-card); }
+  .faq-a p { margin: 0; font-size: 0.9375rem; color: var(--site-text-muted); line-height: 1.6; }
+  .related-section { margin: 2rem 0; }
+  .related-section h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.6px; color: var(--site-text); margin: 0 0 0.875rem; }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 0.625rem; }
+  .related-card { display: block; padding: 0.875rem 1rem; border: 1px solid var(--site-border); border-radius: 8px; text-decoration: none; background: var(--site-bg-card); transition: box-shadow 0.15s, border-color 0.15s; }
+  .related-card:hover { box-shadow: var(--shadow-2); border-color: var(--site-border-strong); text-decoration: none; }
+  .related-name { display: block; font-size: 0.875rem; font-weight: 600; color: var(--site-text); margin-bottom: 0.2rem; }
+  .related-desc { display: block; font-size: 0.75rem; color: var(--site-text-muted); line-height: 1.4; }
+
+  @media (max-width: 640px) {
+    .page-content { padding: 1.5rem 0 3rem; }
+    h1 { letter-spacing: -0.5px; }
+    .content-section h2, .faq-section h2 { letter-spacing: -0.4px; }
+    .content-section { margin: 1.75rem 0; }
+    .faq-section { margin: 1.75rem 0; }
+  }
+</style>

@@ -1,0 +1,383 @@
+---
+// No props — standalone rotate/flip tool
+---
+
+<section class="tool-widget" id="rotate-tool">
+  <!-- Upload zone -->
+  <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Upload image">
+    <div class="drop-inner">
+      <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"/>
+      </svg>
+      <p class="drop-label">Drop image here or <span class="drop-link">browse</span></p>
+      <p class="drop-hint">JPG · PNG · WebP · GIF — max 20 MB</p>
+    </div>
+    <input type="file" id="file-input" accept="image/*" class="file-input" />
+  </div>
+
+  <!-- Editor (hidden until file selected) -->
+  <div class="editor" id="editor" hidden>
+    <div class="file-meta">
+      <span class="file-name" id="file-name"></span>
+      <span class="file-dims" id="file-dims"></span>
+      <button class="change-btn" id="change-btn" type="button">× Change</button>
+    </div>
+
+    <!-- Live canvas preview -->
+    <div class="preview-wrap">
+      <canvas class="preview-canvas" id="preview-canvas"></canvas>
+    </div>
+
+    <!-- Rotation buttons -->
+    <div class="btn-group" role="group" aria-label="Rotation controls">
+      <button class="ctrl-btn" id="rot-left" type="button" title="Rotate 90° left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg>
+        90° Left
+      </button>
+      <button class="ctrl-btn" id="rot-right" type="button" title="Rotate 90° right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"/></svg>
+        90° Right
+      </button>
+      <button class="ctrl-btn" id="rot-180" type="button" title="Rotate 180°">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+        180°
+      </button>
+      <button class="ctrl-btn" id="flip-h" type="button" title="Flip horizontal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
+        Flip H
+      </button>
+      <button class="ctrl-btn" id="flip-v" type="button" title="Flip vertical">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5 7.5 21m0 0L12 16.5M7.5 21V7.5m9 13.5L21 16.5m0 0L16.5 12M21 16.5V7.5M3 7.5 7.5 3m0 0L12 7.5M7.5 3v4.5m9-4.5L21 7.5m0 0L16.5 12M21 7.5V3"/></svg>
+        Flip V
+      </button>
+    </div>
+
+    <!-- Free angle slider -->
+    <label class="angle-row">
+      <span class="angle-label">Fine angle</span>
+      <input type="range" id="angle-slider" min="-180" max="180" value="0" step="1" class="slider" />
+      <span class="angle-val" id="angle-val">0°</span>
+      <button class="reset-angle-btn" id="reset-angle" type="button">Reset</button>
+    </label>
+
+    <!-- Format + download -->
+    <div class="bottom-row">
+      <div class="format-row">
+        <label for="fmt-select">Output</label>
+        <select id="fmt-select" class="fmt-select">
+          <option value="jpeg">JPEG</option>
+          <option value="png">PNG</option>
+          <option value="webp">WebP</option>
+        </select>
+      </div>
+      <button class="btn-primary" id="download-btn" type="button">Download</button>
+    </div>
+  </div>
+
+  <p class="privacy-note">
+    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd"/></svg>
+    Your image never leaves your device. All processing happens in your browser.
+  </p>
+</section>
+
+<script>
+  const dropZone    = document.getElementById('drop-zone') as HTMLElement;
+  const fileInput   = document.getElementById('file-input') as HTMLInputElement;
+  const editor      = document.getElementById('editor') as HTMLElement;
+  const fileNameEl  = document.getElementById('file-name') as HTMLElement;
+  const fileDimsEl  = document.getElementById('file-dims') as HTMLElement;
+  const changeBtn   = document.getElementById('change-btn') as HTMLButtonElement;
+  const previewCanvas = document.getElementById('preview-canvas') as HTMLCanvasElement;
+  const rotLeft     = document.getElementById('rot-left') as HTMLButtonElement;
+  const rotRight    = document.getElementById('rot-right') as HTMLButtonElement;
+  const rot180      = document.getElementById('rot-180') as HTMLButtonElement;
+  const flipH       = document.getElementById('flip-h') as HTMLButtonElement;
+  const flipV       = document.getElementById('flip-v') as HTMLButtonElement;
+  const angleSlider = document.getElementById('angle-slider') as HTMLInputElement;
+  const angleVal    = document.getElementById('angle-val') as HTMLElement;
+  const resetAngle  = document.getElementById('reset-angle') as HTMLButtonElement;
+  const fmtSelect   = document.getElementById('fmt-select') as HTMLSelectElement;
+  const downloadBtn = document.getElementById('download-btn') as HTMLButtonElement;
+  const dropInner   = dropZone.querySelector('.drop-inner') as HTMLElement;
+
+  let currentFile: File | null = null;
+  let currentImg:  HTMLImageElement | null = null;
+  let previewUrl:  string | null = null;
+  let rotation   = 0;   // accumulated button rotation in degrees
+  let isFlipH    = false;
+  let isFlipV    = false;
+  let freeAngle  = 0;   // from slider
+
+  function degToRad(d: number) { return (d * Math.PI) / 180; }
+
+  function effectiveRad() { return degToRad(rotation + freeAngle); }
+
+  function outputDims(w: number, h: number, rad: number) {
+    const sin = Math.abs(Math.sin(rad));
+    const cos = Math.abs(Math.cos(rad));
+    return { w: Math.round(w * cos + h * sin), h: Math.round(w * sin + h * cos) };
+  }
+
+  function drawToCanvas(canvas: HTMLCanvasElement, img: HTMLImageElement) {
+    const rad  = effectiveRad();
+    const dims = outputDims(img.naturalWidth, img.naturalHeight, rad);
+    canvas.width  = dims.w;
+    canvas.height = dims.h;
+    const ctx = canvas.getContext('2d')!;
+    ctx.clearRect(0, 0, dims.w, dims.h);
+    ctx.save();
+    ctx.translate(dims.w / 2, dims.h / 2);
+    ctx.rotate(rad);
+    ctx.scale(isFlipH ? -1 : 1, isFlipV ? -1 : 1);
+    ctx.drawImage(img, -img.naturalWidth / 2, -img.naturalHeight / 2);
+    ctx.restore();
+  }
+
+  function renderPreview() {
+    if (!currentImg) return;
+    drawToCanvas(previewCanvas, currentImg);
+  }
+
+  function loadImage(file: File): Promise<HTMLImageElement> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  async function showEditor(file: File) {
+    currentFile = file;
+    const img   = await loadImage(file);
+    currentImg  = img;
+    fileNameEl.textContent = file.name;
+    fileDimsEl.textContent = `${img.naturalWidth}×${img.naturalHeight} px`;
+    rotation = 0; isFlipH = false; isFlipV = false; freeAngle = 0;
+    angleSlider.value = '0';
+    angleVal.textContent = '0°';
+    editor.hidden = false;
+    // swap drop zone content
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(file);
+    dropInner.hidden = true;
+    renderPreview();
+  }
+
+  function reset() {
+    currentFile = null; currentImg = null;
+    fileInput.value = '';
+    editor.hidden = true;
+    if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
+    dropInner.hidden = false;
+  }
+
+  // Drop zone
+  dropZone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    const f = e.dataTransfer?.files[0];
+    if (f && f.type.startsWith('image/')) showEditor(f);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files?.[0]) showEditor(fileInput.files[0]);
+  });
+
+  changeBtn.addEventListener('click', reset);
+
+  // Rotation buttons
+  rotLeft.addEventListener('click',  () => { rotation = (rotation - 90 + 360) % 360; renderPreview(); });
+  rotRight.addEventListener('click', () => { rotation = (rotation + 90) % 360; renderPreview(); });
+  rot180.addEventListener('click',   () => { rotation = (rotation + 180) % 360; renderPreview(); });
+  flipH.addEventListener('click',    () => { isFlipH = !isFlipH; renderPreview(); });
+  flipV.addEventListener('click',    () => { isFlipV = !isFlipV; renderPreview(); });
+
+  // Angle slider
+  angleSlider.addEventListener('input', () => {
+    freeAngle = parseInt(angleSlider.value);
+    angleVal.textContent = `${freeAngle >= 0 ? '+' : ''}${freeAngle}°`;
+    renderPreview();
+  });
+  resetAngle.addEventListener('click', () => {
+    freeAngle = 0; angleSlider.value = '0'; angleVal.textContent = '0°';
+    renderPreview();
+  });
+
+  // Download
+  downloadBtn.addEventListener('click', () => {
+    if (!currentImg || !currentFile) return;
+    const fmt    = fmtSelect.value as 'jpeg' | 'png' | 'webp';
+    const mime   = `image/${fmt}`;
+    const canvas = document.createElement('canvas');
+    drawToCanvas(canvas, currentImg);
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const ext  = fmt === 'jpeg' ? 'jpg' : fmt;
+      const base = currentFile!.name.replace(/\.[^.]+$/, '');
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = `${base}-rotated.${ext}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }, mime, 0.92);
+  });
+</script>
+
+<style>
+  .tool-widget {
+    background: var(--site-bg-card);
+    border-radius: 12px;
+    box-shadow: var(--shadow-4);
+    padding: 2rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  /* Drop zone */
+  .drop-zone {
+    border: 2px dashed var(--site-border);
+    border-radius: 8px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--site-accent);
+    background: color-mix(in srgb, var(--site-accent) 5%, transparent);
+  }
+  .drop-inner { pointer-events: none; }
+  .drop-icon { width: 2.5rem; height: 2.5rem; color: var(--site-text-muted); margin: 0 auto 0.75rem; }
+  .drop-label { font-size: 1rem; font-weight: 500; color: var(--site-text); margin: 0 0 0.25rem; }
+  .drop-link  { color: var(--site-accent); }
+  .drop-hint  { font-size: 0.8125rem; color: var(--site-text-muted); margin: 0; }
+  .file-input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+
+  /* Editor */
+  .editor { margin-top: 1.25rem; }
+
+  .file-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--site-hover);
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+  .file-name { font-weight: 600; color: var(--site-text); font-size: 0.9375rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 18ch; }
+  .file-dims { font-size: 0.875rem; color: var(--site-text-muted); flex-shrink: 0; }
+  .change-btn {
+    margin-left: auto; background: none; border: none; font-size: 0.8125rem;
+    color: var(--site-text-muted); cursor: pointer; padding: 0.125rem 0.375rem;
+    border-radius: 4px; flex-shrink: 0; transition: color 0.15s, background 0.15s;
+  }
+  .change-btn:hover { color: var(--site-text); background: var(--site-border); }
+
+  /* Preview canvas */
+  .preview-wrap {
+    background: repeating-conic-gradient(#80808020 0% 25%, transparent 0% 50%) 0 0 / 16px 16px;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+  }
+  .preview-canvas {
+    max-width: 100%;
+    max-height: 280px;
+    width: auto;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+  }
+
+  /* Button group */
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .ctrl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.875rem;
+    background: var(--site-hover);
+    border: 1px solid var(--site-border);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: var(--site-text);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .ctrl-btn:hover { background: color-mix(in srgb, var(--site-accent) 10%, transparent); border-color: var(--site-accent); }
+  .ctrl-btn svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+
+  /* Angle row */
+  .angle-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.9375rem;
+    color: var(--site-text);
+  }
+  .angle-label { flex-shrink: 0; }
+  .slider { flex: 1; min-width: 6rem; accent-color: var(--site-accent); }
+  .angle-val { font-weight: 600; min-width: 3.5ch; color: var(--site-accent); flex-shrink: 0; }
+  .reset-angle-btn {
+    background: none; border: 1px solid var(--site-border); border-radius: 6px;
+    font-size: 0.8125rem; color: var(--site-text-muted); cursor: pointer;
+    padding: 0.25rem 0.625rem; transition: border-color 0.15s, color 0.15s; flex-shrink: 0;
+  }
+  .reset-angle-btn:hover { border-color: var(--site-accent); color: var(--site-text); }
+
+  /* Bottom row */
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .format-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9375rem; color: var(--site-text); flex-shrink: 0; }
+  .fmt-select { padding: 0.375rem 0.75rem; border: 1px solid var(--site-border); border-radius: 6px; background: var(--site-bg); color: var(--site-text); font-size: 0.9375rem; }
+
+  .btn-primary {
+    flex: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.625rem 1.5rem;
+    background: var(--site-accent); color: #fff;
+    border: none; border-radius: 9999px;
+    font-size: 0.9375rem; font-weight: 600;
+    cursor: pointer; transition: opacity 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  /* Privacy note */
+  .privacy-note {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin: 1.25rem 0 0; padding: 0.75rem 1rem;
+    background: var(--site-hover); border-radius: 8px;
+    font-size: 0.8125rem; color: var(--site-text-muted);
+  }
+  .privacy-note svg { width: 1rem; height: 1rem; flex-shrink: 0; color: var(--site-accent); }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .tool-widget { padding: 1.125rem; }
+    .drop-zone { padding: 2rem 1rem; }
+    .ctrl-btn { font-size: 0.8125rem; padding: 0.4rem 0.625rem; }
+    .bottom-row { flex-direction: column; align-items: stretch; }
+    .format-row { justify-content: center; }
+  }
+</style>
