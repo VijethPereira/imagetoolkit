@@ -47,7 +47,7 @@ const isFixed = targetKB !== undefined;
     )}
 
     {isFixed && (
-      <p class="target-note">Target: <strong>{targetKB} KB</strong></p>
+      <p class="target-note" id="target-note">Target: <strong>{targetKB} KB</strong></p>
     )}
 
     <button class="btn-primary" id="compress-btn">
@@ -74,7 +74,7 @@ const isFixed = targetKB !== undefined;
       </div>
       <div class="stat">
         <span class="stat-label">Saved</span>
-        <span class="stat-val green" id="r-saved"></span>
+        <span class="stat-val" id="r-saved"></span>
       </div>
     </div>
     <div class="result-actions">
@@ -108,6 +108,7 @@ const isFixed = targetKB !== undefined;
   const downloadBtn = document.getElementById('download-btn') as HTMLAnchorElement;
   const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
   const changeBtn = document.getElementById('change-btn') as HTMLButtonElement;
+  const targetNote = document.getElementById('target-note') as HTMLElement | null;
 
   const targetKB = tool.dataset.targetKb ? parseInt(tool.dataset.targetKb) : null;
   const outputFormat = (tool.dataset.outputFormat || 'jpeg') as 'jpeg' | 'png' | 'webp';
@@ -164,6 +165,18 @@ const isFixed = targetKB !== undefined;
     previewImg.src = previewUrl;
     previewWrap.hidden = false;
     dropInner.hidden = true;
+
+    if (targetKB && targetNote) {
+      const alreadySmall = file.size <= targetKB * 1024;
+      if (alreadySmall) {
+        targetNote.innerHTML = `<span class="already-ok">✓ Already under ${targetKB} KB</span> — this file is upload-ready.`;
+        compressBtn.textContent = 'Download as-is';
+      } else {
+        targetNote.innerHTML = `Target: <strong>${targetKB} KB</strong>`;
+        compressBtn.textContent = `Compress to ${targetKB} KB`;
+      }
+    }
+
     if (estSizeEl) estSizeEl.textContent = 'Estimating…';
     currentImg = await loadImage(file);
     if (!targetKB) updateEstimate();
@@ -234,11 +247,6 @@ const isFixed = targetKB !== undefined;
     const targetBytes = kb * 1024;
     const canvas = drawToCanvas(img);
 
-    // Already small enough — just re-encode at high quality
-    if (currentFile!.size <= targetBytes) {
-      return canvasToBlob(canvas, mime, 0.92);
-    }
-
     // Binary search quality
     let lo = 0.01, hi = 0.95, best: Blob | null = null;
     for (let i = 0; i < 14; i++) {
@@ -267,6 +275,27 @@ const isFixed = targetKB !== undefined;
   compressBtn.addEventListener('click', async () => {
     if (!currentFile) return;
     compressBtn.disabled = true;
+
+    const origBytes = currentFile.size;
+    const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
+    const baseName = currentFile.name.replace(/\.[^.]+$/, '');
+
+    // File already under the target — serve original directly, no re-encoding
+    if (targetKB !== null && origBytes <= targetKB * 1024) {
+      rOrig.textContent = fmtBytes(origBytes);
+      rNew.textContent = fmtBytes(origBytes);
+      rSaved.textContent = `already under ${targetKB} KB`;
+      rSaved.classList.remove('green');
+      rSaved.classList.add('already-small');
+      downloadBtn.href = URL.createObjectURL(currentFile);
+      downloadBtn.download = `${baseName}.${ext}`;
+      controls.hidden = true;
+      result.hidden = false;
+      setStatus('');
+      compressBtn.disabled = false;
+      return;
+    }
+
     setStatus('Compressing…');
     result.hidden = true;
 
@@ -283,7 +312,6 @@ const isFixed = targetKB !== undefined;
         blob = await canvasToBlob(canvas, mime, quality);
       }
 
-      const origBytes = currentFile.size;
       // Never serve a file larger than the original — fall back to the original
       const useOriginal = blob.size >= origBytes;
       const finalBlob = useOriginal ? currentFile : blob;
@@ -292,10 +320,14 @@ const isFixed = targetKB !== undefined;
 
       rOrig.textContent = fmtBytes(origBytes);
       rNew.textContent = fmtBytes(newBytes);
-      rSaved.textContent = useOriginal ? 'no reduction — try lower quality' : `${saved}% smaller`;
+      if (useOriginal) {
+        rSaved.textContent = 'no reduction — try lower quality';
+        rSaved.classList.remove('green');
+      } else {
+        rSaved.textContent = `${saved}% smaller`;
+        rSaved.classList.add('green');
+      }
 
-      const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
-      const baseName = currentFile.name.replace(/\.[^.]+$/, '');
       downloadBtn.href = URL.createObjectURL(finalBlob);
       downloadBtn.download = `${baseName}-compressed.${ext}`;
 
@@ -312,10 +344,6 @@ const isFixed = targetKB !== undefined;
   resetBtn.addEventListener('click', reset);
   changeBtn.addEventListener('click', reset);
 
-  // Fix broken overload call above
-  async function canvasToBlob2(canvas: HTMLCanvasElement, mime: string, quality: number): Promise<Blob> {
-    return canvasToBlob(canvas, mime, quality);
-  }
 </script>
 
 <style>
@@ -479,6 +507,16 @@ const isFixed = targetKB !== undefined;
     font-size: 0.9375rem;
     color: var(--site-text-muted);
   }
+
+  .already-ok {
+    color: #16a34a;
+    font-weight: 600;
+  }
+  [data-theme="dark"] .already-ok { color: #4ade80; }
+
+  .stat-val.green { color: #16a34a; }
+  [data-theme="dark"] .stat-val.green { color: #4ade80; }
+  .stat-val.already-small { color: var(--site-text-muted); font-size: 0.875rem; }
 
   /* button-primary — DESIGN: ink bg, white text, 14px/500, pill (100px) */
   .btn-primary {
