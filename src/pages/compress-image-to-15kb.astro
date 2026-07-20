@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
@@ -9,27 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Which state PSC portals require a photo under 15 KB?',
-    a: 'Maharashtra Public Service Commission (MPSC), Rajasthan Public Service Commission (RPSC), and Bihar Public Service Commission (BPSC) have all used a 15 KB photo limit for various examination notifications. TS EAMCET (Telangana State Engineering, Agriculture and Medical Common Entrance Test) and some AP (Andhra Pradesh) state entrance portal notifications have also specified this threshold. Always check the latest official notification, as limits can vary between exam cycles.\\',
+    a: 'Maharashtra Public Service Commission (MPSC), Rajasthan Public Service Commission (RPSC), and Bihar Public Service Commission (BPSC) have all used a 15 KB photo limit for various examination notifications. TS EAMCET (Telangana State Engineering, Agriculture and Medical Common Entrance Test) and some AP (Andhra Pradesh) state entrance portal notifications have also specified this threshold. Always check the latest official notification, as limits can vary between exam cycles.',
   },
   {
     q: 'How do I compress an image to exactly 15 KB?',
-    a: 'Upload your photo here — the target is pre-set to 15 KB. The compressor uses binary search to find the highest JPEG quality that produces a file under 15 KB. For best results, resize your photo to around 200×230 px first using the Resize Image tool. At that resolution, reaching 15 KB requires moderate compression, and the output remains clearly recognisable.\\',
+    a: 'Upload your photo here — the target is pre-set to 15 KB. The compressor uses binary search to find the highest JPEG quality that produces a file under 15 KB. For best results, resize your photo to around 200×230 px first using the Resize Image tool. At that resolution, reaching 15 KB requires moderate compression, and the output remains clearly recognisable.',
   },
   {
     q: 'What is the difference between 15 KB, 20 KB, and 10 KB limits?',
-    a: '15 KB falls squarely between the SSC standard of 20 KB and the NTA photo limit (which varies between 10–20 KB). At 200×230 px, the visible quality difference between 10 KB, 15 KB, and 20 KB is real but modest. All three produce a clear, recognisable face suitable for identity verification on exam portals. If your specific portal says 15 KB, use this tool — submitting a 16 or 20 KB file will cause an upload rejection.\\',
+    a: '15 KB falls squarely between the SSC standard of 20 KB and the NTA photo limit (which varies between 10–20 KB). At 200×230 px, the visible quality difference between 10 KB, 15 KB, and 20 KB is real but modest. All three produce a clear, recognisable face suitable for identity verification on exam portals. If your specific portal says 15 KB, use this tool — submitting a 16 or 20 KB file will cause an upload rejection.',
   },
   {
     q: 'Do I need to resize before compressing to 15 KB?',
-    a: 'Strongly recommended, yes. If you upload a 4 MB smartphone photo and target 15 KB, the tool will achieve 15 KB but at very heavy compression, resulting in a visibly degraded image. Resize to 200×230 px first using the Resize Image tool. At that pixel count, 15 KB provides excellent quality for an exam photo.\\',
+    a: 'Strongly recommended, yes. If you upload a 4 MB smartphone photo and target 15 KB, the tool will achieve 15 KB but at very heavy compression, resulting in a visibly degraded image. Resize to 200×230 px first using the Resize Image tool. At that pixel count, 15 KB provides excellent quality for an exam photo.',
   },
   {
     q: 'Does this tool work for MPSC Rajyaseva exam photo requirements?',
-    a: 'Yes. MPSC Rajyaseva and other MPSC examinations typically require a recent passport-size photograph in JPEG format under 15 KB. This tool targets exactly 15 KB with JPEG output. Pair it with the Passport Size Photo tool to resize to 200×230 px before compressing, which gives you the cleanest result for MPSC uploads.\\',
+    a: 'Yes. MPSC Rajyaseva and other MPSC examinations typically require a recent passport-size photograph in JPEG format under 15 KB. This tool targets exactly 15 KB with JPEG output. Pair it with the Passport Size Photo tool to resize to 200×230 px before compressing, which gives you the cleanest result for MPSC uploads.',
   },
   {
     q: 'Is my personal photo safe when using this tool?',
-    a: 'Yes. All processing happens locally in your browser using the HTML5 Canvas API. Your image never leaves your device and is not sent to any server. There are no cookies, no logins, and no stored files. The tool is safe to use with ID photos, passport photos, or any personal document images.\\',
+    a: 'Yes. All processing happens locally in your browser using the HTML5 Canvas API. Your image never leaves your device and is not sent to any server. There are no cookies, no logins, and no stored files. The tool is safe to use with ID photos, passport photos, or any personal document images.',
   },
 ];
 

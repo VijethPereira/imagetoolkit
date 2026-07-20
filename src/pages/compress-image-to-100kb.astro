@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
@@ -9,27 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'How do I compress an image to 100 KB without losing quality?',
-    a: 'This tool does it automatically — it binary-searches for the highest JPEG quality that keeps the output under 100 KB. At 100 KB, most portrait photos at 400×500 px can be encoded at JPEG quality 80–90%, producing sharp, attractive results with no visible compression artefacts.\\',
+    a: 'This tool does it automatically — it binary-searches for the highest JPEG quality that keeps the output under 100 KB. At 100 KB, most portrait photos at 400×500 px can be encoded at JPEG quality 80–90%, producing sharp, attractive results with no visible compression artefacts.',
   },
   {
     q: 'What is the 100 KB image limit used for?',
-    a: 'The 100 KB limit appears on job application portals (Naukri, LinkedIn company portals, IRCTC), company HR systems, e-commerce seller dashboards, several Indian railway and police recruitment portals, and university registration systems. Profile photos on many platforms are also recommended to be under 100 KB for fast page loading.\\',
+    a: 'The 100 KB limit appears on job application portals (Naukri, LinkedIn company portals, IRCTC), company HR systems, e-commerce seller dashboards, several Indian railway and police recruitment portals, and university registration systems. Profile photos on many platforms are also recommended to be under 100 KB for fast page loading.',
   },
   {
     q: 'What quality can I expect at 100 KB?',
-    a: 'At 100 KB, even a 600×800 px portrait photograph compresses to JPEG quality 80–90%, which looks excellent — sharp details, accurate colours, and no visible artefacts. This is a comfortable target that preserves good visual quality for both identification and display purposes.\\',
+    a: 'At 100 KB, even a 600×800 px portrait photograph compresses to JPEG quality 80–90%, which looks excellent — sharp details, accurate colours, and no visible artefacts. This is a comfortable target that preserves good visual quality for both identification and display purposes.',
   },
   {
     q: 'Can I compress a PNG to 100 KB?',
-    a: 'Yes. For photographs, switch the output format to JPEG for best results — PNG uses lossless compression and may be much larger than 100 KB even after compression. For logos or graphics with transparency, WebP supports alpha channels and compresses far better than PNG at this size target.\\',
+    a: 'Yes. For photographs, switch the output format to JPEG for best results — PNG uses lossless compression and may be much larger than 100 KB even after compression. For logos or graphics with transparency, WebP supports alpha channels and compresses far better than PNG at this size target.',
   },
   {
     q: 'My image is 102 KB — will it be rejected by the portal?',
-    a: 'Most portals enforce the file size limit strictly and will reject anything over the stated maximum, even by 1–2 KB. Always aim for a safe margin: if the limit is 100 KB, target 95 KB or less. This tool targets exactly 100 KB but file size calculation methods can vary, so download and check the actual file size before uploading.\\',
+    a: 'Most portals enforce the file size limit strictly and will reject anything over the stated maximum, even by 1–2 KB. Always aim for a safe margin: if the limit is 100 KB, target 95 KB or less. This tool targets exactly 100 KB but file size calculation methods can vary, so download and check the actual file size before uploading.',
   },
   {
     q: 'Is this tool free and does it work without uploading my image?',
-    a: 'Yes. It is completely free with no account required. All processing happens in your browser using the Canvas API — your image is never uploaded to any server. This makes it safe for sensitive images like ID photos and professional headshots.\\',
+    a: 'Yes. It is completely free with no account required. All processing happens in your browser using the Canvas API — your image is never uploaded to any server. This makes it safe for sensitive images like ID photos and professional headshots.',
   },
 ];
 

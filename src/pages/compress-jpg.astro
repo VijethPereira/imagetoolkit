@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
@@ -9,11 +9,11 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'What JPEG quality setting gives the best balance of size and quality?',
-    a: 'The widely-accepted sweet spot is quality 75–85%. Below quality 70, JPEG artifacts become visible in areas of smooth gradient (sky, skin tones) and sharp edges start to show "ringing" (ghost edges). Above quality 90, file size grows rapidly with almost no visible quality improvement on screen. For web photos, quality 80 is the standard recommended by Google PageSpeed and web performance specialists. For professional printing, use quality 90+.\\',
+    a: 'The widely-accepted sweet spot is quality 75–85%. Below quality 70, JPEG artifacts become visible in areas of smooth gradient (sky, skin tones) and sharp edges start to show "ringing" (ghost edges). Above quality 90, file size grows rapidly with almost no visible quality improvement on screen. For web photos, quality 80 is the standard recommended by Google PageSpeed and web performance specialists. For professional printing, use quality 90+.',
   },
   {
     q: 'Why does JPEG use lossy compression?',
-    a: 'JPEG (Joint Photographic Experts Group) was designed specifically for photographs. It exploits the fact that the human eye is less sensitive to high-frequency detail (fine texture, sharp edges) than to broad colour and brightness changes. JPEG discards high-frequency information in small 8×8 pixel blocks, which dramatically reduces file size with minimal perceived quality loss for typical photographic content. This is why JPEG works well for photos but poorly for sharp-edged graphics, text, and logos.\\',
+    a: 'JPEG (Joint Photographic Experts Group) was designed specifically for photographs. It exploits the fact that the human eye is less sensitive to high-frequency detail (fine texture, sharp edges) than to broad colour and brightness changes. JPEG discards high-frequency information in small 8×8 pixel blocks, which dramatically reduces file size with minimal perceived quality loss for typical photographic content. This is why JPEG works well for photos but poorly for sharp-edged graphics, text, and logos.',
   },
   {
     q: 'Why do Indian exam portals require JPEG format?',
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: 'What is the difference between JPG and JPEG?',
-    a: 'JPG and JPEG are identical formats — the difference is only in the file extension. Early Windows systems limited file extensions to 3 characters, so JPEG became JPG. Modern systems support both. All exam portals, image editors, and browsers treat .jpg and .jpeg files identically. This tool outputs JPEG regardless of whether you name the file .jpg or .jpeg.\\',
+    a: 'JPG and JPEG are identical formats — the difference is only in the file extension. Early Windows systems limited file extensions to 3 characters, so JPEG became JPG. Modern systems support both. All exam portals, image editors, and browsers treat .jpg and .jpeg files identically. This tool outputs JPEG regardless of whether you name the file .jpg or .jpeg.',
   },
   {
     q: 'Should I resize before compressing a JPEG?',
@@ -29,7 +29,7 @@ const faqs = [
   },
   {
     q: 'Can I compress multiple JPEGs at once?',
-    a: 'This tool currently processes one image at a time to ensure maximum quality and 100% private browser-only processing. For batch compression of multiple photos, you can process each file individually here. The tool is fast — typically compressing each image in under a second in your browser.\\',
+    a: 'This tool currently processes one image at a time to ensure maximum quality and 100% private browser-only processing. For batch compression of multiple photos, you can process each file individually here. The tool is fast — typically compressing each image in under a second in your browser.',
   },
 ];
 

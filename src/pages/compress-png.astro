@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
@@ -9,27 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'Does compressing a PNG to PNG actually reduce the file size?',
-    a: 'Yes, but with caveats. PNG uses lossless deflate compression. Re-encoding a PNG through the Canvas API strips embedded metadata (EXIF data, colour profiles, comments) and re-applies compression, which often reduces file size by 10–30% for PNGs that were saved with suboptimal compression settings. However, if your PNG was already well-optimised, the reduction may be minimal. For significant size reduction, converting to WebP or JPEG is far more effective.\\',
+    a: 'Yes, but with caveats. PNG uses lossless deflate compression. Re-encoding a PNG through the Canvas API strips embedded metadata (EXIF data, colour profiles, comments) and re-applies compression, which often reduces file size by 10–30% for PNGs that were saved with suboptimal compression settings. However, if your PNG was already well-optimised, the reduction may be minimal. For significant size reduction, converting to WebP or JPEG is far more effective.',
   },
   {
     q: 'When should I use PNG instead of JPEG or WebP?',
-    a: 'PNG is best for: screenshots and UI captures (sharp edges around text and icons stay crisp), logos and graphics with text, images that require a transparent background, and illustrations with flat colours or geometric shapes. For photographs, JPEG or WebP produces far smaller files at equivalent quality. A typical photograph saved as PNG is 3–5x larger than the same image as JPEG at quality 85%.\\',
+    a: 'PNG is best for: screenshots and UI captures (sharp edges around text and icons stay crisp), logos and graphics with text, images that require a transparent background, and illustrations with flat colours or geometric shapes. For photographs, JPEG or WebP produces far smaller files at equivalent quality. A typical photograph saved as PNG is 3–5x larger than the same image as JPEG at quality 85%.',
   },
   {
     q: 'Will compressing PNG affect image quality?',
-    a: 'This tool re-encodes to PNG, which is lossless — the visual content of the image is preserved exactly. You will not see any quality degradation, blurring, or color shifting. The only changes are metadata removal and potentially improved deflate compression. If you need lossy compression (smaller file sizes with some quality trade-off), convert to JPEG using PNG to JPG or to WebP using PNG to WebP.\\',
+    a: 'This tool re-encodes to PNG, which is lossless — the visual content of the image is preserved exactly. You will not see any quality degradation, blurring, or color shifting. The only changes are metadata removal and potentially improved deflate compression. If you need lossy compression (smaller file sizes with some quality trade-off), convert to JPEG using PNG to JPG or to WebP using PNG to WebP.',
   },
   {
     q: 'Why is my PNG file still large after compression?',
-    a: 'PNG compression is inherently limited for photographs and complex images because lossless compression cannot discard visual information. A 1200×800 photograph saved as PNG will typically be 1–4 MB regardless of compression settings, because the image data itself is that large. For photographs, use JPEG or WebP. PNG compression is most effective on images with large uniform colour areas (logos, illustrations, diagrams) where the deflate algorithm can find many repeated patterns.\\',
+    a: 'PNG compression is inherently limited for photographs and complex images because lossless compression cannot discard visual information. A 1200×800 photograph saved as PNG will typically be 1–4 MB regardless of compression settings, because the image data itself is that large. For photographs, use JPEG or WebP. PNG compression is most effective on images with large uniform colour areas (logos, illustrations, diagrams) where the deflate algorithm can find many repeated patterns.',
   },
   {
     q: 'Does converting PNG to WebP save more space than PNG to JPEG?',
-    a: 'For photographs, JPEG and WebP produce similar sizes (WebP typically 25–34% smaller than equivalent JPEG). For graphics with transparency or sharp edges, WebP significantly outperforms JPEG because WebP supports both lossless and lossy modes with better efficiency than PNG in lossy mode. For content with transparency, WebP lossless or PNG are the only options — JPEG does not support transparency.\\',
+    a: 'For photographs, JPEG and WebP produce similar sizes (WebP typically 25–34% smaller than equivalent JPEG). For graphics with transparency or sharp edges, WebP significantly outperforms JPEG because WebP supports both lossless and lossy modes with better efficiency than PNG in lossy mode. For content with transparency, WebP lossless or PNG are the only options — JPEG does not support transparency.',
   },
   {
     q: 'Can I compress a transparent PNG without losing the transparency?',
-    a: 'Yes — re-encoding to PNG preserves the alpha (transparency) channel. If you convert a transparent PNG to JPEG, the transparency is lost and replaced with a white background. To keep transparency while reducing file size, compress to PNG here (limited reduction) or convert to WebP using PNG to WebP (WebP supports transparency and is usually 20–30% smaller than PNG for the same image).\\',
+    a: 'Yes — re-encoding to PNG preserves the alpha (transparency) channel. If you convert a transparent PNG to JPEG, the transparency is lost and replaced with a white background. To keep transparency while reducing file size, compress to PNG here (limited reduction) or convert to WebP using PNG to WebP (WebP supports transparency and is usually 20–30% smaller than PNG for the same image).',
   },
 ];
 

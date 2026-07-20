@@ -2,7 +2,7 @@
 > **Local reference only. Do not commit or publish.**
 > Source: user research + manual audits of competitor sites
 > Domain: snapimagetools.com
-> Last updated: 2026-07-17
+> Last updated: 2026-07-20
 
 ---
 
@@ -168,30 +168,30 @@ One component (CompressTool) with different `targetKB` props generates 5 unique 
 | # | Tool | URL | Why | Status |
 |---|---|---|---|---|
 | 17 | Custom KB input on compress page | `/compress-image` (update) | Let users type any target size | — |
-| 18 | Compress to 5 KB | `/compress-image-to-5kb` | NTA signature / very strict portals | — |
-| 19 | Compress to 10 KB | `/compress-image-to-10kb` | NTA/NEET signature limit | — |
-| 20 | Compress to 15 KB | `/compress-image-to-15kb` | State PSC portals | — |
-| 21 | Compress to 25 KB | `/compress-image-to-25kb` | Various exam portals | — |
-| 22 | Compress to 30 KB | `/compress-image-to-30kb` | State PSC portal limit | — |
-| 23 | Compress to 40 KB | `/compress-image-to-40kb` | UPSC / NDA signature | — |
-| 24 | Compress to 75 KB | `/compress-image-to-75kb` | College admission forms | — |
-| 25 | Compress to 150 KB | `/compress-image-to-150kb` | Job portals | — |
-| 26 | Compress to 300 KB | `/compress-image-to-300kb` | E-commerce listings | — |
-| 27 | Compress to 400 KB | `/compress-image-to-400kb` | Job portals | — |
-| 28 | Compress to 500 KB | `/compress-image-to-500kb` | College admission forms | — |
-| 29 | Compress to 1 MB | `/compress-image-to-1mb` | General web upload | — |
-| 30 | Compress to 2 MB | `/compress-image-to-2mb` | General web upload | — |
-| 31 | Rotate & Flip Image | `/rotate-image` | Basic editing everyone expects | — |
-| 32 | Resize to 100×100 | `/resize-image-to-100x100` | Profile icons, favicons | — |
-| 33 | Resize to 300×300 | `/resize-image-to-300x300` | E-commerce thumbnails | — |
-| 34 | Resize to 400×400 | `/resize-image-to-400x400` | WhatsApp DP | — |
-| 35 | Resize to 1080×1080 | `/resize-image-to-1080x1080` | Instagram square | — |
-| 36 | Resize to 1280×720 | `/resize-image-to-1280x720` | HD / YouTube thumbnail | — |
-| 37 | Resize to 1920×1080 | `/resize-image-to-1920x1080` | Wallpaper / presentation | — |
-| 38 | Grayscale converter | `/grayscale-image` | Canvas filter, near-zero effort | — |
-| 39 | Black & White converter | `/convert-image-to-black-and-white` | Different keyword, same component | — |
-| 40 | Compress PNG (dedicated) | `/compress-png` | High search volume | — |
-| 41 | Compress JPG (dedicated) | `/compress-jpg` | High search volume | — |
+| 18 | Compress to 5 KB | `/compress-image-to-5kb` | NTA signature / very strict portals | ✅ Live |
+| 19 | Compress to 10 KB | `/compress-image-to-10kb` | NTA/NEET signature limit | ✅ Live |
+| 20 | Compress to 15 KB | `/compress-image-to-15kb` | State PSC portals | ✅ Live |
+| 21 | Compress to 25 KB | `/compress-image-to-25kb` | Various exam portals | ✅ Live |
+| 22 | Compress to 30 KB | `/compress-image-to-30kb` | State PSC portal limit | ✅ Live |
+| 23 | Compress to 40 KB | `/compress-image-to-40kb` | UPSC / NDA signature | ✅ Live |
+| 24 | Compress to 75 KB | `/compress-image-to-75kb` | College admission forms | ✅ Live |
+| 25 | Compress to 150 KB | `/compress-image-to-150kb` | Job portals | ✅ Live |
+| 26 | Compress to 300 KB | `/compress-image-to-300kb` | E-commerce listings | ✅ Live |
+| 27 | Compress to 400 KB | `/compress-image-to-400kb` | Job portals | ✅ Live |
+| 28 | Compress to 500 KB | `/compress-image-to-500kb` | College admission forms | ✅ Live |
+| 29 | Compress to 1 MB | `/compress-image-to-1mb` | General web upload | ✅ Live |
+| 30 | Compress to 2 MB | `/compress-image-to-2mb` | General web upload | ✅ Live |
+| 31 | Rotate & Flip Image | `/rotate-image` | Basic editing everyone expects | ✅ Live |
+| 32 | Resize to 100×100 | `/resize-image-to-100x100` | Profile icons, favicons | ✅ Live |
+| 33 | Resize to 300×300 | `/resize-image-to-300x300` | E-commerce thumbnails | ✅ Live |
+| 34 | Resize to 400×400 | `/resize-image-to-400x400` | WhatsApp DP | ✅ Live |
+| 35 | Resize to 1080×1080 | `/resize-image-to-1080x1080` | Instagram square | ✅ Live |
+| 36 | Resize to 1280×720 | `/resize-image-to-1280x720` | HD / YouTube thumbnail | ✅ Live |
+| 37 | Resize to 1920×1080 | `/resize-image-to-1920x1080` | Wallpaper / presentation | ✅ Live |
+| 38 | Grayscale converter | `/grayscale-image` | Canvas filter, near-zero effort | ✅ Live |
+| 39 | Black & White converter | `/convert-image-to-black-and-white` | Different keyword, same component | ✅ Live |
+| 40 | Compress PNG (dedicated) | `/compress-png` | High search volume | ✅ Live |
+| 41 | Compress JPG (dedicated) | `/compress-jpg` | High search volume | ✅ Live |
 
 ---
 
@@ -275,49 +275,49 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [ ] Update FAQ copy on `/compress-image` to mention custom size support
 
 #### New Compress-to-XKB Pages (#18–30)
-- [ ] `/compress-image-to-5kb`
-- [ ] `/compress-image-to-10kb`
-- [ ] `/compress-image-to-15kb`
-- [ ] `/compress-image-to-25kb`
-- [ ] `/compress-image-to-30kb`
-- [ ] `/compress-image-to-40kb`
-- [ ] `/compress-image-to-75kb`
-- [ ] `/compress-image-to-150kb`
-- [ ] `/compress-image-to-300kb`
-- [ ] `/compress-image-to-400kb`
-- [ ] `/compress-image-to-500kb`
-- [ ] `/compress-image-to-1mb`
-- [ ] `/compress-image-to-2mb`
-- [ ] Add all 13 pages to `public/sitemap.xml`
-- [ ] Add all 13 pages to `src/site.config.ts` tools array
+- [x] `/compress-image-to-5kb`
+- [x] `/compress-image-to-10kb`
+- [x] `/compress-image-to-15kb`
+- [x] `/compress-image-to-25kb`
+- [x] `/compress-image-to-30kb`
+- [x] `/compress-image-to-40kb`
+- [x] `/compress-image-to-75kb`
+- [x] `/compress-image-to-150kb`
+- [x] `/compress-image-to-300kb`
+- [x] `/compress-image-to-400kb`
+- [x] `/compress-image-to-500kb`
+- [x] `/compress-image-to-1mb`
+- [x] `/compress-image-to-2mb`
+- [x] Add all 13 pages to `public/sitemap.xml`
+- [x] Add all 13 pages to `src/site.config.ts` tools array
 
 #### Rotate & Flip Tool (#31)
-- [ ] Build `RotateTool.astro` component
-- [ ] Buttons: rotate 90° left, 90° right, 180°, flip horizontal, flip vertical
-- [ ] Free-angle slider (–180° to +180°)
-- [ ] Canvas-only processing, download result
-- [ ] Build `/rotate-image` page
-- [ ] Add to sitemap + site.config.ts
+- [x] Build `RotateTool.astro` component
+- [x] Buttons: rotate 90° left, 90° right, 180°, flip horizontal, flip vertical
+- [x] Free-angle slider (–180° to +180°)
+- [x] Canvas-only processing, download result
+- [x] Build `/rotate-image` page
+- [x] Add to sitemap + site.config.ts
 
 #### More Pixel-Dimension Resize Pages (#32–37)
-- [ ] `/resize-image-to-100x100`
-- [ ] `/resize-image-to-300x300`
-- [ ] `/resize-image-to-400x400`
-- [ ] `/resize-image-to-1080x1080`
-- [ ] `/resize-image-to-1280x720`
-- [ ] `/resize-image-to-1920x1080`
-- [ ] Add all 6 pages to sitemap + site.config.ts
+- [x] `/resize-image-to-100x100`
+- [x] `/resize-image-to-300x300`
+- [x] `/resize-image-to-400x400`
+- [x] `/resize-image-to-1080x1080`
+- [x] `/resize-image-to-1280x720`
+- [x] `/resize-image-to-1920x1080`
+- [x] Add all 6 pages to sitemap + site.config.ts
 
 #### Grayscale / B&W Converter (#38–39)
-- [ ] Add `mode` prop to `ConvertTool.astro` (or build `FilterTool.astro`)
-- [ ] Build `/grayscale-image` (canvas `filter: grayscale(1)` pre-download)
-- [ ] Build `/convert-image-to-black-and-white` (same component, higher contrast desaturation)
-- [ ] Add both pages to sitemap + site.config.ts
+- [x] Add `mode` prop to `ConvertTool.astro` (or build `FilterTool.astro`)
+- [x] Build `/grayscale-image` (canvas `filter: grayscale(1)` pre-download)
+- [x] Build `/convert-image-to-black-and-white` (same component, higher contrast desaturation)
+- [x] Add both pages to sitemap + site.config.ts
 
 #### Format-Specific Compress Pages (#40–41)
-- [ ] Build `/compress-png` (output format locked to PNG)
-- [ ] Build `/compress-jpg` (output format locked to JPEG)
-- [ ] Add both pages to sitemap + site.config.ts
+- [x] Build `/compress-png` (output format locked to PNG)
+- [x] Build `/compress-jpg` (output format locked to JPEG)
+- [x] Add both pages to sitemap + site.config.ts
 
 ---
 
@@ -428,19 +428,21 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` done
 ### Cross-Cutting (apply to every new page)
 
 - [ ] JSON-LD: WebApplication + FAQPage structured data on every page
-- [ ] Minimum 4 FAQs with substantive answers (not placeholder text)
-- [ ] 400–600 words of content below the tool (h2 + h3 + paragraphs + steps)
+- [ ] Minimum 5 SEO rich FAQs with substantive answers (not placeholder text)
+- [ ] 500–600 very good SEO rich words of content below the tool (h2 + h3 + paragraphs + steps)
 - [ ] Two `<AdSlot>` placements (between tool & content, between content & FAQ)
 - [ ] Add URL to `public/sitemap.xml` with correct `<lastmod>` date
 - [ ] Add card to `src/site.config.ts` tools array
 - [ ] "Related tools" section at bottom of every tool page (3–4 internal links)
 - [ ] Dark mode tested
-- [ ] Mobile tested at 375px (drop zone tap, result stats visible, download button accessible)
+- [ ] Mobile responsive tested at 375px (drop zone tap, result stats visible, download button accessible)
 - [ ] `canonical` URL set correctly (no trailing slash issues)
 - [ ] `keywords` meta set with 3–5 relevant phrases
 - [ ] Page title format: `[Tool Name] Online Free | SnapImageTools`
 - [ ] Privacy note visible on tool widget
 - [ ] Verify file-input double-dialog bug is not re-introduced on any new tool component
+- [ ] check the compatiblity with google search console, bing web master policies
+- [ ] check compatiblity for google Adsense policies
 
 ---
 

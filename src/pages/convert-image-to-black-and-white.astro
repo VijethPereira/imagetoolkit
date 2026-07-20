@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import SiteNav from '../components/SiteNav.astro';
 import Footer from '../components/Footer.astro';
@@ -9,27 +9,27 @@ import siteConfig from '../site.config.ts';
 const faqs = [
   {
     q: 'What is a high-contrast black and white conversion?',
-    a: 'A high-contrast black and white conversion takes a colour or grayscale image and pushes each pixel toward either pure black (0) or pure white (255), eliminating or dramatically reducing the midtones (grey values). The result is a graphic, high-contrast image that looks like print, ink, or silhouette art — very different from grayscale, which preserves smooth tonal transitions.\\',
+    a: 'A high-contrast black and white conversion takes a colour or grayscale image and pushes each pixel toward either pure black (0) or pure white (255), eliminating or dramatically reducing the midtones (grey values). The result is a graphic, high-contrast image that looks like print, ink, or silhouette art — very different from grayscale, which preserves smooth tonal transitions.',
   },
   {
     q: 'What is the difference between grayscale and black &amp; white?',
-    a: 'Grayscale preserves all 256 shades of grey between black and white — it looks like a classic black-and-white photograph, with rich shadow and highlight detail. High-contrast black &amp; white pushes pixels to the extremes (pure black or pure white), eliminating midtones. The result is graphical rather than photographic — like a newspaper line drawing, a silhouette, or bold typographic art. Use grayscale for photography and tonal images; use B&amp;W high-contrast for graphic design, OCR preparation, and artistic effects.\\',
+    a: 'Grayscale preserves all 256 shades of grey between black and white — it looks like a classic black-and-white photograph, with rich shadow and highlight detail. High-contrast black &amp; white pushes pixels to the extremes (pure black or pure white), eliminating midtones. The result is graphical rather than photographic — like a newspaper line drawing, a silhouette, or bold typographic art. Use grayscale for photography and tonal images; use B&amp;W high-contrast for graphic design, OCR preparation, and artistic effects.',
   },
   {
     q: 'How does this help with OCR and document recognition?',
-    a: 'OCR (Optical Character Recognition) software works best on high-contrast images where text is pure black on a pure white background. Coloured paper backgrounds, grey shadows, and uneven scan lighting can confuse OCR algorithms. Converting a scanned document to high-contrast black &amp; white cleans up the background, darkens the text, and produces the ideal binary image for OCR processing. This is especially useful for old scanned documents, photocopies, or images taken with a phone camera.\\',
+    a: 'OCR (Optical Character Recognition) software works best on high-contrast images where text is pure black on a pure white background. Coloured paper backgrounds, grey shadows, and uneven scan lighting can confuse OCR algorithms. Converting a scanned document to high-contrast black &amp; white cleans up the background, darkens the text, and produces the ideal binary image for OCR processing. This is especially useful for old scanned documents, photocopies, or images taken with a phone camera.',
   },
   {
     q: 'Can I use this to prepare passport-style photo backgrounds for cutout?',
-    a: 'Yes — for digital cutout workflows, converting an image to high-contrast black &amp; white can help isolate subjects against uniform backgrounds. However, for actual passport and ID photo submissions, you must submit the original colour photograph. Use the B&amp;W converter for intermediate creative or technical steps, not for the final submission. For correctly-sized passport photos, use the passport size resizer tool.\\',
+    a: 'Yes — for digital cutout workflows, converting an image to high-contrast black &amp; white can help isolate subjects against uniform backgrounds. However, for actual passport and ID photo submissions, you must submit the original colour photograph. Use the B&amp;W converter for intermediate creative or technical steps, not for the final submission. For correctly-sized passport photos, use the passport size resizer tool.',
   },
   {
     q: 'Is this useful for creating coloring book pages from photos?',
-    a: 'Yes — this is one of the most popular creative uses. Converting a photograph or illustration to high-contrast black &amp; white outlines is the first step in creating a coloring page or line art. The high-contrast conversion preserves the edges and outlines of the subject while eliminating interior colour detail, producing an outline-heavy image that works well as a coloring page. For best results, start with a photo that has clear, defined edges and good lighting.\\',
+    a: 'Yes — this is one of the most popular creative uses. Converting a photograph or illustration to high-contrast black &amp; white outlines is the first step in creating a coloring page or line art. The high-contrast conversion preserves the edges and outlines of the subject while eliminating interior colour detail, producing an outline-heavy image that works well as a coloring page. For best results, start with a photo that has clear, defined edges and good lighting.',
   },
   {
     q: 'Is this tool free and does it upload my images?',
-    a: 'Completely free with no account required. All conversion happens in your browser using the HTML5 Canvas API — your image is never uploaded to any server. Processing is instant and completely private. You can safely convert personal photos, official documents, and commercial images without any privacy concern.\\',
+    a: 'Completely free with no account required. All conversion happens in your browser using the HTML5 Canvas API — your image is never uploaded to any server. Processing is instant and completely private. You can safely convert personal photos, official documents, and commercial images without any privacy concern.',
   },
 ];
 
