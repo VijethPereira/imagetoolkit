@@ -22,6 +22,10 @@ const isFixed = targetKB !== undefined;
       <p class="drop-label">Drop image here or <span class="drop-link">browse</span></p>
       <p class="drop-hint">JPG · PNG · WebP · GIF — max 20 MB</p>
     </div>
+    <div class="preview-wrap" id="preview-wrap" hidden>
+      <img id="preview-img" class="preview-img" alt="" />
+      <p class="preview-hint">Click to change image</p>
+    </div>
     <input type="file" id="file-input" accept="image/*" class="file-input" />
   </div>
 
@@ -30,6 +34,7 @@ const isFixed = targetKB !== undefined;
     <div class="file-meta">
       <span class="file-name" id="file-name"></span>
       <span class="file-size" id="orig-size"></span>
+      <button class="change-btn" id="change-btn" type="button">× Change</button>
     </div>
 
     {!isFixed && (
@@ -38,6 +43,7 @@ const isFixed = targetKB !== undefined;
         <input type="range" id="quality-slider" min="1" max="99" value="75" class="slider" />
         <span class="quality-val" id="quality-val">75%</span>
       </label>
+      <p class="est-size" id="est-size"></p>
     )}
 
     {isFixed && (
@@ -92,6 +98,7 @@ const isFixed = targetKB !== undefined;
   const origSize = document.getElementById('orig-size') as HTMLElement;
   const qualitySlider = document.getElementById('quality-slider') as HTMLInputElement;
   const qualityVal = document.getElementById('quality-val') as HTMLElement;
+  const estSizeEl = document.getElementById('est-size') as HTMLElement | null;
   const compressBtn = document.getElementById('compress-btn') as HTMLButtonElement;
   const status = document.getElementById('status') as HTMLElement;
   const result = document.getElementById('result') as HTMLElement;
@@ -100,11 +107,19 @@ const isFixed = targetKB !== undefined;
   const rSaved = document.getElementById('r-saved') as HTMLElement;
   const downloadBtn = document.getElementById('download-btn') as HTMLAnchorElement;
   const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+  const changeBtn = document.getElementById('change-btn') as HTMLButtonElement;
 
   const targetKB = tool.dataset.targetKb ? parseInt(tool.dataset.targetKb) : null;
   const outputFormat = (tool.dataset.outputFormat || 'jpeg') as 'jpeg' | 'png' | 'webp';
 
+  const previewWrap = document.getElementById('preview-wrap') as HTMLElement;
+  const previewImg = document.getElementById('preview-img') as HTMLImageElement;
+  const dropInner = dropZone.querySelector('.drop-inner') as HTMLElement;
+
   let currentFile: File | null = null;
+  let currentImg: HTMLImageElement | null = null;
+  let previewUrl: string | null = null;
+  let estimateTimer: ReturnType<typeof setTimeout> | null = null;
 
   function fmtBytes(b: number) {
     if (b < 1024) return `${b} B`;
@@ -117,13 +132,55 @@ const isFixed = targetKB !== undefined;
     status.hidden = !msg;
   }
 
-  function showControls(file: File) {
+  async function updateEstimate() {
+    if (!currentImg || !estSizeEl || !currentFile) return;
+    const quality = parseInt(qualitySlider.value) / 100;
+    const mime = `image/${outputFormat}`;
+    const canvas = drawToCanvas(currentImg);
+    const blob = await canvasToBlob(canvas, mime, quality);
+    if (blob.size >= currentFile.size) {
+      estSizeEl.textContent = `Quality too high — output would be larger than original (${fmtBytes(currentFile.size)}). Lower the slider to actually compress.`;
+      estSizeEl.dataset.warn = '1';
+    } else {
+      estSizeEl.textContent = `Estimated output: ~${fmtBytes(blob.size)}`;
+      estSizeEl.dataset.warn = '';
+    }
+  }
+
+  function scheduleEstimate() {
+    if (estimateTimer) clearTimeout(estimateTimer);
+    estimateTimer = setTimeout(updateEstimate, 300);
+  }
+
+  async function showControls(file: File) {
     currentFile = file;
     fileName.textContent = file.name;
     origSize.textContent = fmtBytes(file.size);
     controls.hidden = false;
     result.hidden = true;
     setStatus('');
+    if (previewUrl) URL.revokeObjectURL(previewUrl);
+    previewUrl = URL.createObjectURL(file);
+    previewImg.src = previewUrl;
+    previewWrap.hidden = false;
+    dropInner.hidden = true;
+    if (estSizeEl) estSizeEl.textContent = 'Estimating…';
+    currentImg = await loadImage(file);
+    if (!targetKB) updateEstimate();
+  }
+
+  function reset() {
+    currentFile = null;
+    currentImg = null;
+    fileInput.value = '';
+    controls.hidden = true;
+    result.hidden = true;
+    setStatus('');
+    if (previewUrl) { URL.revokeObjectURL(previewUrl); previewUrl = null; }
+    previewImg.src = '';
+    previewWrap.hidden = true;
+    dropInner.hidden = false;
+    if (estSizeEl) estSizeEl.textContent = '';
   }
 
   // Drag-drop
@@ -143,6 +200,7 @@ const isFixed = targetKB !== undefined;
   // Quality slider
   qualitySlider?.addEventListener('input', () => {
     if (qualityVal) qualityVal.textContent = `${qualitySlider.value}%`;
+    scheduleEstimate();
   });
 
   // Canvas helpers
@@ -226,16 +284,19 @@ const isFixed = targetKB !== undefined;
       }
 
       const origBytes = currentFile.size;
-      const newBytes = blob.size;
+      // Never serve a file larger than the original — fall back to the original
+      const useOriginal = blob.size >= origBytes;
+      const finalBlob = useOriginal ? currentFile : blob;
+      const newBytes = finalBlob.size;
       const saved = Math.round((1 - newBytes / origBytes) * 100);
 
       rOrig.textContent = fmtBytes(origBytes);
       rNew.textContent = fmtBytes(newBytes);
-      rSaved.textContent = saved > 0 ? `${saved}% smaller` : 'no reduction';
+      rSaved.textContent = useOriginal ? 'no reduction — try lower quality' : `${saved}% smaller`;
 
       const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
       const baseName = currentFile.name.replace(/\.[^.]+$/, '');
-      downloadBtn.href = URL.createObjectURL(blob);
+      downloadBtn.href = URL.createObjectURL(finalBlob);
       downloadBtn.download = `${baseName}-compressed.${ext}`;
 
       controls.hidden = true;
@@ -248,13 +309,8 @@ const isFixed = targetKB !== undefined;
     compressBtn.disabled = false;
   });
 
-  resetBtn.addEventListener('click', () => {
-    currentFile = null;
-    fileInput.value = '';
-    controls.hidden = true;
-    result.hidden = true;
-    setStatus('');
-  });
+  resetBtn.addEventListener('click', reset);
+  changeBtn.addEventListener('click', reset);
 
   // Fix broken overload call above
   async function canvasToBlob2(canvas: HTMLCanvasElement, mime: string, quality: number): Promise<Blob> {
@@ -322,6 +378,28 @@ const isFixed = targetKB !== undefined;
     height: 100%;
   }
 
+  .preview-wrap {
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 6px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .preview-hint {
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+    margin: 0;
+  }
+
   /* Controls */
   .controls { margin-top: 1.25rem; }
 
@@ -351,6 +429,30 @@ const isFixed = targetKB !== undefined;
     color: var(--site-text-muted);
     flex-shrink: 0;
   }
+
+  .change-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+    cursor: pointer;
+    padding: 0.125rem 0.375rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: color 0.15s, background 0.15s;
+  }
+  .change-btn:hover { color: var(--site-text); background: var(--site-border); }
+
+  .est-size {
+    font-size: 0.8125rem;
+    color: var(--site-text-muted);
+    margin: -0.5rem 0 0.75rem;
+    text-align: right;
+    transition: color 0.15s;
+  }
+  .est-size[data-warn="1"] { color: #dc2626; }
+  [data-theme="dark"] .est-size[data-warn="1"] { color: #f87171; }
 
   .quality-row {
     display: flex;
